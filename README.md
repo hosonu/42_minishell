@@ -6,6 +6,8 @@
     
     ・cntl+Dによる終了
 
+    ・cntl+\で終了しない
+    
 対応できるプロンプト
     
     ./minishell cmd XX metachar XX ..
