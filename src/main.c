@@ -25,13 +25,13 @@ int	main(void)
 	char	*prompt;
 	char	*input;
 	t_token	*tokens;
-/*	struct sigaction	sa;
+	struct sigaction	sa;
 
 	sa.sa_handler = signal_handler;
 	sa.sa_flags = 0;
 	sigemptyset(&sa.sa_mask);
 	sigaction(SIGINT, &sa, NULL);
-*/	prompt = "minish>> ";
+	prompt = "minish>> ";
 	while (1)
 	{
 		input = readline(prompt);
@@ -43,10 +43,11 @@ int	main(void)
 		if (*input)
 			add_history(input);
 		tokens = lexer(input);
-		decide_type(tokens);
-		print_tokens(tokens);
 		free(input);
+		decide_type(tokens);
+		//実行用のプログラムを入れる
+		print_tokens(tokens); //debug用
 	}
-	free(tokens);
+	free(tokens); //全然リーク
 	return 0;
 }
