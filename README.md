@@ -8,10 +8,10 @@
 
 対応できるプロンプト
     
-    ・cmd XX metachar XX ..
+    ./minishell cmd XX metachar XX ..
 
 対応できていないプロンプト
     
-    ・metacharacter .. 
+    ./minishell metacharacter .. 
     
-    ・.. metacharacter
+    ./minishell .. metacharacter
