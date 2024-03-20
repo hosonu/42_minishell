@@ -1,5 +1,3 @@
-Bでは./minishell metachar .. & ./minshell .. metachar　に対応させる
-
 対応できている機能
     
     ・プロンプト履歴
@@ -14,8 +12,10 @@ Bでは./minishell metachar .. & ./minshell .. metachar　に対応させる
     
     ./minishell cmd XX metachar XX ..
 
-対応できていないプロンプト
-    
     ./minishell metacharacter .. 
     
     ./minishell .. metacharacter
+
+対応できていないプロンプト
+    "" ''    
+    
