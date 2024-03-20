@@ -33,22 +33,22 @@ char	*tokenizer(char *str)
 {
 	char	*token;
 	int	len;
+	int	i;
 
 	len = 0;
 	len = token_len(str);
 	token = NULL;
-	//case 1 token
-	//case 2 metacharacter
 	if (len > 0)
 		token = ft_substr(str, 0, len);
-/*	else if (len == 0)
+	i = 0;
+	if (token != NULL)
 	{
-		if (str[0] == str[1])
-			token = ft_substr(str, 0, 2);
-		else
-			token = ft_substr(str, 0 , 1);
+		while (token[i] == ' ')
+			i++;
+		if (i == len)
+			return (NULL);
 	}
-*/	return (token);
+	return (token);
 }
 
 int	is_metachar(char c)
