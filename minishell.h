@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 11:31:28 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/03/20 00:38:38 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/03/21 00:27:36 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int		token_len(char *src);
 int	is_metachar(char c);
 char	*tokenizer(char *str);
 char	*make_right(char *str);
+void	decide_type_util(t_token *token, int type);
 int	decide_type(t_token *top);
 char	*strdup_right(char *str);
 t_token	*new_token(char *content);
