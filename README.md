@@ -1,3 +1,5 @@
+Bでは,/minishell metachar .. & ./minshell .. metachar
+
 対応できている機能
     
     ・プロンプト履歴
