@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 11:31:28 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/03/21 00:27:36 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/03/21 02:56:18 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,10 @@ char	*strdup_right(char *str);
 t_token	*new_token(char *content);
 t_token	*lexer(char *str);
 void	token_addlast(t_token *top, t_token *new);
+void	check(t_token *top);
+t_token	*devide_file(t_token *node);
+t_token	*devide_cmd(t_token *node);
+void	token_insert(t_token *node, t_token *new);
+void	token_destroy(t_token *node);
 
 #endif

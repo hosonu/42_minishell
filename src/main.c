@@ -32,13 +32,13 @@ int	main(void)
 	sa.sa_handler = signal_handler;
 	sa.sa_flags = 0;
 	sigemptyset(&sa.sa_mask);
-	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
+	sigaction(SIGINT, &sa, NULL);// CNTL + C
+	sigaction(SIGQUIT, &sa, NULL);//CNTL + "\"
 	prompt = "minish>> ";
 	while (1)
 	{
 		input = readline(prompt);
-		if (input == NULL)
+		if (input == NULL)// CNTL + D
 		{
 			ft_printf("exit\n");
 			break ;
@@ -48,6 +48,7 @@ int	main(void)
 		tokens = lexer(input);
 		free(input);
 		decide_type(tokens);
+		check(tokens);
 		//実行用のプログラムを入れる
 		print_tokens(tokens); //debug用
 	}

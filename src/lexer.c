@@ -69,3 +69,18 @@ void	token_addlast(t_token *top, t_token *new)
 	lst->next = new;
 	new->prev = lst;
 }
+
+void	token_insert(t_token *node, t_token *new)
+{
+	new->next = node->next;
+	node->next = new;
+	new->prev = node;
+}
+
+void	token_destroy(t_token *node)
+{
+	node->next->prev = node->prev;
+	node->prev->next = node->next;
+	free(node->token);
+	free(node);
+}
