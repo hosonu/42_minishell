@@ -1,4 +1,4 @@
-Bでは,/minishell metachar .. & ./minshell .. metachar
+Bでは./minishell metachar .. & ./minshell .. metachar　に対応させる
 
 対応できている機能
     
