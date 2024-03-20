@@ -37,8 +37,12 @@ t_token	*lexer(char *str)
 	t_token	*new;
 
 
+	new = NULL;
 	top = new_token(tokenizer(str));
-	new = new_metatoken(str);
+	if (top == NULL)
+		top = new_metatoken(str);
+	else
+		new = new_metatoken(str);
 	if (new != NULL)
 		token_addlast(top, new);
 	left = strdup_right(str);

@@ -41,14 +41,14 @@ char	*tokenizer(char *str)
 	//case 2 metacharacter
 	if (len > 0)
 		token = ft_substr(str, 0, len);
-	else if (len == 0)
+/*	else if (len == 0)
 	{
 		if (str[0] == str[1])
 			token = ft_substr(str, 0, 2);
 		else
 			token = ft_substr(str, 0 , 1);
 	}
-	return (token);
+*/	return (token);
 }
 
 int	is_metachar(char c)
