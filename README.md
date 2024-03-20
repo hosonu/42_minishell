@@ -17,5 +17,6 @@
     ./minishell .. metacharacter
 
 対応できていないプロンプト
+    
     "" ''    
     
