@@ -33,13 +33,17 @@ char	*tokenizer(char *str)
 {
 	char	*token;
 	int	len;
+	int	start;
 	int	i;
 
 	len = 0;
 	len = token_len(str);
 	token = NULL;
+	start = 0;
+	while (str[start] == ' ' && str[start] != '\0')
+		start++;
 	if (len > 0)
-		token = ft_substr(str, 0, len);
+		token = ft_substr(str, start, len - start);
 	i = 0;
 	if (token != NULL)
 	{
@@ -66,6 +70,8 @@ char	*strdup_right(char *str)
 	if (len == (int)ft_strlen(str))
 		return (NULL);
 	while (is_metachar(str[len]) == 1)
+		len++;
+	while (str[len] == ' ')
 		len++;
 	return (ft_strdup(&str[len]));
 }

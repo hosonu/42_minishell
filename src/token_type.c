@@ -1,8 +1,8 @@
 #include "../minishell.h"
 
-void	decide_type_util(t_token *token, int type)
+void	decide_type_util(t_token *token, int meta_type, int type)
 {
-	token->type = METACHAR;
+	token->type = meta_type;
 	if (token->next == NULL)
 		perror("syntaxerror");
 	else
@@ -19,15 +19,15 @@ int	decide_type(t_token *top)
 	{
 		len = ft_strlen(node->token);
 		if (ft_strnstr(node->token, ">>", len))
-			decide_type_util(node, APNDOUTFILE);
+			decide_type_util(node, METAAPNDOUT, APNDOUTFILE);
 		else if (ft_strnstr(node->token, ">", len))
-			decide_type_util(node, OWOUTFILE);
+			decide_type_util(node, METAOUT, OWOUTFILE);
 		else if (ft_strnstr(node->token, "<<", len))
-			decide_type_util(node, HEREDOC);
+			decide_type_util(node, METAHEREDOC, HEREDOC);
 		else if (ft_strnstr(node->token, "<", len))
-			decide_type_util(node, INFILE);
+			decide_type_util(node, METAIN, INFILE);
 		else if (ft_strnstr(node->token, "|", len))
-			decide_type_util(node, PIPECOMMAND);
+			decide_type_util(node, METAPIPE, PIPECOMMAND);
 		else if (node->type == 0)
 			node->type = COMMAND;
 		node = node->next;
@@ -108,7 +108,7 @@ void	check(t_token *top)
 	node = top;
 	while (node != NULL)
 	{
-		if (node->type != COMMAND && count_word(node->token) > 1)
+		if (node->type < COMMAND && count_word(node->token) > 1)
 		{
 			//devide command and filename
 			file = devide_file(node);

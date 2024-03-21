@@ -1,6 +1,7 @@
 CC = cc
 CFLAGS = -Wextra -Werror -Wall -g -fsanitize=address
-SRCS = src/main.c src/lexer.c src/tokenize.c src/token_type.c
+SRCS = src/main.c src/lexer.c src/tokenize.c src/token_type.c src/sort_token.c
+
 OBJS = $(SRCS:.c=.o)
 READ_LINE_PREFIX = $(shell brew --prefix readline)
 NAME = minishell

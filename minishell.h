@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 11:31:28 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/03/21 02:56:18 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:14:51 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@
 # include <readline/history.h>
 # include <signal.h>
 
-# define METACHAR 0
+# define METAOUT -1
+# define METAAPNDOUT -2
+# define METAIN -3
+# define METAHEREDOC -4
+# define METAPIPE -5
 # define OWOUTFILE 10
 # define APNDOUTFILE 11
 # define INFILE 20
@@ -41,7 +45,7 @@ int		token_len(char *src);
 int	is_metachar(char c);
 char	*tokenizer(char *str);
 char	*make_right(char *str);
-void	decide_type_util(t_token *token, int type);
+void	decide_type_util(t_token *token, int meta_type, int type);
 int	decide_type(t_token *top);
 char	*strdup_right(char *str);
 t_token	*new_token(char *content);
@@ -52,5 +56,8 @@ t_token	*devide_file(t_token *node);
 t_token	*devide_cmd(t_token *node);
 void	token_insert(t_token *node, t_token *new);
 void	token_destroy(t_token *node);
+t_token	**linear_token_list(t_token *top);
+void	sort_token(t_token **list);
+void	print_to(t_token **top);
 
 #endif

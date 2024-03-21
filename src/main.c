@@ -27,6 +27,7 @@ int	main(void)
 	char	*prompt;
 	char	*input;
 	t_token	*tokens;
+	t_token	**list;
 	struct sigaction	sa;
 
 	sa.sa_handler = signal_handler;
@@ -49,8 +50,11 @@ int	main(void)
 		free(input);
 		decide_type(tokens);
 		check(tokens);
+		list = linear_token_list(tokens);
+		sort_token(list);
 		//実行用のプログラムを入れる
-		print_tokens(tokens); //debug用
+		//print_tokens(tokens); //debug用
+		print_to(list);
 	}
 	free(tokens); //全然リーク
 	return 0;
