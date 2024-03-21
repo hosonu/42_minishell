@@ -27,7 +27,7 @@ int	decide_type(t_token *top)
 		else if (ft_strnstr(node->token, "<", len))
 			decide_type_util(node, METAIN, INFILE);
 		else if (ft_strnstr(node->token, "|", len))
-			decide_type_util(node, METAPIPE, PIPECOMMAND);
+			decide_type_util(node, METAPIPE, PIPEINCOMMAND);
 		else if (node->type == 0)
 			node->type = COMMAND;
 		node = node->next;

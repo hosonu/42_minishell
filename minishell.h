@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 11:31:28 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/03/21 14:14:51 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:38:36 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@
 # define REINCOMMAND 31
 # define REOUTCOMMAND 32
 # define REINTOUTCOMMAND 33
-# define PIPECOMMAND 34
+# define PIPEOUTCOMMAND 34
+# define PIPEINCOMMAND 35
+# define PIPEINOUTCOMMAND 36
 
 typedef struct s_token
 {
