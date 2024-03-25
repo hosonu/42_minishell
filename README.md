@@ -1,6 +1,6 @@
 quotation branchでは"" ''に対応する
 
-execveで実行する際にtypeがcommandである場合は"" ''を参照する必要があるため除かず、他のtypeでは除く
+execveで実行する際にtypeがCOMMAND以上である場合は"" ''を参照する必要があるため除かず、他のtypeでは除く
 
 
 対応できている機能
