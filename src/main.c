@@ -4,7 +4,7 @@ void	print_tokens(t_token *top)
 {
 	while(top != NULL)
 	{
-		ft_printf("token %s\ttype %d\n", top->token, top->type);
+		ft_printf("DEBUG: token %s\ttype %d\n", top->token, top->type);
 		top = top->next;
 	}
 }
@@ -49,6 +49,7 @@ int	main(void)
 		tokens = lexer(input);
 		free(input);
 		decide_type(tokens);
+//		print_tokens(tokens); //debug用
 		check(tokens);
 		list = linear_token_list(tokens);
 		sort_token(list);

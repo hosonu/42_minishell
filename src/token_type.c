@@ -18,15 +18,15 @@ int	decide_type(t_token *top)
 	while (node != NULL)
 	{
 		len = ft_strlen(node->token);
-		if (ft_strnstr(node->token, ">>", len))
+		if (ft_strnstr(node->token, ">>", len) == node->token)
 			decide_type_util(node, METAAPNDOUT, APNDOUTFILE);
-		else if (ft_strnstr(node->token, ">", len))
+		else if (ft_strnstr(node->token, ">", len) == node->token)
 			decide_type_util(node, METAOUT, OWOUTFILE);
-		else if (ft_strnstr(node->token, "<<", len))
+		else if (ft_strnstr(node->token, "<<", len) == node->token)
 			decide_type_util(node, METAHEREDOC, HEREDOC);
-		else if (ft_strnstr(node->token, "<", len))
+		else if (ft_strnstr(node->token, "<", len) == node->token)
 			decide_type_util(node, METAIN, INFILE);
-		else if (ft_strnstr(node->token, "|", len))
+		else if (ft_strnstr(node->token, "|", len) == node->token)
 			decide_type_util(node, METAPIPE, PIPEINCOMMAND);
 		else if (node->type == 0)
 			node->type = COMMAND;
@@ -35,24 +35,30 @@ int	decide_type(t_token *top)
 	return (1);
 }
 
-int	count_word(char *str)
+int	more_than_word(char *str)
 {
-	int	i;
-	int	count;
+	char	*pnt[5];
 
-	count = 0;
-	i = 0;
-	while (str[i] == ' ')
-		i++;
-	while (str[i])
+	pnt[0] = strchr(str, '\"');
+	if (pnt[0] != NULL)
+		pnt[1] = strchr(pnt[0] + 1, '\"');
+	pnt[2] = strchr(str, '\'');
+	if (pnt[2] != NULL)
+		pnt[3] = strchr(pnt[2] + 1, '\'');
+	if (pnt[0] != NULL || pnt[2] != NULL)
 	{
-		count++;
-		while (str[i] != ' ' && str[i] != '\0')
-			i++;
-		while (str[i] == ' ' && str[i] != '\0')
-			i++;
+		if (pnt[0] != NULL && pnt[2] == NULL)
+			pnt[4] = strchr(pnt[1], ' ');
+		else if (pnt[0] == NULL && pnt[2] != NULL)
+			pnt[4] = strchr(pnt[3], ' ');
+		else if (pnt[0] < pnt[2])
+			pnt[4] = strchr(pnt[1], ' ');
+		else
+			pnt[4] = strchr(pnt[3], ' ');
 	}
-	return (count);
+	else
+		pnt[4] = strchr(str, ' ');
+	return (pnt[4] != NULL);
 }
 
 t_token	*devide_file(t_token *node)
@@ -60,14 +66,36 @@ t_token	*devide_file(t_token *node)
 	int	len;
 	int	start;
 	char	*token;
+	char	*pnt[5];
 	t_token	*new;
 
 	len = 0;
 	start = 0;
+	pnt[0] = strchr(node->token, '\"');
+	if (pnt[0] != NULL)
+		pnt[1] = strchr(node->token + 1, '\"');
+	pnt[2] = strchr(node->token, '\'');
+	if (pnt[2] != NULL)
+		pnt[3] = strchr(node->token + 1, '\'');
+	pnt[4] = strchr(node->token, ' ');
 	while (node->token[start] == ' ')
 		start++;
-	while (node->token[start + len] != ' ')
-		len++;
+	if (pnt[0] == NULL && pnt[2] == NULL)
+	{
+		while (node->token[start + len] != ' ')
+			len++;
+	}
+	else if (pnt[0] < pnt[4] || pnt[2] < pnt[4])
+	{
+		if (pnt[0] != NULL && pnt[2] == NULL)
+			len = (pnt[1] - pnt[0]) + 1;
+		else if (pnt[0] == NULL && pnt[2] != NULL)
+			len = (pnt[3] - pnt[2]) + 1;
+		else if (pnt[0] < pnt[2])
+			len = (pnt[1] - pnt[0]) + 1;
+		else
+			len = (pnt[3] - pnt[2]) + 1;
+	}
 	token = ft_substr(node->token, start, len);
 	new = new_token(token);
 	if (new != NULL)
@@ -80,16 +108,41 @@ t_token	*devide_cmd(t_token *node)
 	int	len;
 	int	start;
 	char	*token;
+	char	*pnt[5];
 	t_token	*new;
 
 	len = 0;
 	start = 0;
-	while (node->token[start] == ' ')
-		start++;
-	while (node->token[start] != ' ')
-		start++;
-	while (node->token[start] == ' ')
-		start++;
+	pnt[0] = strchr(node->token, '\"');
+	if (pnt[0] != NULL)
+		pnt[1] = strchr(pnt[0] + 1, '\"');
+	pnt[2] = strchr(node->token, '\'');
+	if (pnt[2] != NULL)
+		pnt[3] = strchr(pnt[2] + 1, '\'');
+	pnt[4] = NULL;
+	if (pnt[0] != NULL || pnt[2] != NULL)
+	{
+		if (pnt[0] != NULL && pnt[2] == NULL)
+			pnt[4] = strchr(pnt[1], ' ');
+		else if (pnt[0] == NULL && pnt[2] != NULL)
+			pnt[4] = strchr(pnt[3], ' ');
+		else if (pnt[0] < pnt[2])
+			pnt[4] = strchr(pnt[1], ' ');
+		else
+			pnt[4] = strchr(pnt[3], ' ');
+		start = (pnt[4] - node->token) + 1;
+		while (node->token[start] == ' ')
+			start++;
+	}
+	else
+	{
+		while (node->token[start] == ' ')
+			start++;
+		while (node->token[start] != ' ')
+			start++;
+		while (node->token[start] == ' ')
+			start++;
+	}
 	while (node->token[start + len] != '\0')
 		len++;
 	token = ft_substr(node->token, start, len);
@@ -108,11 +161,12 @@ void	check(t_token *top)
 	node = top;
 	while (node != NULL)
 	{
-		if (node->type < COMMAND && count_word(node->token) > 1)
+		if (node->type < COMMAND && more_than_word(node->token) == 1)
 		{
 			//devide command and filename
 			file = devide_file(node);
 			cmd = devide_cmd(node);
+			printf("DEBUG: file %s\tcmd %s\n", file->token, cmd->token);
 			//insert func and destory origin
 			token_insert(node, file);
 			token_insert(file, cmd);

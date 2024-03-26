@@ -39,7 +39,6 @@ t_token	**linear_token_list(t_token *top)
 		top = top->next;
 	}
 	list[i] = NULL;
-	//print_to(list);
 	return (list);
 }
 
@@ -51,13 +50,10 @@ void	sort_token(t_token **list)
 	i = 0;
 	while (list[i] != NULL)
 	{
-		//printf("AA\n");
 		if (list[i + 1] != NULL)
 		{
-			//printf("BB\n");
 			if (list[i]->type >= COMMAND && list[i + 1]->type < COMMAND && list[i + 1]->type != METAPIPE)
 			{
-				//printf("CC\n");
 				tmp = list[i];
 				list[i] = list[i + 1];
 				list[i + 1] = tmp;

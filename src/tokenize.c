@@ -5,16 +5,22 @@ int	token_len(char *src)
 	int	srclen;
 	int	token_len;
 	int	len;
-	char	*pnt[5];
+	char	*pnt[9];
 	int	i;
 
 	srclen = ft_strlen(src);
-	token_len = srclen;
 	pnt[0] = ft_strnstr(src, ">>", srclen);
 	pnt[1] = ft_strnstr(src, ">", srclen);
 	pnt[2] = ft_strnstr(src, "<<", srclen);
 	pnt[3] = ft_strnstr(src, "<", srclen);
 	pnt[4] = ft_strnstr(src, "|", srclen);
+	pnt[5] = ft_strchr(src, '\"');
+	if (pnt[5] != NULL)
+		pnt[6] = ft_strchr(pnt[5] + 1, '\"');
+	pnt[7] = ft_strchr(src, '\'');
+	if (pnt[7] != NULL)
+		pnt[8] = ft_strchr(pnt[7] + 1, '\'');
+	token_len = srclen;
 	i = 0;
 	while (i < 5)
 	{
@@ -22,7 +28,19 @@ int	token_len(char *src)
 		{
 			len = pnt[i] - src;
 			if (len < token_len)
-				token_len = len;
+			{
+				if (pnt[5] != NULL || pnt[7] != NULL)
+				{
+					if (pnt[7] == NULL && (pnt[5] < pnt[i] && pnt[6] > pnt[i]))
+						token_len = (pnt[6] - src) + 1;
+					else if (pnt[5] == NULL && (pnt[7] < pnt[i] && pnt[8] > pnt[i]))
+						token_len = (pnt[8] - src) + 1;
+					else
+						token_len = len;
+				}
+				else
+					token_len = len;
+			}
 		}
 		i++;
 	}
@@ -42,6 +60,8 @@ char	*tokenizer(char *str)
 	start = 0;
 	while (str[start] == ' ' && str[start] != '\0')
 		start++;
+	while (str[len] == ' ')
+		len--;
 	if (len > 0)
 		token = ft_substr(str, start, len - start);
 	i = 0;
@@ -49,7 +69,7 @@ char	*tokenizer(char *str)
 	{
 		while (token[i] == ' ')
 			i++;
-		if (i == len)
+		if (token[i] == '\0')
 			return (NULL);
 	}
 	return (token);
@@ -69,6 +89,8 @@ char	*strdup_right(char *str)
 	len = token_len(str);
 	if (len == (int)ft_strlen(str))
 		return (NULL);
+	while (str[len] == ' ')
+		len++;
 	while (is_metachar(str[len]) == 1)
 		len++;
 	while (str[len] == ' ')

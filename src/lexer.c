@@ -24,6 +24,8 @@ t_token	*new_metatoken(char *str)
 	len = 0;
 	if (start == (int)ft_strlen(str))
 		return (NULL);
+	while (str[start] == ' ')
+		start++;
 	while (is_metachar(str[start + len]) == 1)
 		len++;
 	new = new_token(ft_substr(str, start, len));
