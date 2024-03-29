@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../includes/minishell.h"
 
 void	decide_type_util(t_token *token, int meta_type, int type)
 {

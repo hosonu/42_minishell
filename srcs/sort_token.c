@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../includes/minishell.h"
 
 void	print_to(t_token **top)
 {
