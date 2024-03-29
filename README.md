@@ -1,10 +1,3 @@
-quotation-bug-handle branchでは
-
-通常の使い方には対応できるようにしたが、それ以外のユースケースではセグフォルトになるので改良する
-
-execveで実行する際にtypeがCOMMAND以上である場合は"" ''を参照する必要があるため除かず、他のtypeでは除く
-
-
 対応できている機能
     
     ・プロンプト履歴
@@ -23,7 +16,4 @@ execveで実行する際にtypeがCOMMAND以上である場合は"" ''を参照�
     
     ./minishell .. metacharacter
 
-対応できていないプロンプト
-    
     "" ''    
-    
