@@ -27,7 +27,7 @@ int	decide_type(t_token *top)
 		else if (ft_strnstr(node->token, "<", len) == node->token)
 			decide_type_util(node, METAIN, INFILE);
 		else if (ft_strnstr(node->token, "|", len) == node->token)
-			decide_type_util(node, METAPIPE, PIPEINCOMMAND);
+			decide_type_util(node, METAPIPE, COMMAND);
 		else if (node->type == 0)
 			node->type = COMMAND;
 		node = node->next;
@@ -152,7 +152,7 @@ t_token	*devide_cmd(t_token *node)
 	return (new);
 }
 
-void	check(t_token *top)
+void	token_revise(t_token *top)
 {
 	t_token	*node;
 	t_token	*file;
@@ -166,7 +166,7 @@ void	check(t_token *top)
 			//devide command and filename
 			file = devide_file(node);
 			cmd = devide_cmd(node);
-			printf("DEBUG: file %s\tcmd %s\n", file->token, cmd->token);
+			//printf("DEBUG check: file %s\tcmd %s\n", file->token, cmd->token);
 			//insert func and destory origin
 			token_insert(node, file);
 			token_insert(file, cmd);
@@ -174,5 +174,78 @@ void	check(t_token *top)
 			node = cmd;
 		}
 		node = node->next;
+	}
+}
+
+void	token_type_revise(t_token **list)
+{
+	int	i;
+	int	token_type;
+
+	i = 0;
+	token_type = 0;
+	while (list[i] != NULL)
+	{
+		if (list[i]->type < 0)
+		{
+			token_type = token_type | (list[i]->type * -1);
+			printf("DEBUG token_type_revise: %d\n", token_type);
+		}
+		else if (list[i]->type >= 30)
+		{
+			printf("DEBUG token_type_revise: %d\n", list[i]->type);
+			list[i]->type = list[i]->type + token_type;
+			token_type = 0;
+			if (list[i + 1] != NULL)
+			{
+				if (list[i + 1]->type == METAPIPE)
+				{
+					switch (list[i]->type)
+					{
+						case COMMAND:
+							list[i]->type = PIPEOUTCOMMAND;
+							printf("DEBUG: a\n");
+							break ;
+						case HEREDOCCOMMAND:
+							list[i]->type = PIPEOUTHEREDOCCOMMAND;
+							break ;
+						case REINHEREDOCCOMMAND:
+							list[i]->type = REINPIPEOUTCOMMAND;
+							break ;
+						case REOUTHEREDOCCOMMAND:
+							list[i]->type = REOUTPIPEOUTHEREDOCCOMMAND;
+							break ;
+						case REINOUTHEREDOCCOMMAND:
+							list[i]->type = REINOUTPIPEOUTCOMMAND;
+							break ;
+						case PIPEINHEREDOCCOMMAND:
+							list[i]->type = PIPEINOUTHEREDOCCOMMAND;
+							break ;
+						case REINOUTPIPEINHEREDOCCOMMAND:
+							list[i]->type = REINOUTPIPEINOUTHEREDOCCOMMAND;
+							break ;
+						case REINCOMMAND:
+							list[i]->type = REINPIPEOUTCOMMAND;
+							break ;
+						case REINOUTCOMMAND:
+							list[i]->type = REINOUTPIPEOUTCOMMAND;
+							break ;
+						case REINOUTPIPEINCOMMAND:
+							list[i]->type = REINOUTPIPEINOUTCOMMAND;
+							break ;
+						case REOUTPIPEINCOMMAND:
+							list[i]->type = REOUTPIPEINOUTCOMMAND;
+							break ;
+						case PIPEINCOMMAND:
+							list[i]->type = PIPEINOUTCOMMAND;
+							break ;
+						case INFILE:
+							list[i]->type = INFILETOPIPE;
+							break ;
+					}
+				}
+			}
+		}
+		i++;
 	}
 }

@@ -40,6 +40,7 @@ t_token	*lexer(char *str)
 
 
 	new = NULL;
+	quotation_validate(str);
 	top = new_token(tokenizer(str));
 	if (top == NULL)
 		top = new_metatoken(str);

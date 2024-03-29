@@ -7,7 +7,7 @@ void	print_to(t_token **top)
 	i = 0;
 	while (top[i])
 	{
-		printf("token %s\ttype %d\n", top[i]->token, top[i]->type);
+		printf("DEBUG after sorted: token [%s]\ttype %d\n", top[i]->token, top[i]->type);
 		i++;
 	}
 }
@@ -58,10 +58,6 @@ void	sort_token(t_token **list)
 				list[i] = list[i + 1];
 				list[i + 1] = tmp;
 			}
-			if (list[i]->type == COMMAND && list[i + 1]->type == METAPIPE)
-				list[i]->type = PIPEOUTCOMMAND;
-			if (list[i]->type == PIPEINCOMMAND && list[i+ 1]->type == METAPIPE)
-				list[i]->type = PIPEINOUTCOMMAND;
 		}
 		i++;
 	}
