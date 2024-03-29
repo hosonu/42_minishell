@@ -4,7 +4,10 @@ void	decide_type_util(t_token *token, int meta_type, int type)
 {
 	token->type = meta_type;
 	if (token->next == NULL)
+	{
 		perror("syntaxerror");
+		exit(EXIT_FAILURE);
+	}
 	else
 		token->next->type = type;
 }
@@ -189,11 +192,11 @@ void	token_type_revise(t_token **list)
 		if (list[i]->type < 0)
 		{
 			token_type = token_type | (list[i]->type * -1);
-			printf("DEBUG token_type_revise: %d\n", token_type);
+			//printf("DEBUG token_type_revise: %d\n", token_type);
 		}
 		else if (list[i]->type >= 30)
 		{
-			printf("DEBUG token_type_revise: %d\n", list[i]->type);
+			//printf("DEBUG token_type_revise: %d\n", list[i]->type);
 			list[i]->type = list[i]->type + token_type;
 			token_type = 0;
 			if (list[i + 1] != NULL)
