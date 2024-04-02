@@ -6,13 +6,13 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:37 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/02 18:00:44 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/03 02:42:47 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	decide_type_util(t_token *token, int meta_type, int type)
+int	decide_type_util(t_token *token, int8_t meta_type, int8_t type)
 {
 	token->type = meta_type;
 	if (token->next == NULL)
@@ -39,7 +39,7 @@ int	decide_type(t_token *top)
 		if (ft_strnstr(node->token, ">>", len) == node->token)
 			ret = decide_type_util(node, METAAPNDOUT, APNDOUTFILE);
 		else if (ft_strnstr(node->token, ">", len) == node->token)
-			ret = decide_type_util(node, METAOUT, OWOUTFILE);
+			ret = decide_type_util(node, METAOUT, TRUNCOUTFILE);
 		else if (ft_strnstr(node->token, "<<", len) == node->token)
 			ret = decide_type_util(node, METAHEREDOC, HEREDOC);
 		else if (ft_strnstr(node->token, "<", len) == node->token)
@@ -200,13 +200,15 @@ void	token_revise(t_token *top)
 void	token_type_revise(t_token **list)
 {
 	int	i;
-	int	token_type;
+	uint8_t	pipefg;
+	int8_t	token_type;
 
 	i = 0;
 	token_type = 0;
+	pipefg = 0;
 	while (list[i] != NULL)
 	{
-		if (list[i]->type < 0)
+		if (list[i]->type < 0 && list[i]->type != METAPIPE)
 		{
 			token_type = token_type | (list[i]->type * -1);
 			//printf("DEBUG token_type_revise: %d\n", token_type);
@@ -214,59 +216,25 @@ void	token_type_revise(t_token **list)
 		else if (list[i]->type >= 30)
 		{
 			//printf("DEBUG token_type_revise: %d\n", list[i]->type);
-			list[i]->type = list[i]->type + token_type;
+			if (token_type == (METAIN * -1 | METAHEREDOC * -1))
+				list[i]->type = HEREDOCCOMMAND;
+			else if (token_type == (METAOUT * -1 | METAIN * -1 | METAHEREDOC * -1))
+				list[i]->type = REOUTHEREDOCCOMMAND;
+			else
+				list[i]->type = list[i]->type + token_type;
 			token_type = 0;
+			list[i]->pipein = pipefg;
+			pipefg = 0;
 			if (list[i + 1] != NULL)
 			{
 				if (list[i + 1]->type == METAPIPE)
-				{
-					switch (list[i]->type)
-					{
-						case COMMAND:
-							list[i]->type = PIPEOUTCOMMAND;
-							break ;
-						case HEREDOCCOMMAND:
-							list[i]->type = PIPEOUTHEREDOCCOMMAND;
-							break ;
-						case REINHEREDOCCOMMAND:
-							list[i]->type = REINPIPEOUTCOMMAND;
-							break ;
-						case REOUTHEREDOCCOMMAND:
-							list[i]->type = REOUTPIPEOUTHEREDOCCOMMAND;
-							break ;
-						case REINOUTHEREDOCCOMMAND:
-							list[i]->type = REINOUTPIPEOUTCOMMAND;
-							break ;
-						case PIPEINHEREDOCCOMMAND:
-							list[i]->type = PIPEINOUTHEREDOCCOMMAND;
-							break ;
-						case REINOUTPIPEINHEREDOCCOMMAND:
-							list[i]->type = REINOUTPIPEINOUTHEREDOCCOMMAND;
-							break ;
-						case REINCOMMAND:
-							list[i]->type = REINPIPEOUTCOMMAND;
-							break ;
-						case REINOUTCOMMAND:
-							list[i]->type = REINOUTPIPEOUTCOMMAND;
-							break ;
-						case REINPIPEINCOMMAND:
-							list[i]->type = REINPIPEINOUTCOMMAND;
-							break ;
-						case REINOUTPIPEINCOMMAND:
-							list[i]->type = REINOUTPIPEINOUTCOMMAND;
-							break ;
-						case REOUTPIPEINCOMMAND:
-							list[i]->type = REOUTPIPEINOUTCOMMAND;
-							break ;
-						case PIPEINCOMMAND:
-							list[i]->type = PIPEINOUTCOMMAND;
-							break ;
-						case INFILE:
-							list[i]->type = INFILETOPIPE;
-							break ;
-					}
-				}
+					list[i]->pipeout = 1;
 			}
+		}
+		else if (list[i]->type == METAPIPE)
+		{
+			token_type = 0;
+			pipefg = 1;
 		}
 		i++;
 	}

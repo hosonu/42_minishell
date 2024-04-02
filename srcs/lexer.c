@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:13 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/03/29 23:00:15 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/03 01:06:18 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_token	*new_token(char *content)
 	new = malloc(sizeof(t_token));
 	new->token = content;
 	new->type = 0;
+	new->pipein = 0;
+	new->pipeout = 0;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:00:08 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/02 16:15:02 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/03 01:17:50 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	print_chain_tokens(t_token *top)
 {
 	while(top != NULL)
 	{
-		ft_printf("DEBUG before sort: token [%s]\ttype %d\n", top->token, top->type);
+		ft_printf("DEBUG before sort: token [%s]\ttype %i pipein %i pipeout %i\n", top->token, top->type, top->pipein, top->pipeout);
 		top = top->next;
 	}
 }
@@ -28,7 +28,7 @@ void	print_linear_tokens(t_token **top)
 	i = 0;
 	while (top[i])
 	{
-		printf("DEBUG after sorted: token [%s]\ttype %d\n", top[i]->token, top[i]->type);
+		printf("DEBUG after sorted: token [%s]\ttype %i pipein %i pipeout %i\n", top[i]->token, top[i]->type, top[i]->pipein, top[i]->pipeout);
 		i++;
 	}
 }
