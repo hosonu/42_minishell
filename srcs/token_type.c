@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:37 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/02 17:00:30 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:00:44 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	decide_type_util(t_token *token, int meta_type, int type)
 	token->type = meta_type;
 	if (token->next == NULL)
 	{
-		ft_printf("syntaxerror");
+		ft_printf("syntaxerror\n");
 		return (-1);
 	}
 	else
@@ -248,6 +248,9 @@ void	token_type_revise(t_token **list)
 							break ;
 						case REINOUTCOMMAND:
 							list[i]->type = REINOUTPIPEOUTCOMMAND;
+							break ;
+						case REINPIPEINCOMMAND:
+							list[i]->type = REINPIPEINOUTCOMMAND;
 							break ;
 						case REINOUTPIPEINCOMMAND:
 							list[i]->type = REINOUTPIPEINOUTCOMMAND;

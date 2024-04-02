@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:06 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/02 16:59:13 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:01:36 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,13 @@ int	main(void)
 		//print_chain_tokens(tokens); //debug用
 		token_revise(tokens);
 		list = linear_token_list(tokens);
+		free_chain_token_list(tokens);
 		sort_token(list);
 		token_type_revise(list);
 		//実行用のプログラムを入れる
 		//print_linear_tokens(tokens); //debug用
 		print_linear_tokens(list);
+		free_linear_token_list(list);
 	}
-	free(tokens); //全然リーク
 	return 0;
 }
