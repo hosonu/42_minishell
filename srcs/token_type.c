@@ -6,45 +6,50 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:37 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/03/29 23:00:38 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/02 17:00:30 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	decide_type_util(t_token *token, int meta_type, int type)
+int	decide_type_util(t_token *token, int meta_type, int type)
 {
 	token->type = meta_type;
 	if (token->next == NULL)
 	{
-		perror("syntaxerror");
-		exit(EXIT_FAILURE);
+		ft_printf("syntaxerror");
+		return (-1);
 	}
 	else
 		token->next->type = type;
+	return (1);
 }
 
 int	decide_type(t_token *top)
 {
 	int	len;
+	int	ret;
 	t_token	*node;
 
 	node = top;
+	ret = 0;
 	while (node != NULL)
 	{
 		len = ft_strlen(node->token);
 		if (ft_strnstr(node->token, ">>", len) == node->token)
-			decide_type_util(node, METAAPNDOUT, APNDOUTFILE);
+			ret = decide_type_util(node, METAAPNDOUT, APNDOUTFILE);
 		else if (ft_strnstr(node->token, ">", len) == node->token)
-			decide_type_util(node, METAOUT, OWOUTFILE);
+			ret = decide_type_util(node, METAOUT, OWOUTFILE);
 		else if (ft_strnstr(node->token, "<<", len) == node->token)
-			decide_type_util(node, METAHEREDOC, HEREDOC);
+			ret = decide_type_util(node, METAHEREDOC, HEREDOC);
 		else if (ft_strnstr(node->token, "<", len) == node->token)
-			decide_type_util(node, METAIN, INFILE);
+			ret = decide_type_util(node, METAIN, INFILE);
 		else if (ft_strnstr(node->token, "|", len) == node->token)
-			decide_type_util(node, METAPIPE, COMMAND);
+			ret = decide_type_util(node, METAPIPE, COMMAND);
 		else if (node->type == 0)
 			node->type = COMMAND;
+		if (ret < 0)
+			return (-1);
 		node = node->next;
 	}
 	return (1);
@@ -219,7 +224,6 @@ void	token_type_revise(t_token **list)
 					{
 						case COMMAND:
 							list[i]->type = PIPEOUTCOMMAND;
-							printf("DEBUG: a\n");
 							break ;
 						case HEREDOCCOMMAND:
 							list[i]->type = PIPEOUTHEREDOCCOMMAND;

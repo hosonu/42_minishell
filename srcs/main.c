@@ -6,20 +6,12 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:06 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/03/29 23:00:08 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/02 16:59:13 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	print_tokens(t_token *top)
-{
-	while(top != NULL)
-	{
-		ft_printf("DEBUG before sort: token [%s]\ttype %d\n", top->token, top->type);
-		top = top->next;
-	}
-}
 
 void	signal_handler(int signum)
 {
@@ -36,7 +28,6 @@ void	signal_handler(int signum)
 
 int	main(void)
 {
-	char	*prompt;
 	char	*input;
 	char	*input_trimed;
 	t_token	*tokens;
@@ -48,10 +39,9 @@ int	main(void)
 	sigemptyset(&sa.sa_mask);
 	sigaction(SIGINT, &sa, NULL);// CNTL + C
 	sigaction(SIGQUIT, &sa, NULL);//CNTL + "\"
-	prompt = "minish>> ";
 	while (1)
 	{
-		input = readline(prompt);
+		input = readline("minish>> ");
 		if (input == NULL)// CNTL + D
 		{
 			ft_printf("exit\n");
@@ -63,15 +53,16 @@ int	main(void)
 		free(input);
 		tokens = lexer(input_trimed);
 		free(input_trimed);
-		decide_type(tokens);
-		//print_tokens(tokens); //debug用
+		if (decide_type(tokens) < 0)
+			continue ;
+		//print_chain_tokens(tokens); //debug用
 		token_revise(tokens);
 		list = linear_token_list(tokens);
 		sort_token(list);
 		token_type_revise(list);
 		//実行用のプログラムを入れる
-		//print_tokens(tokens); //debug用
-		print_to(list);
+		//print_linear_tokens(tokens); //debug用
+		print_linear_tokens(list);
 	}
 	free(tokens); //全然リーク
 	return 0;

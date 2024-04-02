@@ -6,13 +6,13 @@
 #    By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/29 22:59:42 by kojwatan          #+#    #+#              #
-#    Updated: 2024/03/29 22:59:44 by kojwatan         ###   ########.fr        #
+#    Updated: 2024/04/02 15:32:29 by kojwatan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wextra -Werror -Wall -g -fsanitize=address
-SRCS = srcs/main.c srcs/lexer.c srcs/tokenize.c srcs/token_type.c srcs/sort_token.c srcs/quotation_validate.c
+SRCS = srcs/main.c srcs/lexer.c srcs/tokenize.c srcs/token_type.c srcs/sort_token.c srcs/quotation_validate.c srcs/debug.c
 
 OBJS = $(SRCS:.c=.o)
 READ_LINE_PREFIX = $(shell brew --prefix readline)

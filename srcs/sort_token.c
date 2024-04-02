@@ -6,23 +6,11 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:30 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/03/29 23:00:31 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:05:01 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	print_to(t_token **top)
-{
-	int	i;
-
-	i = 0;
-	while (top[i])
-	{
-		printf("DEBUG after sorted: token [%s]\ttype %d\n", top[i]->token, top[i]->type);
-		i++;
-	}
-}
 
 int	token_count(t_token *top)
 {

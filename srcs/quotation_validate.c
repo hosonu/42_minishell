@@ -6,13 +6,13 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:23 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/03/29 23:00:24 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:47:00 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	quotation_validate(char *str)
+int	quotation_validate(char *str)
 {
 	int	single_quote_count;
 	int	double_quote_count;
@@ -25,16 +25,18 @@ void	quotation_validate(char *str)
 	if (single_quote_count % 2 == 1 || double_quote_count % 2 == 1)
 	{
 		perror("Quotation Error");
-		exit(EXIT_FAILURE);
+		return (-1);
 	}
 	single_list = quote_list(str, '\'');
 	double_list = quote_list(str, '\"');
-	validate_quote_nesting(single_list, double_list);
+	if (validate_quote_nesting(single_list, double_list) < 0)
+		return (-1);
 	free(single_list);
 	free(double_list);
+	return (1);
 }
 
-void	validate_quote_nesting_util(t_quotes *list, t_quotes quotes)
+int	validate_quote_nesting_util(t_quotes *list, t_quotes quotes)
 {
 	int i;
 
@@ -42,7 +44,7 @@ void	validate_quote_nesting_util(t_quotes *list, t_quotes quotes)
 	while (list[i].open != NULL)
 	{
 		if (list[i].open < quotes.open && quotes.close < list[i].close)
-			return ;
+			return (1);
 		else if (!(list[i].open < quotes.open) && !(quotes.close < list[i].close))
 			;
 		else if (list[i].close < quotes.open)
@@ -52,44 +54,37 @@ void	validate_quote_nesting_util(t_quotes *list, t_quotes quotes)
 		else
 		{
 			perror("Quotation Nesting Error");
-			exit(EXIT_FAILURE);
+			return (-1);
 		}
 		i++;
 	}
+	return (1);
 }
 
-void	validate_quote_nesting(t_quotes *list1, t_quotes *list2)
+int	validate_quote_nesting(t_quotes *list1, t_quotes *list2)
 {
 	int	i;
 
 	if (list1 == NULL || list2 == NULL)
-		return ;
+		return (1);
 	//printf("DEBUG validate_quote_nesting: \n");
 	i = 0;
 	while (list1[i].open != NULL)
 	{
-		validate_quote_nesting_util(list2, list1[i]);
+		if (validate_quote_nesting_util(list2, list1[i]) < 0)
+			return (-1);
 		i++;
 	}
 	i = 0;
 	while (list2[i].open != NULL)
 	{
-		validate_quote_nesting_util(list1, list2[i]);
+		if (validate_quote_nesting_util(list1, list2[i]) < 0)
+			return (-1);
 		i++;
 	}
+	return (1);
 }
 
-void	print_quote(t_quotes *list)
-{
-	int	i;
-
-	i = 0;
-	while (list[i].open != NULL)
-	{
-		//printf("DEBUG printf_quote: LEFT %p RIGHT %p\n", list[i].left, list[i].right);
-		i++;
-	}
-}
 
 int	count_chr(char *str, char c)
 {
