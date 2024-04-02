@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 22:58:35 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/03/29 22:58:36 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/02 17:04:49 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_quotes
 # define OWOUTFILE 10
 # define APNDOUTFILE 11
 # define INFILE 20
-# define INFILETOPIPE 22
+//# define INFILETOPIPE 22 not needed
 # define HEREDOC 23
 # define COMMAND 30
 # define REINCOMMAND 34
