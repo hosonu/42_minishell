@@ -1,10 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-
 NAME = libft.a
-
 HEAD = libft.h
-
 SRCS = ./ft_digit_deci_to_hexa.c \
 		./ft_print_c.c \
 		./ft_print_d.c \
@@ -66,8 +63,11 @@ SRCS = ./ft_digit_deci_to_hexa.c \
 		./ft_print_x.c \
 		./ft_digit_deci_to_hexa.c \
 		./ft_print_x_cap.c \
-		./get_next_line_utils_bonus.c \
-		./get_next_line_bonus.c \
+		./get_next_line.c \
+		./get_next_line_utils.c\
+		# ./get_next_line_utils_bonus.c \
+		# ./get_next_line_bonus.c \
+		
 
 OBJS = $(SRCS:.c=.o)
 
@@ -76,8 +76,8 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -I $(HEAD) -c $< -o $@
+# %.o: %.c
+# 	$(CC) $(CFLAGS) -I $(HEAD) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

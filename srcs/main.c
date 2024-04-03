@@ -62,8 +62,9 @@ int	main(void)
 		sort_token(list);
 		token_type_revise(list);
 		//実行用のプログラムを入れる
+		dispatch_token(list);
 		//print_linear_tokens(tokens); //debug用
-		print_linear_tokens(list);
+		// print_linear_tokens(list);
 		free_linear_token_list(list);
 	}
 	return 0;

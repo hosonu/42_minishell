@@ -29,6 +29,13 @@ typedef struct s_quotes
 	char	*close;
 }	t_quotes;
 
+typedef struct s_size
+{
+	int		read;
+	int		buf;
+	int		total;
+}			t_size;
+
 # define METAOUT -1
 # define METAAPNDOUT -1
 # define METAIN -2

@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdio.h>
+# include <stdint.h>
 
 typedef struct s_list
 {
@@ -87,8 +88,13 @@ int			digit_deci_to_hexa(size_t nbr);
 
 //gnl
 char		*get_next_line(int fd);
-char		*ft_strjoin_gnl(char const *s1, char const *s2);
-char		*linecpy(char *str);
-char		*save_to_buff(char *src);
+// char		*ft_strjoin_gnl(char const *s1, char const *s2);
+// char		*linecpy(char *str);
+// char		*save_to_buff(char *src);
+char	*left_str(char *str);
+char	*get_line(char *str);
+char	*gnl_strchr(char *s, int c);
+char	*gnl_strjoin(char *s1, char *s2, size_t j);
+
 
 #endif

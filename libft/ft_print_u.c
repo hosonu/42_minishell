@@ -15,7 +15,7 @@
 void	ft_putnbr_u(unsigned int nbr)
 {
 	char			c;
-	unsigned long	nb;
+	long long int	nb;
 
 	nb = nbr;
 	if (nb < 0)
@@ -37,12 +37,12 @@ int	print_u(unsigned int nbr)
 	ft_putnbr_u(nbr);
 	if (nbr == 0)
 		return (1);
-	if (nbr < 0)
-	{
-		nbr *= -1;
-		digit++;
-	}
-	while (nbr > 0)
+	// if (nbr < 0)
+	// {
+	// 	nbr *= -1;
+	// 	digit++;
+	// }
+	// while (nbr > 0)
 	{
 		nbr /= 10;
 		digit++;
