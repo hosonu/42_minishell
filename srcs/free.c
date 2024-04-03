@@ -17,7 +17,7 @@ void	free_chain_token_list(t_token *top)
 {
 	t_token	*tmp;
 
-	while (top == NULL)
+	while (top != NULL)
 	{
 		tmp = top;
 		free(top->token);

@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:06 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/02 18:01:36 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/03 10:45:08 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(void)
 		//print_chain_tokens(tokens); //debug用
 		token_revise(tokens);
 		list = linear_token_list(tokens);
-		free_chain_token_list(tokens);
+		//free_chain_token_list(tokens); //線形リストにデータを移しているのでfreeはしちゃだめ
 		sort_token(list);
 		token_type_revise(list);
 		//実行用のプログラムを入れる
