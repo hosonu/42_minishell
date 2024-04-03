@@ -19,6 +19,7 @@ void execute_heredoc(int gfd[2], t_token *list)
             free(input);
             break;
         }
+        input = expand_variable(input);
         write(gfd[0], input, ft_strlen(input));
         write(gfd[0], "\n", 1);
         free(input);

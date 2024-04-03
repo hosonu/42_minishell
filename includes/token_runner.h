@@ -11,15 +11,21 @@ void    execve_token(t_token *list);
 char *path_lookup(char *comand, char **envi);
 char *join_path(char *comand, char *path);
 
-
-//fctl_token.c
-void   fctl_token(int gfd[2], t_token *list);
-void execute_heredoc(int gfd[2], t_token *list);
-
 //manage_fd.c
 void    manage_gfdin(int gfd[2], t_token *list);
 void    manage_gfdout(int gfd[2], t_token *list);
 void    manage_pipein(int pp[2], t_token *list);
 void    manage_pipeout(int pp[2], t_token *list);
+
+//fctl_token.c
+void   fctl_token(int gfd[2], t_token *list);
+void execute_heredoc(int gfd[2], t_token *list);
+
+//expand_varivable.c
+char *expand_variable(char *input);
+char *change_input(char *expanded_in, char *original_in, int index);
+char    *check_and_expand(int index, char *input, char **envi);
+size_t get_len_env(char *envi);
+char    *get_expanded_env(char *env);
 
 #endif
