@@ -58,16 +58,23 @@ char *change_input(char *expanded_in, char *original_in, int index)
     return change_in;
 }
 
-char *expand_variable(char *input)
+char *expand_variable(char *input, int heredoc)
 {
     extern char **environ;
     char *expanded_input;
     int i;
+    int unexpand;
 
     i = 0;
+    unexpand = 0;
     while(input[i] != '\0')
     {
-        if(input[i] == '$')
+        
+        if(is_quote(input[i]) == 1 && unexpand == 0 && heredoc == 1)
+            unexpand = 2;
+        if(is_quote(input[i]) == 2 && unexpand == 0 && heredoc == 1)
+            unexpand = 1;
+        if(input[i] == '$' && unexpand != 1)
         {
             expanded_input = check_and_expand(i, input, environ);
             input = change_input(expanded_input, input, i);

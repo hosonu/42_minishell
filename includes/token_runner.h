@@ -22,10 +22,13 @@ void   fctl_token(int gfd[2], t_token *list);
 void execute_heredoc(int gfd[2], t_token *list);
 
 //expand_varivable.c
-char *expand_variable(char *input);
+char *expand_variable(char *input, int heredoc);
 char *change_input(char *expanded_in, char *original_in, int index);
 char    *check_and_expand(int index, char *input, char **envi);
 size_t get_len_env(char *envi);
 char    *get_expanded_env(char *env);
+
+//handle_token.c
+void    handle_token(char **splited_token);
 
 #endif
