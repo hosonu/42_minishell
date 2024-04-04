@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:06 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/03 10:45:08 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/04 02:47:58 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,23 @@ int	main(void)
 		}
 		if (*input)
 			add_history(input);
+		if (prompt_validate(input) == -1)
+		{
+			free(input);
+			continue ;
+		}
 		input_trimed = ft_strtrim(input, " ");
 		free(input);
 		tokens = lexer(input_trimed);
 		free(input_trimed);
-		if (decide_type(tokens) < 0)
-			continue ;
+		//print_chain_tokens(tokens); //debug用
+		decide_type(tokens);
+		token_revise(tokens);
+		sort_token(&tokens);
 		//print_chain_tokens(tokens); //debug用
 		token_revise(tokens);
-		list = linear_token_list(tokens);
 		//free_chain_token_list(tokens); //線形リストにデータを移しているのでfreeはしちゃだめ
-		sort_token(list);
+		list = linear_token_list(tokens);
 		token_type_revise(list);
 		//実行用のプログラムを入れる
 		dispatch_token(list);

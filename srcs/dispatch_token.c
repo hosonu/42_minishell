@@ -7,6 +7,7 @@ void dispatch_token(t_token **list)
     int pid;
     int pid2;
     int gfd[2];
+    int original_stdin;
 
     i = 0;
     pid2 = fork();
@@ -22,7 +23,7 @@ void dispatch_token(t_token **list)
                fctl_token(gfd, list[i]);
             else if (list[i]->type >= 30)
             {
-                int original_stdin = dup(STDIN_FILENO);
+                original_stdin = dup(STDIN_FILENO);
                 manage_gfdin(gfd, list[i]);
                 manage_pipein(pp, list[i]);
                 pid = fork();

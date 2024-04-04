@@ -42,6 +42,8 @@ void    execve_token(t_token *list)
 
     i = 0;
     tokens_splited = ft_split(list->token, ' ');
+    
+    handle_token(tokens_splited);
     while(tokens_splited[i] != NULL)
     {
         if(access(tokens_splited[i], X_OK) == 0)

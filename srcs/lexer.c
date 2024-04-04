@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:13 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/03 01:06:18 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/04 02:28:49 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_token	*new_token(char *content)
 	new = malloc(sizeof(t_token));
 	new->token = content;
 	new->type = 0;
-	new->pipein = 0;
-	new->pipeout = 0;
+	new->pipein = false;
+	new->pipeout = false;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
@@ -54,7 +54,6 @@ t_token	*lexer(char *str)
 
 
 	new = NULL;
-	quotation_validate(str);
 	top = new_token(tokenizer(str));
 	if (top == NULL)
 		top = new_metatoken(str);
@@ -96,8 +95,10 @@ void	token_insert(t_token *node, t_token *new)
 
 void	token_destroy(t_token *node)
 {
-	node->next->prev = node->prev;
-	node->prev->next = node->next;
+	if (node->next != NULL)
+		node->next->prev = node->prev;
+	if (node->prev != NULL)
+		node->prev->next = node->next;
 	free(node->token);
 	free(node);
 }

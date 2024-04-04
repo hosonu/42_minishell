@@ -13,7 +13,7 @@
 CC = cc
 CFLAGS = -Wextra -Werror -Wall 
 # -g -fsanitize=address
-SRCS = srcs/main.c srcs/lexer.c srcs/tokenize.c srcs/token_type.c srcs/sort_token.c srcs/quotation_validate.c srcs/debug.c srcs/free.c srcs/dispatch_token.c srcs/execve_token.c srcs/fctl_token.c srcs/manage_fd.c srcs/expand_variable.c
+SRCS = srcs/main.c srcs/lexer.c srcs/tokenize.c srcs/token_type.c srcs/sort_token.c srcs/prompt_validate.c srcs/string_utils.c srcs/debug.c srcs/free.c srcs/dispatch_token.c srcs/execve_token.c srcs/fctl_token.c srcs/manage_fd.c srcs/expand_variable.c
 
 OBJS = $(SRCS:.c=.o)
 READ_LINE_PREFIX = $(shell brew --prefix readline)
