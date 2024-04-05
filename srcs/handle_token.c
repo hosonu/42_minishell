@@ -3,10 +3,11 @@
 char *remove_specific_quote(char *token, int *i, int *quote_status)
 {
     char *new_token;
+
     token[*i] = '\0';
     new_token = ft_strjoin(token, token + *i + 1);
-    *i = -1;
-    *quote_status = 1;
+    *i -= 1;
+    *quote_status += 1;
     return new_token;
 }
 
@@ -23,11 +24,11 @@ char *remove_quote(char *token)
     while (token[i] != '\0')
     {
         quote_type = is_quote(token[i]);
-        if (quote_type == 1 && dblquoted == 0)
+        if (quote_type == 1 && dblquoted % 2 == 0)
         {
             token = remove_specific_quote(token, &i, &quoted);
         }
-        else if (quote_type == 2 && quoted == 0)
+        else if (quote_type == 2 && quoted % 2 == 0)
         {
             token = remove_specific_quote(token, &i, &dblquoted);
         }

@@ -69,12 +69,11 @@ char *expand_variable(char *input, int heredoc)
     unexpand = 0;
     while(input[i] != '\0')
     {
-        
-        if(is_quote(input[i]) == 1 && unexpand == 0 && heredoc == 0)
-            unexpand = 2;
-        if(is_quote(input[i]) == 2 && unexpand == 0 && heredoc == 0)
-            unexpand = 1;
-        if(input[i] == '$' && unexpand != 1)
+        if(is_quote(input[i]) == 1 && heredoc == 0)
+            unexpand += 2;
+        if(is_quote(input[i]) == 2 && heredoc == 0  && unexpand != 2)
+            unexpand += 1;
+        if(input[i] == '$' && unexpand % 2 == 0)
         {
             expanded_input = check_and_expand(i, input, environ);
             input = change_input(expanded_input, input, i);
