@@ -33,6 +33,7 @@ char *path_lookup(char *comand, char **envi)
     return (NULL);
 }
 
+//error taiou
 void    execve_token(t_token *list)
 {
     extern char **environ;

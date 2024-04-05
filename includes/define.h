@@ -29,6 +29,14 @@ typedef struct s_quotes
 	char	*close;
 }	t_quotes;
 
+typedef struct s_fdgs
+{
+	int pp[2];
+	int gfd[2];
+	int original_stdin;
+}	t_fdgs;
+
+
 # define METAOUT -1
 # define METAAPNDOUT -1
 # define METAIN -2
