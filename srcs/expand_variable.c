@@ -70,9 +70,9 @@ char *expand_variable(char *input, int heredoc)
     while(input[i] != '\0')
     {
         
-        if(is_quote(input[i]) == 1 && unexpand == 0 && heredoc == 1)
+        if(is_quote(input[i]) == 1 && unexpand == 0 && heredoc == 0)
             unexpand = 2;
-        if(is_quote(input[i]) == 2 && unexpand == 0 && heredoc == 1)
+        if(is_quote(input[i]) == 2 && unexpand == 0 && heredoc == 0)
             unexpand = 1;
         if(input[i] == '$' && unexpand != 1)
         {
