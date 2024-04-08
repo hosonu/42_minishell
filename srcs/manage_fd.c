@@ -11,7 +11,9 @@ void    manage_gfdin(int gfd[2], t_token *list)
         break;
     case HEREDOCCOMMAND:
     case REOUTHEREDOCCOMMAND:
-        gfd[0] = open("/tmp/sh-thd-tekitou", O_RDONLY);
+        gfd[0] = x_open("/tmp/sh-thd-tekitou", O_RDONLY, 0);
+        x_dup2(gfd[0], STDIN_FILENO);
+        x_close(gfd[0]);
         break;
     }
 }

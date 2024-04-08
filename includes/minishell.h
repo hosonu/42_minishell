@@ -25,6 +25,7 @@
 # include "./string_utils.h"
 # include "token_runner.h"
 # include "x_func.h"
+# include "error_msg.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>

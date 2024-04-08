@@ -6,6 +6,8 @@ char *remove_specific_quote(char *token, int *i, int *quote_status)
 
     token[*i] = '\0';
     new_token = ft_strjoin(token, token + *i + 1);
+    if(new_token == NULL)
+        error_and_exit("malloc");
     *i -= 1;
     *quote_status += 1;
     return new_token;

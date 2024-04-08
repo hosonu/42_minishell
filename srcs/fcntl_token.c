@@ -26,7 +26,7 @@ void execute_heredoc(int gfd[2], t_token *list)
     }
 }
 
-void   fctl_token(t_fdgs *fdgs, t_token *list)
+void   fcntl_token(t_fdgs *fdgs, t_token *list)
 {
     switch(list->type)
     {
@@ -37,7 +37,7 @@ void   fctl_token(t_fdgs *fdgs, t_token *list)
             fdgs->gfd[1] = x_open(list->token, O_APPEND | O_CREAT | O_RDWR, 0644);
             break;
         case INFILE:
-            fdgs->gfd[0] = open(list->token, O_RDONLY);
+            fdgs->gfd[0] = x_open(list->token, O_RDONLY, 0);
             break;
         case HEREDOC:
             fdgs->gfd[0] = x_open("/tmp/sh-thd-tekitou", O_RDWR | O_CREAT, 0644);

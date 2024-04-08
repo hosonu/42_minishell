@@ -2,8 +2,12 @@
 
 char *join_path(char *comand, char *path)
 {
-    path = ft_strjoin(path, "/");//error taiou
+    path = ft_strjoin(path, "/");
+    if(path == NULL)
+        error_and_exit("malloc");
     path = ft_strjoin(path, comand);
+    if(path == NULL)
+        error_and_exit("malloc");
     return path;
 }
 
@@ -42,7 +46,7 @@ void    execve_token(t_token *list)
     int i;
 
     i = 0;
-    tokens_splited = ft_split(list->token, ' ');
+    tokens_splited = ft_split(list->token, ' ');//Are we handle ftfuntions error
     handle_token(tokens_splited);
     while(tokens_splited[i] != NULL)
     {
@@ -51,8 +55,7 @@ void    execve_token(t_token *list)
         else
         {
             comands = path_lookup(tokens_splited[i], environ);
-            x_access(comands, X_OK);
-            execve(comands, tokens_splited, environ);
+            x_execve(comands, tokens_splited, environ);
         }
         i++;
     }

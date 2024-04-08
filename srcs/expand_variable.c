@@ -19,6 +19,7 @@ size_t get_len_env(char *envi)
 }
 
 //TODO: free trimed_input
+// ft_substr func 
 char    *check_and_expand(int index, char *input, char **envi)
 {
     int i;
@@ -28,7 +29,7 @@ char    *check_and_expand(int index, char *input, char **envi)
     j = index;
     while(ft_isalnum(input[j + 1]) != 0)
         j++;
-    trimmed_input = ft_substr(input, index + 1, j - index);
+    trimmed_input = ft_substr(input, index + 1, j - index);//TODO: error handling?
     i = 0;
     while(envi[i] != NULL)
     {
@@ -37,6 +38,7 @@ char    *check_and_expand(int index, char *input, char **envi)
             break;
         i++;
     }
+    free(trimmed_input);//is it neccessary ? 
     if(envi[i] != NULL)
         return (get_expanded_env(envi[i]));
     else

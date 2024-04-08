@@ -3,8 +3,9 @@
 int x_execve(const char *filename, char *const argv[], char *const envp[])
 {
     int result = execve(filename, argv, envp);
-    if (result == -1) {
-        perror("execve");
+    if (result == -1)
+    {
+        error_msg_for_cmd(argv[0]);
         exit(EXIT_FAILURE);
     }
     return result;

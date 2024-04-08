@@ -18,8 +18,8 @@ void    manage_gfdout(int gfd[2], t_token *list);
 void    manage_pipein(int pp[2], t_token *list);
 void    manage_pipeout(int pp[2], t_token *list);
 
-//fctl_token.c
-void   fctl_token(t_fdgs *fdgs, t_token *list);
+//fcntl_token.c
+void    fcntl_token(t_fdgs *fdgs, t_token *list);
 void    execute_heredoc(int gfd[2], t_token *list);
 
 //expand_varivable.c

@@ -23,12 +23,13 @@ SRCS =	srcs/main.c \
 		srcs/debug.c srcs/free.c \
 		srcs/dispatch_token.c \
 		srcs/execve_token.c \
-		srcs/fctl_token.c \
+		srcs/fcntl_token.c \
 		srcs/manage_fd.c \
 		srcs/expand_variable.c \
 		srcs/handle_token.c \
 		srcs/x_funcs.c \
-		srcs/x_funcs_second.c
+		srcs/x_funcs_second.c \
+		srcs/error_msg.c
 
 OBJS = $(SRCS:.c=.o)
 READ_LINE_PREFIX = $(shell brew --prefix readline)

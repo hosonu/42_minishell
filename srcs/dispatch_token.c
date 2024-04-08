@@ -5,7 +5,7 @@ void    dispatch_token_help(t_token **list, t_fdgs *fdgs, int i)
 {
     int pid;
 
-    fdgs->original_stdin = dup(STDIN_FILENO);
+    fdgs->original_stdin = x_dup(STDIN_FILENO);
     manage_gfdin(fdgs->gfd, list[i]);
     manage_pipein(fdgs->pp, list[i]);
     pid = x_fork();
@@ -20,9 +20,9 @@ void    dispatch_token_help(t_token **list, t_fdgs *fdgs, int i)
         wait(NULL);
         if(list[i]->type == HEREDOCCOMMAND || list[i]->type == REOUTHEREDOCCOMMAND)
         {
-            dup2(fdgs->original_stdin, STDIN_FILENO);
-            close(fdgs->original_stdin);
-            unlink("/tmp/sh-thd-tekitou");
+            x_dup2(fdgs->original_stdin, STDIN_FILENO);
+            x_close(fdgs->original_stdin);
+            x_unlink("/tmp/sh-thd-tekitou");
         }
     }
 }
@@ -45,7 +45,7 @@ void dispatch_token(t_token **list)
         {
             if (list[i]->type > 0 && list[i]->type < 30)
             {
-               fctl_token(&fdgs, list[i]);
+               fcntl_token(&fdgs, list[i]);
 
             }
             else if (list[i]->type >= 30)
