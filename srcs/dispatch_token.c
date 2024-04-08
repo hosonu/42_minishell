@@ -1,3 +1,4 @@
+
 #include "../includes/minishell.h"
 
 void    dispatch_token_help(t_token **list, t_fdgs *fdgs, int i)
@@ -7,7 +8,7 @@ void    dispatch_token_help(t_token **list, t_fdgs *fdgs, int i)
     fdgs->original_stdin = dup(STDIN_FILENO);
     manage_gfdin(fdgs->gfd, list[i]);
     manage_pipein(fdgs->pp, list[i]);
-    pid = fork();
+    pid = x_fork();
     if (pid == 0)
     {
         manage_gfdout(fdgs->gfd, list[i]);
@@ -33,17 +34,20 @@ void dispatch_token(t_token **list)
     t_fdgs fdgs;
 
     i = 0;
-    pid2 = fork();
+    pid2 = x_fork();
     if (pid2 > 0)
     {
-        wait(NULL);
+        x_wait(NULL);
     }
     else if (pid2 == 0)
     {
         while (list[i] != NULL)
         {
             if (list[i]->type > 0 && list[i]->type < 30)
+            {
                fctl_token(&fdgs, list[i]);
+
+            }
             else if (list[i]->type >= 30)
             {
                 dispatch_token_help(list, &fdgs, i);

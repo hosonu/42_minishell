@@ -33,7 +33,7 @@ char *path_lookup(char *comand, char **envi)
     return (NULL);
 }
 
-//error taiou
+//TODO: error handling for access
 void    execve_token(t_token *list)
 {
     extern char **environ;
@@ -47,10 +47,11 @@ void    execve_token(t_token *list)
     while(tokens_splited[i] != NULL)
     {
         if(access(tokens_splited[i], X_OK) == 0)
-            execve(tokens_splited[i], tokens_splited, environ);
+            x_execve(tokens_splited[i], tokens_splited, environ);
         else
         {
             comands = path_lookup(tokens_splited[i], environ);
+            x_access(comands, X_OK);
             execve(comands, tokens_splited, environ);
         }
         i++;
