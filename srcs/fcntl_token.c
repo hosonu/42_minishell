@@ -40,7 +40,7 @@ void   fcntl_token(t_fdgs *fdgs, t_token *list)
             fdgs->gfd[0] = x_open(list->token, O_RDONLY, 0);
             break;
         case HEREDOC:
-            fdgs->gfd[0] = x_open("/tmp/sh-thd-tekitou", O_RDWR | O_CREAT, 0644);
+            fdgs->gfd[0] = x_open("/tmp/sh-thd-tekitou", O_TRUNC | O_RDWR | O_CREAT, 0644);
             execute_heredoc(fdgs->gfd, list);
             break;
         default:

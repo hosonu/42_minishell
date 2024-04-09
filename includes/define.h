@@ -34,6 +34,7 @@ typedef struct s_fdgs
 	int pp[2];
 	int gfd[2];
 	int original_stdin;
+	int original_stdout;
 }	t_fdgs;
 
 
