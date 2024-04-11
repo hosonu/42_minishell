@@ -17,7 +17,6 @@ size_t get_len_env(char *envi)
         len++;
     return len;
 }
-
 //TODO: free trimed_input
 // ft_substr func 
 char    *check_and_expand(int index, char *input, char **envi)
@@ -38,7 +37,7 @@ char    *check_and_expand(int index, char *input, char **envi)
             break;
         i++;
     }
-    free(trimmed_input);//is it neccessary ? 
+    free(trimmed_input);
     if(envi[i] != NULL)
         return (get_expanded_env(envi[i]));
     else
@@ -54,13 +53,15 @@ char *change_input(char *expanded_in, char *original_in, int index)
     before_symbol = ft_substr(original_in, 0, index);
     while(ft_isalnum(original_in[index + 1]) != 0)
         index++;
+    if(original_in[index + 1] == '?')
+        index++;
     after_symbol = ft_substr(original_in, index + 1, ft_strlen(original_in)- index + 1);
     change_in = ft_strjoin(before_symbol, expanded_in);
     change_in = ft_strjoin(change_in, after_symbol);
     return change_in;
 }
 
-char *expand_variable(char *input, int heredoc)
+char *expand_variable(char *input, int heredoc, int exit_code)
 {
     extern char **environ;
     char *expanded_input;
@@ -75,9 +76,13 @@ char *expand_variable(char *input, int heredoc)
             unexpand += 2;
         if(is_quote(input[i]) == 2 && heredoc == 0  && unexpand != 2)
             unexpand += 1;
-        if(input[i] == '$' && unexpand % 2 == 0)
+        if(input[i] == '$' && unexpand % 2 == 0 && input[i + 1] != '\0')
         {
             expanded_input = check_and_expand(i, input, environ);
+            if(input[i + 1] == '?')
+            {
+                expanded_input = ft_itoa(exit_code);
+            }
             input = change_input(expanded_input, input, i);
             i += ft_strlen(expanded_input) - 1;
         }

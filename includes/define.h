@@ -37,6 +37,14 @@ typedef struct s_fdgs
 	int original_stdout;
 }	t_fdgs;
 
+typedef struct s_status
+{
+	int exit_status;
+	int exit_code;
+	int signal;
+
+}	t_status;
+
 
 # define METAOUT -1
 # define METAAPNDOUT -1

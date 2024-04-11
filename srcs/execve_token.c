@@ -38,16 +38,16 @@ char *path_lookup(char *comand, char **envi)
 }
 
 //TODO: error handling for access
-void    execve_token(t_token *list)
+// void    execve_token(t_token *list, t_status *status)
+void    execve_token(char **tokens_splited)
 {
     extern char **environ;
-    char **tokens_splited;
+    // char **tokens_splited;
     char *comands;
     int i;
 
     i = 0;
-    tokens_splited = ft_split(list->token, ' ');//Are we handle ftfuntions error
-    handle_token(tokens_splited);
+    
     while(tokens_splited[i] != NULL)
     {
         if(access(tokens_splited[i], X_OK) == 0)

@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-void execute_heredoc(int gfd[2], t_token *list)
+void execute_heredoc(int gfd[2], t_token *list, int exit_code)
 {
     char *input;
 
@@ -19,14 +19,14 @@ void execute_heredoc(int gfd[2], t_token *list)
             free(input);
             break;
         }
-        input = expand_variable(input, 1);
+        input = expand_variable(input, 1, exit_code);
         write(gfd[0], input, ft_strlen(input));
         write(gfd[0], "\n", 1);
         free(input);
     }
 }
 
-void   fcntl_token(t_fdgs *fdgs, t_token *list)
+void   fcntl_token(t_fdgs *fdgs, t_token *list, int exit_code)
 {
     switch(list->type)
     {
@@ -41,7 +41,7 @@ void   fcntl_token(t_fdgs *fdgs, t_token *list)
             break;
         case HEREDOC:
             fdgs->gfd[0] = x_open("/tmp/sh-thd-tekitou", O_TRUNC | O_RDWR | O_CREAT, 0644);
-            execute_heredoc(fdgs->gfd, list);
+            execute_heredoc(fdgs->gfd, list, exit_code);
             break;
         default:
             break;

@@ -15,7 +15,7 @@ int x_dup2(int oldfd, int newfd)
     int result = dup2(oldfd, newfd);
     if (result == -1) {
         perror("dup2");
-        exit(EXIT_FAILURE);
+        // exit(EXIT_FAILURE);
     }
     return result;
 }
