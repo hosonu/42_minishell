@@ -36,10 +36,9 @@ char *path_lookup(char *comand, char **envi)
     }
     return (NULL);
 }
-
 //TODO: error handling for access
 // void    execve_token(t_token *list, t_status *status)
-void    execve_token(char **tokens_splited)
+void    execve_token(char **tokens_splited, t_env *env)
 {
     extern char **environ;
     // char **tokens_splited;
@@ -47,7 +46,9 @@ void    execve_token(char **tokens_splited)
     int i;
 
     i = 0;
-    
+
+    if(check_builtins(tokens_splited, env) == 0)
+        exit(0);
     while(tokens_splited[i] != NULL)
     {
         if(access(tokens_splited[i], X_OK) == 0)

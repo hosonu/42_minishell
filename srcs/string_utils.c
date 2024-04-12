@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 00:14:54 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/04 01:09:36 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/04 22:38:00 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	is_quoted(char *str, char *pnt)
 
 	i = 0;
 	quotefg = false;
-	if (pnt == NULL)
+	if (pnt == NULL || str == NULL || *pnt == '\0')
 		return (-1);
 	while (str[i] != '\0')
 	{

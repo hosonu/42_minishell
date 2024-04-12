@@ -11,13 +11,15 @@
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wextra -Werror -Wall 
+CFLAGS = -Wextra 
+# -Werror -Wall
 # -g -fsanitize=address
 SRCS =	srcs/main.c \
 		srcs/lexer.c \
 		srcs/tokenize.c \
 		srcs/token_type.c \
 		srcs/sort_token.c \
+		srcs/token_split.c \
 		srcs/prompt_validate.c \
 		srcs/string_utils.c \
 		srcs/debug.c srcs/free.c \
@@ -29,7 +31,16 @@ SRCS =	srcs/main.c \
 		srcs/handle_token.c \
 		srcs/x_funcs.c \
 		srcs/x_funcs_second.c \
-		srcs/error_msg.c
+		srcs/error_msg.c \
+		srcs/environ_init.c \
+		srcs/42_cd.c \
+		srcs/42_echo.c \
+		srcs/42_env.c \
+		srcs/42_exit.c \
+		srcs/42_export.c \
+		srcs/42_pwd.c \
+		srcs/42_unset.c \
+		srcs/check_builtins.c
 
 OBJS = $(SRCS:.c=.o)
 READ_LINE_PREFIX = $(shell brew --prefix readline)

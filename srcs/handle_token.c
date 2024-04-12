@@ -39,14 +39,14 @@ char *remove_quote(char *token)
     return token;
 }
 
-void    handle_token(char **splited_token, int exit_code)
+void    handle_token(char **splited_token, int exit_code, t_env *env)
 {
     int i;
 
     i = 0;
     while(splited_token[i] != NULL)
     {
-        splited_token[i] = expand_variable(splited_token[i], 0, exit_code);
+        splited_token[i] = expand_variable(splited_token[i], 0, exit_code, env);
         splited_token[i] = remove_quote(splited_token[i]);
         i++;
     }

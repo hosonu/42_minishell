@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 22:58:35 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/03 01:56:34 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:30:51 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ typedef struct s_quotes
 	char	*close;
 }	t_quotes;
 
+typedef struct	s_env
+{
+	char	*key;
+	char	*value;
+	struct s_env	*next;
+}	t_env;
+
 typedef struct s_fdgs
 {
 	int pp[2];
@@ -44,7 +51,6 @@ typedef struct s_status
 	int signal;
 
 }	t_status;
-
 
 # define METAOUT -1
 # define METAAPNDOUT -1

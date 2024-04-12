@@ -18,8 +18,8 @@ size_t get_len_env(char *envi)
     return len;
 }
 //TODO: free trimed_input
-// ft_substr func 
-char    *check_and_expand(int index, char *input, char **envi)
+// ft_substr func
+char    *check_and_expand(int index, char *input, t_env *env)
 {
     int i;
     int j;
@@ -30,18 +30,17 @@ char    *check_and_expand(int index, char *input, char **envi)
         j++;
     trimmed_input = ft_substr(input, index + 1, j - index);//TODO: error handling?
     i = 0;
-    while(envi[i] != NULL)
-    {
-        if(ft_strncmp(envi[i], trimmed_input, ft_strlen(trimmed_input)) == 0 
-            && ft_strlen(trimmed_input) == get_len_env(envi[i]))
-            break;
-        i++;
-    }
-    free(trimmed_input);
-    if(envi[i] != NULL)
-        return (get_expanded_env(envi[i]));
-    else
-        return(NULL);
+    // while(envi[i] != NULL)
+    // {
+    //     if(ft_strncmp(envi[i], trimmed_input, ft_strlen(trimmed_input)) == 0 
+    //         && ft_strlen(trimmed_input) == get_len_env(envi[i]))
+    //         break;
+    //     i++;
+    // }
+    // free(trimmed_input);//get_env
+    // if(envi[i] != NULL)
+    //     return (get_expanded_env(envi[i]));
+    return(ft_getenv(env, trimmed_input));
 }
 
 char *change_input(char *expanded_in, char *original_in, int index)
@@ -61,9 +60,9 @@ char *change_input(char *expanded_in, char *original_in, int index)
     return change_in;
 }
 
-char *expand_variable(char *input, int heredoc, int exit_code)
+char *expand_variable(char *input, int heredoc, int exit_code, t_env *env)
 {
-    extern char **environ;
+    // extern char **environ;
     char *expanded_input;
     int i;
     int unexpand;
@@ -78,7 +77,7 @@ char *expand_variable(char *input, int heredoc, int exit_code)
             unexpand += 1;
         if(input[i] == '$' && unexpand % 2 == 0 && input[i + 1] != '\0')
         {
-            expanded_input = check_and_expand(i, input, environ);
+            expanded_input = check_and_expand(i, input, env);
             if(input[i + 1] == '?')
             {
                 expanded_input = ft_itoa(exit_code);

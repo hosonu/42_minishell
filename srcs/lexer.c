@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:13 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/04 02:28:49 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/05 03:28:45 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_token	*new_token(char *content)
 	if (content == NULL)
 		return (NULL);
 	new = malloc(sizeof(t_token));
-	new->token = content;
+	new->token = ft_strdup(content);
 	new->type = 0;
 	new->pipein = false;
 	new->pipeout = false;
@@ -48,6 +48,28 @@ t_token	*new_metatoken(char *str)
 
 t_token	*lexer(char *str)
 {
+	char	**splited_token;
+	int	i;
+	t_token	*top;
+	t_token	*new;
+
+	i = 0;
+	top = NULL;
+	splited_token = token_split(str, ' ');
+	while (splited_token[i] != NULL)
+	{
+		new = new_token(splited_token[i]);
+		if (top == NULL)
+			top = new;
+		else
+			token_addlast(top, new);
+		i++;
+	}
+	return (top);
+}
+/*
+t_token	*lexer(char *str)
+{
 	char	*left;
 	t_token	*top;
 	t_token	*new;
@@ -74,7 +96,7 @@ t_token	*lexer(char *str)
 	}
 	return (top);
 }
-
+*/
 void	token_addlast(t_token *top, t_token *new)
 {
 	t_token	*lst;

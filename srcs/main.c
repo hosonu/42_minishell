@@ -6,11 +6,12 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:06 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/04 02:47:58 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/05 03:21:39 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
 
 void	signal_handler(int signum)
 {
@@ -53,6 +54,7 @@ int	main(void)
 			free(input);
 			continue ;
 		}
+		token_split(input, ' ');
 		input_trimed = ft_strtrim(input, " ");
 		free(input);
 		tokens = lexer(input_trimed);
