@@ -40,8 +40,7 @@ char *path_lookup(char *comand, char **envi)
 // void    execve_token(t_token *list, t_status *status)
 void    execve_token(char **tokens_splited, t_env *env)
 {
-    extern char **environ;
-    // char **tokens_splited;
+    char **environ;
     char *comands;
     int i;
 
@@ -49,6 +48,7 @@ void    execve_token(char **tokens_splited, t_env *env)
 
     if(check_builtins(tokens_splited, env) == 0)
         exit(0);
+    environ = env_int_str(env);
     while(tokens_splited[i] != NULL)
     {
         if(access(tokens_splited[i], X_OK) == 0)

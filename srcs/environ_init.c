@@ -128,6 +128,8 @@ char    *ft_getenv(t_env *env, char *key)
         char    *value;
 
         value = NULL;
+        if (key == NULL)
+                return NULL;
         while (env != NULL)
         {
                 if (ft_strncmp(key, env->key, ft_strlen(key)) == 0)
@@ -152,4 +154,22 @@ t_env   *getenv_node(t_env *env, char *key)
                 env = env->next;
         }
         return (NULL);
+}
+
+char **env_int_str(t_env *env)
+{
+        char **str;
+        char *line;
+
+        line = NULL;
+         while (env != NULL)
+        {
+                line = ft_strjoin(line, env->key);
+                line = ft_strjoin(line, "=");
+                line = ft_strjoin(line, env->value);
+                line = ft_strjoin(line, "\n");
+                env = env->next;
+        }
+        str = ft_split(line, '\n');
+        return str;
 }

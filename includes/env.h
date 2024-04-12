@@ -1,13 +1,6 @@
 # ifndef ENV_H
 # define ENV_H
 
-// #include<stdio.h>
-// #include<stdlib.h>
-// #include<unistd.h>
-// #include<libft.h>
-// #include<limits.h>
-// #include<sys/param.h>
-
 #include "./minishell.h"
 
 // typedef struct  s_env
@@ -25,5 +18,6 @@ void    destroy_env(t_env *data);
 void    delone_env(t_env **env, t_env *data);
 char    *ft_getenv(t_env *env, char *key);
 t_env   *getenv_node(t_env *env, char *key);
+char **env_int_str(t_env *env);
 
 #endif

@@ -40,7 +40,8 @@ char    *check_and_expand(int index, char *input, t_env *env)
     // free(trimmed_input);//get_env
     // if(envi[i] != NULL)
     //     return (get_expanded_env(envi[i]));
-    return(ft_getenv(env, trimmed_input));
+    trimmed_input = ft_getenv(env, trimmed_input);
+    return(trimmed_input);
 }
 
 char *change_input(char *expanded_in, char *original_in, int index)
@@ -62,7 +63,6 @@ char *change_input(char *expanded_in, char *original_in, int index)
 
 char *expand_variable(char *input, int heredoc, int exit_code, t_env *env)
 {
-    // extern char **environ;
     char *expanded_input;
     int i;
     int unexpand;
