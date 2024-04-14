@@ -1,5 +1,4 @@
-#include "../includes/minishell.h"
-
+#include "../../includes/minishell.h"
 
 int	ft_env(t_env *env)
 {
@@ -10,12 +9,3 @@ int	ft_env(t_env *env)
 	}
 	return (0);
 }
-/*
-int	main(void)
-{
-	t_env	*env;
-
-	env = environ_init();
-	ft_env(env);
-}
-*/

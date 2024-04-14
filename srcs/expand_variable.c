@@ -1,45 +1,15 @@
 #include "../includes/minishell.h"
 
-char    *get_expanded_env(char *env)
-{
-    int i;
-    i = 0;
-    while(env[i] != '=')
-        i++;
-    return env + i + 1;
-}
-
-size_t get_len_env(char *envi)
-{
-    size_t len;
-    len = 0;
-    while(envi[len] != '=')
-        len++;
-    return len;
-}
 //TODO: free trimed_input
-// ft_substr func
 char    *check_and_expand(int index, char *input, t_env *env)
 {
     int i;
-    int j;
     char *trimmed_input;
 
-    j = index;
-    while(ft_isalnum(input[j + 1]) != 0)
-        j++;
-    trimmed_input = ft_substr(input, index + 1, j - index);//TODO: error handling?
-    i = 0;
-    // while(envi[i] != NULL)
-    // {
-    //     if(ft_strncmp(envi[i], trimmed_input, ft_strlen(trimmed_input)) == 0 
-    //         && ft_strlen(trimmed_input) == get_len_env(envi[i]))
-    //         break;
-    //     i++;
-    // }
-    // free(trimmed_input);//get_env
-    // if(envi[i] != NULL)
-    //     return (get_expanded_env(envi[i]));
+    i = index;
+    while(ft_isalnum(input[i + 1]) != 0)
+        i++;
+    trimmed_input = ft_substr(input, index + 1, i - index);
     trimmed_input = ft_getenv(env, trimmed_input);
     return(trimmed_input);
 }

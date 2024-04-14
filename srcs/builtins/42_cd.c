@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 char	*format_path(char *av, char buff[PATH_MAX])
 {
@@ -55,18 +55,3 @@ int	ft_cd(char *av[], t_env *env)
 		cd_change_env(env);
 	return (0);
 }
-
-//test
-/*
-int	main(void)
-{
-	t_env	*env;
-	char	*pwd;
-	char	*av[] = {NULL};
-
-	env = environ_init();
-	ft_env(env);
-	ft_cd(av, env);
-	ft_env(env);
-}
-*/

@@ -1,5 +1,4 @@
-#include "../includes/minishell.h"
-
+#include "../../includes/minishell.h"
 
 void	export_display(t_env *env)
 {
@@ -38,13 +37,3 @@ int	ft_export(char *av[], t_env *env)
 		i++;
 	}
 }
-/*
-int	main(void)
-{
-	t_env	*env;
-	char	*av[] = {NULL};
-
-	env = environ_init();
-	ft_export(av, env);
-	//ft_env(env);
-}*/

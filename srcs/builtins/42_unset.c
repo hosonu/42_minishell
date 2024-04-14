@@ -1,17 +1,4 @@
-#include "../includes/minishell.h"
-
-// typedef struct	s_env
-// {
-// 	char	*key;
-// 	char	*value;
-// 	struct s_env	*next;
-// }	t_env;
-
-// t_env	*environ_init(void);
-// void	destroy_env(t_env *data);
-// void	delone_env(t_env **env, t_env *data);
-// int	ft_env(t_env *env);
-// int	ft_export(char *av[], t_env *env);
+#include "../../includes/minishell.h"
 
 int	unset_util(char *key, char *av[])
 {

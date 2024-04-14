@@ -1,51 +1,5 @@
 #include "../includes/minishell.h"
 
-// t_env	*new_env(char *var)
-// {
-// 	t_env	*new;
-// 	char	**splited;
-
-// 	new = malloc(sizeof(t_env));
-// 	splited = ft_split(var, '=');
-// 	new->key = splited[0];
-// 	new->value = splited[1];
-// 	new->next = NULL;
-// 	return new;
-// }
-// void	addlast_env(t_env **env, t_env *new)
-// {
-// 	t_env	*node;
-
-// 	node = *env;
-// 	if (*env == NULL)
-// 		*env = new;
-// 	else
-// 	{
-// 		while (node->next != NULL)
-// 			node = node->next;
-// 		node->next = new;
-// 	}
-// }
-
-// t_env	*environ_init(void)
-// {
-// 	extern char	**environ;
-// 	t_env	*env;
-// 	t_env	*new;
-// 	int	i;
-
-// 	i = 0;
-// 	env = NULL;
-// 	while (environ[i] != NULL)
-// 	{
-// 		new = new_env(environ[i]);
-// 		addlast_env(&env, new);
-// 		i++;
-// 	}
-// 	return (env);
-// }
-
-
 t_env   *new_env(char *var)
 {
         t_env   *new;

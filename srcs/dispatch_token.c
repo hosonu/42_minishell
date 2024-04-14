@@ -1,25 +1,34 @@
-
 #include "../includes/minishell.h"
 
-extern int sige;
+void pre_manage_fd_parent(t_token *list, t_fdgs *fdgs)
+{
+    fdgs->original_stdin = x_dup(STDIN_FILENO);
+    fdgs->original_stdout = x_dup(STDOUT_FILENO);
+    manage_gfdin(fdgs->gfd, list);
+    manage_pipein(fdgs->pp, list);
+}
+
+void    post_manage_fd_parent(t_token *list, t_fdgs *fdgs)
+{
+    x_dup2(fdgs->original_stdin, STDIN_FILENO);
+    x_dup2(fdgs->original_stdout, STDOUT_FILENO);
+    x_close(fdgs->original_stdin);
+    x_close(fdgs->original_stdout);
+    if(list->type == HEREDOCCOMMAND || list->type == REOUTHEREDOCCOMMAND)
+        x_unlink("/tmp/sh-thd-tekitou");
+}
 
 void    dispatch_token_help(t_token *list, t_fdgs *fdgs, t_status *status, t_env *env)
 {
     int pid;
     char **tokens_splited;
 
-    fdgs->original_stdin = x_dup(STDIN_FILENO);
-    fdgs->original_stdout = x_dup(STDOUT_FILENO);
-    manage_gfdin(fdgs->gfd, list);
-    manage_pipein(fdgs->pp, list);
-    tokens_splited = ft_split(list->token, ' ');//Are we handle ftfuntions error
+    pre_manage_fd_parent(list, fdgs);
+    tokens_splited = ft_split(list->token, ' ');
     handle_token(tokens_splited, status->exit_code, env);
-    //buildin comand execve && list->pipe false
-    // if(list->pipeout == false && list->pipein == false)
-    // {
-    //     check_builtins(tokens_splited, env);//check jakunane!!
-
-    // }
+    if(ft_strncmp("exit", tokens_splited[0], ft_strlen(tokens_splited[0])) == 0
+        && list->pipein == 0 && list->pipeout == 0)
+        ft_exit(tokens_splited + 1, 0);
     pid = x_fork();
     if (pid == 0)
     {
@@ -27,15 +36,7 @@ void    dispatch_token_help(t_token *list, t_fdgs *fdgs, t_status *status, t_env
         manage_pipeout(fdgs->pp, list);
         execve_token(tokens_splited, env);
     }
-    else if (pid > 0)
-    {
-        x_dup2(fdgs->original_stdin, STDIN_FILENO);
-        x_dup2(fdgs->original_stdout, STDOUT_FILENO);
-        x_close(fdgs->original_stdin);
-        x_close(fdgs->original_stdout);
-        if(list->type == HEREDOCCOMMAND || list->type == REOUTHEREDOCCOMMAND)
-            x_unlink("/tmp/sh-thd-tekitou");
-    }
+    post_manage_fd_parent(list, fdgs);
 }
 
 void dispatch_token(t_token **list)

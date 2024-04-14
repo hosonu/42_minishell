@@ -33,13 +33,13 @@ SRCS =	srcs/main.c \
 		srcs/x_funcs_second.c \
 		srcs/error_msg.c \
 		srcs/environ_init.c \
-		srcs/42_cd.c \
-		srcs/42_echo.c \
-		srcs/42_env.c \
-		srcs/42_exit.c \
-		srcs/42_export.c \
-		srcs/42_pwd.c \
-		srcs/42_unset.c \
+		srcs/builtins/42_cd.c \
+		srcs/builtins/42_echo.c \
+		srcs/builtins/42_env.c \
+		srcs/builtins/42_exit.c \
+		srcs/builtins/42_export.c \
+		srcs/builtins/42_pwd.c \
+		srcs/builtins/42_unset.c \
 		srcs/check_builtins.c
 
 OBJS = $(SRCS:.c=.o)

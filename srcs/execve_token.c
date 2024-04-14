@@ -1,17 +1,17 @@
 #include "../includes/minishell.h"
 
-char *join_path(char *comand, char *path)
+char *join_path(char *command, char *path)
 {
     path = ft_strjoin(path, "/");
     if(path == NULL)
         error_and_exit("malloc");
-    path = ft_strjoin(path, comand);
+    path = ft_strjoin(path, command);
     if(path == NULL)
         error_and_exit("malloc");
     return path;
 }
 
-char *path_lookup(char *comand, char **envi)
+char *path_lookup(char *command, char **envi)
 {
     int i;
     char **path;
@@ -25,7 +25,7 @@ char *path_lookup(char *comand, char **envi)
             i = 0;
             while(path[i] != NULL)
             {
-                path[i] = join_path(comand, path[i]);
+                path[i] = join_path(command, path[i]);
                 if(access(path[i], X_OK) == 0)
                     return path[i];
                 free(path[i]);
@@ -37,11 +37,10 @@ char *path_lookup(char *comand, char **envi)
     return (NULL);
 }
 //TODO: error handling for access
-// void    execve_token(t_token *list, t_status *status)
 void    execve_token(char **tokens_splited, t_env *env)
 {
     char **environ;
-    char *comands;
+    char *command;
     int i;
 
     i = 0;
@@ -55,8 +54,8 @@ void    execve_token(char **tokens_splited, t_env *env)
             x_execve(tokens_splited[i], tokens_splited, environ);
         else
         {
-            comands = path_lookup(tokens_splited[i], environ);
-            x_execve(comands, tokens_splited, environ);
+            command = path_lookup(tokens_splited[i], environ);
+            x_execve(command, tokens_splited, environ);
         }
         i++;
     }

@@ -1,5 +1,4 @@
-#include "../includes/minishell.h"
-
+#include "../../includes/minishell.h"
 
 bool    get_option_n(char *argv)
 {
@@ -56,12 +55,3 @@ int ft_echo(int argc, char *argv[])
     }
     return 0;
 }
-
-//test case
-// int main(int argc, char *argv[])
-// {
-//     ft_echo(argc, argv);
-
-//     char *test_case3[] = {"./echo", "-n", "'$?'", "Hello", "World", NULL};
-//     ft_echo(5, test_case3);
-// }

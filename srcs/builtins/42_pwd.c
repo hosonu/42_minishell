@@ -1,5 +1,4 @@
-#include "../includes/minishell.h"
-
+#include "../../includes/minishell.h"
 
 int ft_pwd(char *av[], t_env *env)
 {
@@ -13,12 +12,3 @@ int ft_pwd(char *av[], t_env *env)
 		env = env->next;
 	}
 }
-/*
-int main(int argc, char *argv[])
-{
-	t_env	*env;
-
-	env = environ_init();
-	ft_pwd(argv, env);
-}
-*/
