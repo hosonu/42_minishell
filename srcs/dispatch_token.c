@@ -26,7 +26,7 @@ void    dispatch_token_help(t_token *list, t_fdgs *fdgs, t_status *status, t_env
     pre_manage_fd_parent(list, fdgs);
     tokens_splited = ft_split(list->token, ' ');
     handle_token(tokens_splited, status->exit_code, env);
-    if(ft_strncmp("exit", tokens_splited[0], ft_strlen(tokens_splited[0])) == 0
+    if(ft_strncmp("exit", tokens_splited[0], 4) == 0
         && list->pipein == 0 && list->pipeout == 0)
         ft_exit(tokens_splited + 1, 0);
     pid = x_fork();
