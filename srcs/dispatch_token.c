@@ -53,14 +53,21 @@ void dispatch_token(t_token **list)
     while (list[i] != NULL)
     {
         if (list[i]->type > 0 && list[i]->type < 30)
+        {
             fcntl_token(&fdgs, list[i], status.exit_code, env);
-        else if (list[i]->type >= 30)
+        }
+        else if (list[i]->type >= 30 && fdgs.gfd[0] != -1)
         {
             dispatch_token_help(list[i], &fdgs, &status, env);
             cnt++;
         }
+        else if(list[i]->type >= 30 && list[i]->pipeout == true)
+        {
+            x_pipe(fdgs.pp);
+            fdgs.gfd[0] = -2;
+        }
         i++;
-    }  
+    }
     while (cnt > 0 && x_wait(&status.exit_status) > 0)
     {
         if (WIFEXITED(status.exit_status))
