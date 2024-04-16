@@ -50,3 +50,13 @@ int x_pipe(int pipefd[2])
     }
     return result;
 }
+
+void	*x_malloc(size_t size)
+{
+	void	*ret;
+
+	ret = malloc(size);
+	if (ret == NULL)
+		perror("malloc");
+	return (ret);
+}
