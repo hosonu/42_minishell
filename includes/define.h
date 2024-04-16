@@ -49,7 +49,7 @@ typedef struct s_status
 	int exit_status;
 	int exit_code;
 	int signal;
-
+	int is_wait;
 }	t_status;
 
 # define METAOUT -1
