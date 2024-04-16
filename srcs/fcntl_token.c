@@ -1,11 +1,5 @@
 #include "../includes/minishell.h"
 
-
-// void    fdgs_init(t_fdgs *fdgs)
-// {
-
-// }
-
 void execute_heredoc(int gfd[2], t_token *list, int exit_code, t_env *env)
 {
     char *input;

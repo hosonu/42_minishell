@@ -61,5 +61,25 @@ int check_builtins_childs(char **tokens_splited, t_env *env)
         ft_env(env);
         is_builtins = 0;
     }
+    else if(ft_strncmp("cd", tokens_splited[0], 2) == 0)
+    {
+        ft_cd(tokens_splited + 1, env);
+        is_builtins = 0;
+    }
+    else if(ft_strncmp("export", tokens_splited[0], 5) == 0)
+    {
+        ft_export(tokens_splited + 1, env);
+        is_builtins = 0;
+    }
+    else if(ft_strncmp("unset", tokens_splited[0], 5) == 0)
+    {
+        ft_unset(tokens_splited + 1, env);
+        is_builtins = 0;
+    }
+    else if(ft_strncmp("exit", tokens_splited[0], 4) == 0)
+    {
+        // ft_exit(tokens_splited + 1, 0);
+        is_builtins = 0;
+    }
     return is_builtins;
 }

@@ -50,6 +50,7 @@ char *expand_variable(char *input, int heredoc, int exit_code, t_env *env)
             expanded_input = check_and_expand(i, input, env);
             if(input[i + 1] == '?')
             {
+
                 expanded_input = ft_itoa(exit_code);
             }
             input = change_input(expanded_input, input, i);

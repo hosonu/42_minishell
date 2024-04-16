@@ -12,14 +12,20 @@
 
 #include "../includes/minishell.h"
 
+t_ige sige;
+
 void	signal_handler(int signum)
 {
 	if (signum == SIGINT)
 	{
+		sige.waiting_for_sige = signum;
 		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		if (sige.ext_child == 0)
+		{
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
 	}
 	if (signum == SIGQUIT)
 		return ;

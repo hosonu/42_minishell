@@ -1,5 +1,7 @@
 #include "../includes/minishell.h"
 
+extern t_ige sige;
+
 void pre_manage_fd_parent(t_token *list, t_fdgs *fdgs)
 {
     fdgs->original_stdin = x_dup(STDIN_FILENO);
@@ -26,11 +28,12 @@ void    dispatch_token_help(t_token *list, t_fdgs *fdgs, t_status *status, t_env
     pre_manage_fd_parent(list, fdgs);
     tokens_splited = ft_split(list->token, ' ');
     handle_token(tokens_splited, status->exit_code, env);
-    if(check_builtins_parents(tokens_splited, env) == 0)
+    if(list->pipeout != true &&  list->pipein != true && check_builtins_parents(tokens_splited, env) == 0)
         status->is_wait = 0;
     else
     {
         pid = x_fork();
+        sige.ext_child = 1;
         if (pid == 0)
         {
             manage_gfdout(fdgs->gfd, list);
@@ -38,7 +41,6 @@ void    dispatch_token_help(t_token *list, t_fdgs *fdgs, t_status *status, t_env
             execve_token(tokens_splited, env);
         }
     }
-        
     post_manage_fd_parent(list, fdgs);
 }
 
@@ -55,7 +57,10 @@ void dispatch_token(t_token **list)
     if(env == NULL)
         env = environ_init();
     status.is_wait = 1;
+    sige.ext_child = 0;
     fdgs.gfd[0] = -2;
+    if(sige.waiting_for_sige == SIGINT)
+        status.exit_code = 130;
     while (list[i] != NULL)
     {
         if (list[i]->type > 0 && list[i]->type < 30)
@@ -83,4 +88,6 @@ void dispatch_token(t_token **list)
             status.exit_code = WTERMSIG(status.exit_status) + 128;
         cnt--;
     }
+    sige.ext_child = 0;
+    sige.waiting_for_sige = 0;
 }

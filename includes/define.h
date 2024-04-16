@@ -48,9 +48,14 @@ typedef struct s_status
 {
 	int exit_status;
 	int exit_code;
-	int signal;
 	int is_wait;
 }	t_status;
+
+typedef struct s_ige
+{
+	int ext_child;
+	int waiting_for_sige;
+}	t_ige;
 
 # define METAOUT -1
 # define METAAPNDOUT -1
