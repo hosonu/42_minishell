@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 11:31:28 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/16 15:24:09 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/16 15:55:12 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdbool.h>
 # include "../libft/libft.h"
 # include "./define.h"
-# include "./lexer.h"
 # include "./tokenize.h"
 # include "./token_type.h"
 # include "./sort_token.h"

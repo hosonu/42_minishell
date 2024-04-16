@@ -13,5 +13,6 @@ int x_access(const char *pathname, int mode);
 int x_unlink(const char *pathname);
 int x_open(const char *pathname, int flags, mode_t mode);
 int x_close(int fd);
+void *x_malloc(size_t size);
 
 #endif
