@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:37 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/04 02:46:03 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/16 16:13:11 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,4 +164,17 @@ void	token_type_revise(t_token **list)
 		}
 		i++;
 	}
+}
+
+t_token	**token_list(t_token *tokens)
+{
+	t_token	**list;
+
+	decide_type(tokens);
+	token_revise(tokens);
+	sort_token(&tokens);
+	token_revise(tokens);
+	list = linear_token_list(tokens);
+	token_type_revise(list);
+	return (list);
 }
