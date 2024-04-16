@@ -28,12 +28,13 @@ void    dispatch_token_help(t_token *list, t_fdgs *fdgs, t_status *status, t_env
     pre_manage_fd_parent(list, fdgs);
     tokens_splited = ft_split(list->token, ' ');
     handle_token(tokens_splited, status->exit_code, env);
-    if(list->pipeout != true &&  list->pipein != true && check_builtins_parents(tokens_splited, env) == 0)
+    if(list->pipeout != true &&  list->pipein != true 
+        && check_builtins_parents(tokens_splited, env) == 0)
         status->is_wait = 0;
     else
     {
-        pid = x_fork();
         sige.ext_child = 1;
+        pid = x_fork();
         if (pid == 0)
         {
             manage_gfdout(fdgs->gfd, list);
