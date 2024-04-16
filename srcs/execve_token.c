@@ -37,7 +37,7 @@ char *path_lookup(char *command, char **envi)
     return (NULL);
 }
 //TODO: error handling for access
-void    execve_token(char **tokens_splited, t_env *env)
+void    execve_token(char **tokens_splited,t_env *env)
 {
     char **environ;
     char *command;
@@ -45,7 +45,7 @@ void    execve_token(char **tokens_splited, t_env *env)
 
     i = 0;
 
-    if(check_builtins(tokens_splited, env) == 0)
+    if(check_builtins_childs(tokens_splited, env) == 0)
         exit(0);
     environ = env_int_str(env);
     while(tokens_splited[i] != NULL)
