@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:06 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/05 03:21:39 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/16 16:14:10 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	signal_handler(int signum)
 int	main(void)
 {
 	char	*input;
-	char	*input_trimed;
 	t_token	*tokens;
 	t_token	**list;
 	struct sigaction	sa;
@@ -53,24 +52,10 @@ int	main(void)
 			free(input);
 			continue ;
 		}
-		token_split(input, ' ');
-		input_trimed = ft_strtrim(input, " ");
+		tokens = tokenize(input);
 		free(input);
-		tokens = lexer(input_trimed);
-		free(input_trimed);
-		//print_chain_tokens(tokens); //debug用
-		decide_type(tokens);
-		token_revise(tokens);
-		sort_token(&tokens);
-		//print_chain_tokens(tokens); //debug用
-		token_revise(tokens);
-		//free_chain_token_list(tokens); //線形リストにデータを移しているのでfreeはしちゃだめ
-		list = linear_token_list(tokens);
-		token_type_revise(list);
-		//実行用のプログラムを入れる
+		list = token_list(tokens);
 		dispatch_token(list);
-		//print_linear_tokens(tokens); //debug用
-		// print_linear_tokens(list);
 		free_linear_token_list(list);
 	}
 	return 0;
