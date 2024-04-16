@@ -6,7 +6,7 @@
 #    By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/29 22:59:42 by kojwatan          #+#    #+#              #
-#    Updated: 2024/04/02 17:49:07 by kojwatan         ###   ########.fr        #
+#    Updated: 2024/04/16 15:31:59 by kojwatan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ CFLAGS = -Wextra
 # -g -fsanitize=address
 SRCS =	srcs/main.c \
 		srcs/lexer.c \
-		srcs/tokenize.c \
 		srcs/token_type.c \
 		srcs/sort_token.c \
 		srcs/token_split.c \
