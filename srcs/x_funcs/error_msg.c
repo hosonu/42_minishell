@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void    error_msg_for_cmd(const char *filename)
 {
@@ -9,6 +9,7 @@ void    error_msg_for_cmd(const char *filename)
 
 void    error_and_exit(const char *filename)
 {
+    write(2, "minish: ", 8);
     perror(filename);
     exit(EXIT_FAILURE);
 }

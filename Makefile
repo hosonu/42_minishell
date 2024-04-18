@@ -22,15 +22,19 @@ SRCS =	srcs/main.c \
 		srcs/prompt_validate.c \
 		srcs/string_utils.c \
 		srcs/debug.c srcs/free.c \
-		srcs/dispatch_token_v2.c \
-		srcs/execve_token.c \
-		srcs/fcntl_token.c \
-		srcs/manage_fd.c \
-		srcs/expand_variable.c \
-		srcs/handle_token.c \
-		srcs/x_funcs.c \
-		srcs/x_funcs_second.c \
-		srcs/error_msg.c \
+		srcs/token_runner/dispatch_token.c \
+		srcs/token_runner/dispatch_token_utils.c \
+		srcs/token_runner/wait.c\
+		srcs/token_runner/execve_token.c \
+		srcs/token_runner/fcntl_token.c \
+		srcs/token_runner/manage_fd.c \
+		srcs/token_runner/expand_variable.c \
+		srcs/token_runner/handle_token.c \
+		srcs/token_runner/check_builtins.c \
+		srcs/x_funcs/error_msg.c \
+		srcs/x_funcs/x_funcs.c \
+		srcs/x_funcs/x_funcs_second.c \
+		srcs/x_funcs/x_funcs_third.c \
 		srcs/environ_init.c \
 		srcs/builtins/42_cd.c \
 		srcs/builtins/42_echo.c \
@@ -38,8 +42,7 @@ SRCS =	srcs/main.c \
 		srcs/builtins/42_exit.c \
 		srcs/builtins/42_export.c \
 		srcs/builtins/42_pwd.c \
-		srcs/builtins/42_unset.c \
-		srcs/check_builtins.c
+		srcs/builtins/42_unset.c 
 
 OBJS = $(SRCS:.c=.o)
 READ_LINE_PREFIX = $(shell brew --prefix readline)

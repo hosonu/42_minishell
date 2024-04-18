@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 char *remove_specific_quote(char *token, int *i, int *quote_status)
 {
@@ -7,7 +7,7 @@ char *remove_specific_quote(char *token, int *i, int *quote_status)
     token[*i] = '\0';
     new_token = ft_strjoin(token, token + *i + 1);
     if(new_token == NULL)
-        error_and_exit("malloc");
+        return NULL;
     *i -= 1;
     *quote_status += 1;
     return new_token;
@@ -29,10 +29,14 @@ char *remove_quote(char *token)
         if (quote_type == 1 && dblquoted % 2 == 0)
         {
             token = remove_specific_quote(token, &i, &quoted);
+            if(token == NULL)
+                return NULL;
         }
         else if (quote_type == 2 && quoted % 2 == 0)
         {
             token = remove_specific_quote(token, &i, &dblquoted);
+            if(token == NULL)
+                return NULL;
         }
         i++;
     }

@@ -1,6 +1,5 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-//TODO: free trimed_input
 char    *check_and_expand(int index, char *input, t_env *env)
 {
     int i;

@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 extern t_ige	sige;
 
@@ -43,7 +43,8 @@ void execute_heredoc(int gfd[2], t_token *list, int exit_code, t_env *env)
     signal(SIGINT, signal_handler_heredoc);
     rl_event_hook = heredoc_hook;
     rl_catch_signals = 0;
-    while(get_sigint_flag() == 0)
+    gfd[0] = open("/tmp/sh-thd-tekitou", O_TRUNC | O_RDWR | O_CREAT, 0644);
+    while(gfd[0] != -1 && get_sigint_flag() == 0)
     {
         input = readline("> ");
         if(input == NULL || get_sigint_flag() == 1)
@@ -56,6 +57,7 @@ void execute_heredoc(int gfd[2], t_token *list, int exit_code, t_env *env)
         if(ft_strncmp(input, list->token, ft_strlen(list->token)) == 0
                 && ft_strlen(input) == ft_strlen(list->token))
         {
+            x_close(gfd[0]);
             free(input);
             break;
         }
@@ -65,24 +67,19 @@ void execute_heredoc(int gfd[2], t_token *list, int exit_code, t_env *env)
         free(input);
     }
 }
-void   fcntl_token(t_fdgs *fdgs, t_token *list, int exit_code, t_env *env)
+
+void   fcntl_token(t_fdgs *fdgs, t_token *list, int exit_code)
 {
-    switch(list->type)
+    if (list->type == TRUNCOUTFILE)
     {
-        case TRUNCOUTFILE:
-            fdgs->gfd[1] = x_open(list->token, O_TRUNC | O_CREAT | O_RDWR, 0644);
-            break;
-        case APNDOUTFILE:
-            fdgs->gfd[1] = x_open(list->token, O_APPEND | O_CREAT | O_RDWR, 0644);
-            break;
-        case INFILE:
-            fdgs->gfd[0] = x_open(list->token, O_RDONLY, 0);
-            break;
-        // case HEREDOC:
-        //     fdgs->gfd[0] = x_open("/tmp/sh-thd-tekitou", O_TRUNC | O_RDWR | O_CREAT, 0644);
-        //     execute_heredoc(fdgs->gfd, list, exit_code, env);
-        //     break;
-        // default:
-            break;
+        fdgs->gfd[1] = x_open(list->token, O_TRUNC | O_CREAT | O_RDWR, 0644);
+    }
+    else if (list->type == APNDOUTFILE)
+    {
+        fdgs->gfd[1] = x_open(list->token, O_APPEND | O_CREAT | O_RDWR, 0644);
+    }
+    else if (list->type == INFILE)
+    {
+        fdgs->gfd[0] = x_open(list->token, O_RDONLY, 0);
     }
 }

@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 char *join_path(char *command, char *path)
 {
@@ -36,7 +36,7 @@ char *path_lookup(char *command, char **envi)
     }
     return (NULL);
 }
-//TODO: error handling for access
+
 void    execve_token(char **tokens_splited,t_env *env)
 {
     char **environ;

@@ -1,8 +1,10 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int x_execve(const char *filename, char *const argv[], char *const envp[])
 {
-    int result = execve(filename, argv, envp);
+    int result;
+
+    result = execve(filename, argv, envp);
     if (result == -1)
     {
         error_msg_for_cmd(argv[0]);
@@ -13,8 +15,11 @@ int x_execve(const char *filename, char *const argv[], char *const envp[])
 
 int x_access(const char *pathname, int mode) 
 {
-    int result = access(pathname, mode);
-    if (result == -1) {
+    int result;
+
+    result = access(pathname, mode);
+    if (result == -1)
+    {
         perror("access");
         exit(EXIT_FAILURE);
     }
@@ -23,8 +28,11 @@ int x_access(const char *pathname, int mode)
 
 int x_unlink(const char *pathname)
 {
-    int result = unlink(pathname);
-    if (result == -1) {
+    int result;
+
+    result = unlink(pathname);
+    if (result == -1)
+    {
         perror("unlink");
     }
     return result;
@@ -32,18 +40,14 @@ int x_unlink(const char *pathname)
 
 int x_open(const char *pathname, int flags, mode_t mode)
 {
-    int result = open(pathname, flags, mode);
-    if (result == -1) {
-        perror("open");
-    }
-    return result;
-}
+    int result;
 
-int x_close(int fd)
-{
-    int result = close(fd);
-    if (result == -1) {
-        perror("close");
+    result = open(pathname, flags, mode);
+    if (result == -1)
+    {
+        write(2, "minish: ", 8);
+        perror(pathname);
+        exit(EXIT_FAILURE);
     }
     return result;
 }

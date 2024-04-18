@@ -63,80 +63,88 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return ((char *)(substr));
 }
 
-
-static int is_quote(char c)
+static size_t count_words(const char *s, char c)
 {
-    return (c == '\'' || c == '"');
-}
+    size_t words;
+    int quoted;
+    int dblquoted;
 
-static size_t count_words(const char *s, char c) {
-    size_t words = 0;
-    int in_word = 0;
-    int quoted = 0;
-
-    while (*s) {
-        if (*s == '\'' || *s == '"')
-            quoted = !quoted;
-        else if (!quoted && *s == c)
-            in_word = 0;
-        else if (!in_word && *s != c) {
-            in_word = 1;
+    words = 1;
+    quoted  = 0;
+    dblquoted  = 0;
+    while (*s)
+    {
+        if (*s == '"' && quoted % 2 == 0)
+            dblquoted += 1;
+        else if(*s == '\'' && dblquoted % 2 == 0)
+            quoted += 1;
+        else if ((dblquoted % 2 == 0 && quoted % 2 == 0) && *s == c)
             words++;
-        }
         s++;
     }
-    printf("%ld\n", words);
     return words;
 }
 
-static size_t strlen_c(const char *s, char c) {
-    size_t len = 0;
-    int quoted = 0;
+static size_t strlen_c(char const *s, char c)
+{
+    size_t len;
+    int quoted;
 
-    while (*s) {
-        if (*s == '\'' || *s == '"')
-            quoted = !quoted;
-        else if (!quoted && *s == c)
+    len = 0;
+    quoted = 0;
+    while (s[len])
+    {
+        if (s[len] == '\'' && (quoted == 0 || quoted == 1))
+        {
+            if (quoted == 1)
+                quoted = 0;
+            else
+                quoted = 1;
+        }
+        else if (s[len] == '"' && (quoted == 0 || quoted == 2))
+        {
+            if (quoted == 2)
+                quoted = 0;
+            else
+                quoted = 2;
+        }
+        else if (quoted == 0 && s[len] == c)
             break;
         len++;
-        s++;
     }
     return len;
 }
 
-static char **get_arr(char const *s, char c, size_t words, char **arr) {
-    size_t i = 0;
-    int quoted = 0;
+char     **get_arr(char const *s, char c, size_t words, char **arr)
+{
+        size_t  i;
 
-    while (words--) {
-        while (*s == c)
-            s++;
-        if (*s == '\'' || *s == '"')
-            quoted = !quoted;
-        arr[i] = malloc(strlen_c(s, c) + 1);
-        if (arr[i] == NULL) {
-            while (i > 0) {
-                free(arr[i - 1]);
-                i--;
+        i = 0;
+        while (words--)
+        {
+            while (*s == c || *s == '\0')
+                s++;
+            arr[i] = ft_substr(s, 0, strlen_c(s, c));
+            if (arr[i] == NULL)
+            {
+                while (i > 0)
+                {
+                    free(arr[i]);
+                    i--;
+                }
+                if (arr[i] != NULL)
+                        free(arr[i]);
+                free(arr);
+                return (NULL);
             }
-            free(arr);
-            return NULL;
+            i++;
+            s += strlen_c(s, c);
         }
-        size_t j = 0;
-        while (*s && (*s != c || quoted)) {
-            if (*s == '\'' || *s == '"')
-                quoted = !quoted;
-            arr[i][j++] = *s++;
-        }
-        arr[i][j] = '\0';
-        printf("%s\n", arr[i]);
-        i++;
-    }
-    arr[i] = NULL;
-    return arr;
+        return (arr);
 }
 
-char **ft_split(char const *s, char c) {
+char **ft_split(char const *s, char c)
+{
     char **arr;
     size_t words;
 
@@ -145,15 +153,25 @@ char **ft_split(char const *s, char c) {
     words = count_words(s, c);
     arr = malloc(sizeof(char *) * (words + 1));
     if (arr == NULL)
-        return NULL;
+	{
+    	return NULL;
+	}
+	arr[words] = 0;
     arr = get_arr(s, c, words, arr);
-    return arr;
+	return arr;
 }
+
 
 int main() {
     char **str;
-    str = ft_split("echo jsa\"$    PATH      \"sda  ada ", ' ');
-    str = ft_split("echo \"fakdja     \"", ' ');
+    // str = ft_split("echo jsa\"$    PATH      \"sda  ada ", ' ');
+    str = ft_split("echo \"fak\'  dja\'     \"", ' ');
+    int i = 0;
+    while (str[i] != NULL)
+        {
+        printf("str[%d] = %s\n", i, str[i]);
+        i++;
+    }
     // str[0] = "echo"
     // str[1] = "jsa\"$PATH\"sda"
     // str[2] = NULL
