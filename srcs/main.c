@@ -13,56 +13,72 @@
 #include "../includes/minishell.h"
 
 t_ige sige;
+t_ige sige;
 
 void	signal_handler(int signum)
 {
 	if (signum == SIGINT)
 	{
 		sige.waiting_for_sige = signum;
-		write(1, "\n", 1);
-		if (sige.ext_child == 0)
-		{
-			rl_on_new_line();
-			rl_replace_line("", 0);
-			rl_redisplay();
-		}
+		write(STDOUT_FILENO, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
-	if (signum == SIGQUIT)
-		return ;
 }
 
-int	main(void)
+void	set_signal_handler(void)
 {
-	char	*input;
-	t_token	*tokens;
-	t_token	**list;
 	struct sigaction	sa;
 
 	sa.sa_handler = signal_handler;
 	sa.sa_flags = 0;
 	sigemptyset(&sa.sa_mask);
-	sigaction(SIGINT, &sa, NULL);// CNTL + C
-	sigaction(SIGQUIT, &sa, NULL);//CNTL + "\"
+	sigaction(SIGINT, &sa, NULL);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+t_token	**prompt_handle(void)
+{
+	t_token	**list;
+	t_token	*tokens;
+	char	*input;
+
+	input = readline("minish>> ");
+	if (input == NULL)
+	{
+		ft_putstr_fd("exit\n", STDOUT_FILENO);
+		return NULL;
+	}
+	if (input[0] != '\0')
+		add_history(input);
+	if (quotation_validate(input) == -1)
+	{
+		free(input);
+		//exit_status 258
+		return NULL;
+	}
+	tokens = tokenize(input);
+	free(input);
+	list = token_list(tokens);
+	return (list);
+}
+
+int	main(void)
+{
+	t_token	**list;
+
 	while (1)
 	{
-		input = readline("minish>> ");
-		if (input == NULL)// CNTL + D
+		set_signal_handler();
+		list = prompt_handle();
+		if (list != NULL)
 		{
-			ft_printf("exit\n");
+			dispatch_token(list);
+			free_linear_token_list(list);
+		}
+		else
 			break ;
-		}
-		if (*input)
-			add_history(input);
-		if (prompt_validate(input) == -1)
-		{
-			free(input);
-			continue ;
-		}
-		tokens = tokenize(input);
-		free(input);
-		list = token_list(tokens);
-		dispatch_token(list);
-		free_linear_token_list(list);
 	}
 	return 0;
 }

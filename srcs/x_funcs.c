@@ -25,7 +25,7 @@ pid_t x_wait(int *status)
     pid_t result = wait(status);
     if (result == -1) {
         perror("wait");
-        exit(EXIT_FAILURE);
+        // exit(EXIT_FAILURE);
     }
     return result;
 }

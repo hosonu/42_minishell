@@ -48,12 +48,11 @@ typedef struct s_status
 {
 	int exit_status;
 	int exit_code;
-	int is_wait;
+	int is_file;
 }	t_status;
 
 typedef struct s_ige
 {
-	int ext_child;
 	int waiting_for_sige;
 }	t_ige;
 

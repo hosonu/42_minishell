@@ -34,5 +34,8 @@
 # include <signal.h>
 # include <fcntl.h>
 # include <sys/wait.h>
+# include <errno.h>
+void	signal_handler(int signum);
+
 
 #endif

@@ -22,7 +22,7 @@ SRCS =	srcs/main.c \
 		srcs/prompt_validate.c \
 		srcs/string_utils.c \
 		srcs/debug.c srcs/free.c \
-		srcs/dispatch_token.c \
+		srcs/dispatch_token_v2.c \
 		srcs/execve_token.c \
 		srcs/fcntl_token.c \
 		srcs/manage_fd.c \

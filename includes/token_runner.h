@@ -5,7 +5,7 @@
 
 //dispatch_token.c
 void    dispatch_token(t_token **list);
-void    dispatch_token_help(t_token *list, t_fdgs *fdgs, t_status *status, t_env *env);
+void    dispatch_token_help(t_token **list, t_fdgs *fdgs, t_status *status, t_env *env);
 int check_builtins_parents(char **tokens_splited, t_env *env);
 int check_builtins_childs(char **tokens_splited, t_env *env);
 
