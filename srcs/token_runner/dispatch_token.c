@@ -23,7 +23,9 @@ void	token_main_engine(t_token **list, t_fdgs *fdgs, t_status *status,
 	{
 		status->is_file = 1;
 		if ((*list)->type == HEREDOC)
+		{
 			execute_heredoc(fdgs->gfd, (*list), status->exit_code, env);
+		}
 	}
 	else if ((*list)->type >= 30)
 	{

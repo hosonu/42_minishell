@@ -31,6 +31,7 @@ SRCS =	srcs/main.c \
 		srcs/token_runner/expand_variable.c \
 		srcs/token_runner/handle_token.c \
 		srcs/token_runner/check_builtins.c \
+		srcs/token_runner/heredoc_init.c \
 		srcs/x_funcs/error_msg.c \
 		srcs/x_funcs/x_funcs.c \
 		srcs/x_funcs/x_funcs_second.c \

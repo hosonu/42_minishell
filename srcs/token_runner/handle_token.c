@@ -39,22 +39,16 @@ char	*remove_quote(char *token)
 	{
 		quote_type = is_quote(token[i]);
 		if (quote_type == 1 && dblquoted % 2 == 0)
-		{
 			token = remove_specific_quote(token, &i, &quoted);
-			if (token == NULL)
-				return (NULL);
-		}
 		else if (quote_type == 2 && quoted % 2 == 0)
-		{
 			token = remove_specific_quote(token, &i, &dblquoted);
-			if (token == NULL)
-				return (NULL);
-		}
+		if (token == NULL)
+			return (NULL);
 		i++;
 	}
 	return (token);
 }
-//more than 25 lines
+
 void	handle_token(char **splited_token, int exit_code, t_env *env)
 {
 	int	i;
