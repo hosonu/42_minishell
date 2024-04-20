@@ -10,9 +10,15 @@
 #                                                                              #
 # **************************************************************************** #
 
+RED=\033[0;31m
+GREEN=\033[0;32m
+BLUE=\033[0;34m
+NC=\033[0m
+
 CC = cc
-CFLAGS = -Wextra 
-# -Werror -Wall
+CFLAGS =  -Wextra 
+# -Wall  -Wextra -Werror
+
 # -g -fsanitize=address
 SRCS =	srcs/main.c \
 		srcs/tokenize.c \
@@ -46,26 +52,37 @@ SRCS =	srcs/main.c \
 		srcs/builtins/42_unset.c 
 
 OBJS = $(SRCS:.c=.o)
-READ_LINE_PREFIX = $(shell brew --prefix readline)
+# READ_LINE_PREFIX = $(shell brew --prefix readline)
+READ_LINE_PREFIX = /usr/local/opt/readline
 NAME = minishell
 HEAD = ../includes/minishell.h
 LIBFT = ./libft
 
-all: $(NAME)
+all: progress compile_success
+
+progress: $(NAME)
+	@bash progress_bar.sh
+
+compile_success:
+	@echo "\n${GREEN}✨ Compilation successful! ✨${NC}"
+	@echo "${BLUE}🎉 $(NAME) created! 🎉${NC}"
 
 $(NAME): $(OBJS)
-	$(MAKE) -C $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) -I $(HEAD) -L$(READ_LINE_PREFIX)/lib -lreadline -I$(READ_LINE_PREFIX)/include -L$(LIBFT) -lft -o $(NAME)
+	@$(MAKE) -C $(LIBFT) >/dev/null 2>&1
+	@$(CC) $(CFLAGS) $(OBJS) -I $(HEAD) -L$(READ_LINE_PREFIX)/lib -lreadline -I$(READ_LINE_PREFIX)/include -L$(LIBFT) -lft -o $(NAME) >/dev/null 2>&1
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I $(HEAD) -I$(READ_LINE_PREFIX)/include -c $< -o $@
+	@$(CC) $(CFLAGS) -I $(HEAD) -I$(READ_LINE_PREFIX)/include -c $< -o $@
 
 clean:
-	$(MAKE) -C $(LIBFT) clean
-	rm -f $(OBJS)
+	@$(MAKE) -C $(LIBFT) clean >/dev/null 2>&1
+	@rm -f $(OBJS)
+	@echo "${YELLOW}💨 Object files removed 💨${NC}"
 
 fclean: clean
-	$(MAKE) -C $(LIBFT) fclean
-	rm -f $(NAME)
+	@$(MAKE) -C $(LIBFT) fclean >/dev/null 2>&1
+	@rm -f $(NAME)
+	@echo "${RED}🗑  $(NAME) removed 🗑${NC}"
 
-re: fclean $(NAME)
+re: fclean progress
+	@$(MAKE) all
