@@ -12,14 +12,13 @@
 
 #include "../includes/minishell.h"
 
-t_ige sige;
-t_ige sige;
+int	g_sige;
 
 void	signal_handler(int signum)
 {
 	if (signum == SIGINT)
 	{
-		sige.waiting_for_sige = signum;
+		g_sige = signum;
 		write(STDOUT_FILENO, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);

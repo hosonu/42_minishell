@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-extern t_ige sige; // g_
+extern int	g_sige;
 int	get_sigint_flag(void);
 int	set_sigint_flag(int i);
 
@@ -46,7 +46,7 @@ void	dispatch_token(t_token **list)
 	cnt = 0;
 	if (env == NULL)
 		env = environ_init();
-	if (sige.waiting_for_sige == SIGINT)
+	if (g_sige == SIGINT)
 		status.exit_code = 130;
 	while (list[i] != NULL)
 	{
@@ -54,6 +54,6 @@ void	dispatch_token(t_token **list)
 		i++;
 	}
 	wait_childs(&status);
-	sige.waiting_for_sige = 0;
+	g_sige = 0;
 	set_sigint_flag(0);
 }

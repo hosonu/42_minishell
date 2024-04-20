@@ -67,7 +67,7 @@ char	*expand_variable(char *input, int heredoc, int exit_code, t_env *env)
 		}
 		i++;
 	}
-	if (i == 1 && input[0] == '~')
+	if (i == 1 && input[0] == '~' && heredoc == 0)
 		input = ft_getenv(env, "HOME");
 	return (input);
 }

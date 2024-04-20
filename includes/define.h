@@ -51,10 +51,6 @@ typedef struct s_status
 	int is_file;
 }	t_status;
 
-typedef struct s_ige
-{
-	int waiting_for_sige;
-}	t_ige;
 
 # define METAOUT -1
 # define METAAPNDOUT -1

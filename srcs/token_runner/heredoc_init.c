@@ -12,8 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-extern t_ige sige;
-
 int	set_sigint_flag(int i)
 {
 	static int	sigint_flag;

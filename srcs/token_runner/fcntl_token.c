@@ -12,8 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-extern t_ige sige;
-
 void	execute_heredoc(int gfd[2], t_token *list, int exit_code, t_env *env)
 {
 	char	*input;
