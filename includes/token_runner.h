@@ -65,7 +65,7 @@ char	*remove_specific_quote(char *token, int *i, int *quote_status);
 
 // check_buiitins.c
 
-int		check_builtins_parents(char **tokens_splited, t_env *env);
+int		check_builtins_parents(char **tokens_splited, t_env *env, int exit_code);
 int		check_builtins_childs(char **tokens_splited, t_env *env);
 int		check_argc(char **str);
 

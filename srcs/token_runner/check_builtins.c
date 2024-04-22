@@ -24,7 +24,7 @@ int	check_argc(char **str)
 	return (cnt);
 }
 
-int	check_builtins_parents(char **tokens_splited, t_env *env)
+int	check_builtins_parents(char **tokens_splited, t_env *env, int exit_code)
 {
 	int	is_builtins;
 
@@ -46,7 +46,7 @@ int	check_builtins_parents(char **tokens_splited, t_env *env)
 	}
 	else if (ft_strncmp("exit", tokens_splited[0], 4) == 0)
 	{
-		ft_exit(tokens_splited + 1, 0);
+		ft_exit(tokens_splited, exit_code);
 		is_builtins = 0;
 	}
 	return (is_builtins);

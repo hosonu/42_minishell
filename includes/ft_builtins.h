@@ -19,6 +19,9 @@ int     ft_pwd(char *av[], t_env *env);
 //42export.c
 int	    ft_export(char *av[], t_env *env);
 void	export_display(t_env *env);
+void	env_sort_ascii(t_env **env);
+void	update_pointers(t_env **env, t_env **prev, t_env **tmp);
+void	swap_nodes(t_env **env, t_env *prev, t_env *current, int *sorted);
 
 //42unset.c
 int     ft_unset(char *av[], t_env *env);
@@ -28,7 +31,8 @@ int	    unset_util(char *key, char *av[]);
 int	    ft_env(t_env *env);
 
 //42exit.c
-int	    ft_exit(char *av[], int num);
+void	ft_exit(char *av[], int status);
+int	check_digits(char *str);
 
 #endif
     

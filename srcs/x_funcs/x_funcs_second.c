@@ -12,13 +12,36 @@
 
 #include "../../includes/minishell.h"
 
+char	*getenv_char(char *const envp[], const char *name)
+{
+	int		i;
+	int		name_len;
+
+	i = 0;
+	name_len = strlen(name);
+	while (envp[i] != NULL)
+	{
+		if (strncmp(envp[i], name, name_len) == 0 && envp[i][name_len] == '=')
+			return (&envp[i][name_len + 1]);
+		i++;
+	}
+	return (NULL);
+}
+
 int	x_execve(const char *filename, char *const argv[], char *const envp[])
 {
-	int	result;
+	int		result;
+	char	*path_check;
 
 	result = execve(filename, argv, envp);
 	if (result == -1)
 	{
+		path_check = getenv_char(envp, "PATH");
+		if (path_check == NULL)
+		{
+			printf("bash: %s: No such file or directory\n", argv[0]);
+			exit(EXIT_FAILURE);
+		}
 		error_msg_for_cmd(argv[0]);
 		exit(127);
 	}
@@ -27,7 +50,7 @@ int	x_execve(const char *filename, char *const argv[], char *const envp[])
 
 int	x_access(const char *pathname, int mode)
 {
-	int	result;
+	int		result;
 
 	result = access(pathname, mode);
 	if (result == -1)
@@ -40,7 +63,7 @@ int	x_access(const char *pathname, int mode)
 
 int	x_unlink(const char *pathname)
 {
-	int	result;
+	int		result;
 
 	result = unlink(pathname);
 	if (result == -1)
@@ -52,7 +75,7 @@ int	x_unlink(const char *pathname)
 
 int	x_open(const char *pathname, int flags, mode_t mode)
 {
-	int	result;
+	int		result;
 
 	result = open(pathname, flags, mode);
 	if (result == -1)
