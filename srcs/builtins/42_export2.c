@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 10:46:47 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/23 10:47:00 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:02:24 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ void	export_display(t_env *env)
 	tmp = sorted_env->next;
 	while (tmp != NULL)
 	{
-		printf("declare -x %s=\"%s\"\n", tmp->key, tmp->value);
+		if (tmp->value != NULL)
+			printf("declare -x %s=\"%s\"\n", tmp->key, tmp->value);
+		else
+			printf("declare -x %s\n", tmp->key);
 		tmp = tmp->next;
 	}
 }

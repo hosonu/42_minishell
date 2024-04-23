@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 08:33:07 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/23 13:47:04 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:01:28 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,40 @@ static int	export_util(char *str, t_env *env)
 	return (0);
 }
 
-static	void	reset_value(t_env *node, char *var)
+static int	append_check(char *key)
+{
+	int	i;
+
+	i = 0;
+	while (key[i] != '\0')
+		i++;
+	if (key[i - 1] == '+')
+		return (1);
+	else
+		return (0);
+}
+
+static	void	set_value(t_env *node, char *var)
 {
 	char	*value;
+	char	*old_value;
+	char	*tmp;
 
 	value = x_malloc(value_strlen(var) + 1);
 	if (value == NULL)
 		return ;
 	value_cpy(value, var);
+	if (ft_strchr(var, '+') < ft_strchr(var, '='))
+	{
+		tmp = value;
+		value = ft_strjoin(node->value, value);
+		if (value == NULL)
+		{
+			perror("malloc");
+			return ;
+		}
+		free(tmp);
+	}
 	free(node->value);
 	node->value = value;
 }
@@ -55,6 +81,7 @@ static char	*get_key(char *var)
 	return (key);
 }
 
+
 int	ft_export(char *av[], t_env *env)
 {
 	int		i;
@@ -68,13 +95,18 @@ int	ft_export(char *av[], t_env *env)
 		export_display(env);
 	while (av[i] != NULL)
 	{
+		if (varname_validate(av[i]) == -1)
+		{
+			i++;
+			continue ;
+		}
 		key = get_key(av[i]);
 		if (key == NULL)
 			return (1);
 		node = getenv_node(env, key);
 		free(key);
 		if (node != NULL)
-			reset_value(node, av[i]);
+			set_value(node, av[i]);
 		else
 		{
 			if (export_util(av[i], env) == 1)
