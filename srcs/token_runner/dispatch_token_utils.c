@@ -19,7 +19,7 @@ void	pre_manage_fd_parent(t_token *list, t_fdgs *fdgs)
 	manage_pipein(fdgs->pp, list);
 }
 
-void	post_manage_fd_parent(t_token *list, t_fdgs *fdgs)
+void	post_manage_fd_parent(t_fdgs *fdgs)
 {
 	x_dup2(fdgs->original_stdin, STDIN_FILENO);
 	x_dup2(fdgs->original_stdout, STDOUT_FILENO);
@@ -30,7 +30,7 @@ void	post_manage_fd_parent(t_token *list, t_fdgs *fdgs)
 void	mange_fd_child(t_token **list, t_fdgs *fdgs, t_status *status)
 {
 	if (status->is_file == 1)
-		fcntl_token(fdgs, list[-1], status->exit_code);
+		fcntl_token(fdgs, list[-1]);
 	manage_gfdin(fdgs->gfd, (*list));
 	manage_gfdout(fdgs->gfd, (*list));
 	manage_pipeout(fdgs->pp, (*list));
@@ -60,5 +60,5 @@ void	dispatch_token_help(t_token **list, t_fdgs *fdgs, t_status *status,
 		execve_token(tokens_splited, env);
 	}
 	signal(SIGINT, SIG_IGN);
-	post_manage_fd_parent((*list), fdgs);
+	post_manage_fd_parent(fdgs);
 }

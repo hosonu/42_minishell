@@ -35,8 +35,6 @@ static int	ft_chdir_util(t_env *env)
 
 static	int	ft_chdir(char *path, t_env *env)
 {
-	t_env	*home;
-
 	if (path != NULL)
 	{
 		if (chdir(path) == -1)
@@ -69,6 +67,7 @@ static int	set_oldpwd(char pwd_buff[PATH_MAX], t_env *env)
 			return (1);
 		}
 	}
+	return (0);
 }
 
 int	ft_cd(char *av[], t_env *env)

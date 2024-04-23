@@ -30,23 +30,22 @@ static int	export_util(char *str, t_env *env)
 	return (0);
 }
 
-static int	append_check(char *key)
-{
-	int	i;
+// static int	append_check(char *key)
+// {
+// 	int	i;
 
-	i = 0;
-	while (key[i] != '\0')
-		i++;
-	if (key[i - 1] == '+')
-		return (1);
-	else
-		return (0);
-}
+// 	i = 0;
+// 	while (key[i] != '\0')
+// 		i++;
+// 	if (key[i - 1] == '+')
+// 		return (1);
+// 	else
+// 		return (0);
+// }
 
 static	void	set_value(t_env *node, char *var)
 {
 	char	*value;
-	char	*old_value;
 	char	*tmp;
 
 	if (ft_strchr(var, '=') == NULL)
@@ -95,8 +94,7 @@ int	ft_export(char *av[], t_env *env)
 {
 	int		i;
 	int		ret;
-	char	*key;
-	t_env	*node;
+	// char	*key;
 
 	i = 0;
 	ret = 0;
@@ -109,7 +107,7 @@ int	ft_export(char *av[], t_env *env)
 			i++;
 			continue ;
 		}
-		key = get_key(av[i]);
+		// key = get_key(av[i]);
 		if (ft_export_util(av[i], &ret, env) == 1)
 			return (1);
 		i++;

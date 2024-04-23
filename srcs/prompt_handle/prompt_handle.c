@@ -47,7 +47,6 @@ t_token	**linear_token_list(t_token *top)
 static char	*input_prompt(void)
 {
 	char	*input;
-	char	*pwd;
 	char	*prompt;
 	char	buff[PATH_MAX];
 

@@ -44,11 +44,9 @@ static int	split_alloc_count(char *str)
 static char	**split_alloc(char **strs, char *str, int end)
 {
 	int	i;
-	int	j;
 	int	count;
 
 	i = 0;
-	j = 0;
 	count = 0;
 	while (i < end)
 	{

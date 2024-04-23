@@ -37,13 +37,11 @@ void	token_main_engine(t_token **list, t_fdgs *fdgs, t_status *status,
 void	dispatch_token(t_token **list)
 {
 	int				i;
-	int				cnt;
 	t_fdgs			fdgs;
 	static t_status	status;
 	static t_env	*env;
 
 	i = 0;
-	cnt = 0;
 	if (env == NULL)
 		env = environ_init();
 	if (g_sige == SIGINT)

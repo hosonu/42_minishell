@@ -41,7 +41,7 @@ int cnt_option_n(char **argv)
     return i;
 }
 
-int ft_echo(int argc, char *argv[])
+int ft_echo(char *argv[])
 {
     bool is_noline;
     int cnt_opt;

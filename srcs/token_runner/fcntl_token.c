@@ -41,7 +41,7 @@ void	execute_heredoc(int gfd[2], t_token *list, int exit_code, t_env *env)
 	}
 }
 
-void	fcntl_token(t_fdgs *fdgs, t_token *list, int exit_code)
+void	fcntl_token(t_fdgs *fdgs, t_token *list)
 {
 	if (list->type == TRUNCOUTFILE)
 	{

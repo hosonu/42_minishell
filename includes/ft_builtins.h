@@ -4,7 +4,7 @@
 #include "./minishell.h"
 
 //42_echo.c
-int ft_echo(int argc, char *argv[]);
+int ft_echo(char *argv[]);
 int		cnt_option_n(char **argv);
 bool	get_option_n(char *argv);
 
