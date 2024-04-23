@@ -6,7 +6,7 @@
 /*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:59:03 by hoyuki            #+#    #+#             */
-/*   Updated: 2024/04/19 14:59:03 by hoyuki           ###   ########.fr       */
+/*   Updated: 2024/04/23 22:26:54 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	dispatch_token_help(t_token **list, t_fdgs *fdgs, t_status *status,
 		if (get_sigint_flag() == 1)
 			exit(EXIT_FAILURE);
 		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		mange_fd_child(list, fdgs, status);
 		execve_token(tokens_splited, env);
 	}

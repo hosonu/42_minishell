@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:49:36 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/23 10:17:46 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/23 23:06:57 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,12 @@ t_token	**prompt_handle(void)
 	input = input_prompt();
 	if (input[0] != '\0')
 		add_history(input);
-	/*else if (input[0] == '\0')
+	else if (input[0] == '\0')
+	{
+		free(input);
 		return (NULL);
-		*/
+	}
+		
 	if (input == NULL)
 		return (NULL);
 	if (quotation_validate(input) == -1)

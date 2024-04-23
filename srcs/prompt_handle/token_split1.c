@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:54:11 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/23 08:54:02 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 00:51:58 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static char	**split_alloc(char **strs, char *str, int end)
 			free_split_all(strs, i);
 			return (NULL);
 		}
-		ft_memset(strs[i], 40, count + 1);
+		ft_memset(strs[i], 1, count + 1);
 		strs[i][count] = '\0';
 		i++;
 	}

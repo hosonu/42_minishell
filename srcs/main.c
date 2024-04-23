@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:06 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/18 21:05:54 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 00:44:02 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,13 @@ int	main(void)
 	{
 		set_signal_handler();
 		list = prompt_handle();
-		if (list != NULL)
+/*		if (list != NULL)
 		{
 			dispatch_token(list);
 			free_linear_token_list(list);
 		}
+		*/
+		free_linear_token_list(list);
 	}
 	return 0;
 }
