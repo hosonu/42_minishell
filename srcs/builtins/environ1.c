@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 08:19:17 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/23 13:47:38 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:57:42 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	key_cpy(char *dst, char *var)
 
 	i = 0;
 	j = 0;
-	while (var[i] != '=' && var[i] != '\0')
+	while (is_special_char(var[i]) == 0 && var[i] != '\0')
 	{
 		dst[j] = var[i];
 		i++;
@@ -59,6 +59,7 @@ t_env	*new_env(char *var)
 	splited = env_split(var);
 	if (splited == NULL)
 		return (NULL);
+	//key_validate(split[0]);
 	new->key = splited[0];
 	new->value = splited[1];
 	new->next = NULL;

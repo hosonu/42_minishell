@@ -6,11 +6,45 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 08:25:45 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/23 13:45:53 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:56:50 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	is_special_char(char c)
+{
+	if (ft_strchr("-+=;&()|^<>?*[]$`\'\"\\!{}\n\t ", c) != NULL)
+		return (1);
+	return (0);
+}
+
+int	varname_validate(char *var)
+{
+	int	i;
+
+	i = 0;
+	if ('0' <= var[0] && var[0] <= '9')
+	{
+		ft_printf("%c is not a valid identifier\n", var[i]);
+		return (-1);
+	}
+	while (var[i] != '=' && var[i] != '\0')
+	{
+		if (is_special_char(var[i]) == 1)
+		{
+			if (var[i + 1] == '=' && var[i] == '+')
+				return (1);
+			else
+			{
+				ft_printf("%c is not a valid identifier\n", var[i]);
+				return (-1);
+			}
+		}
+		i++;
+	}
+	return (1);
+}
 
 int	key_strlen(char *var)
 {
@@ -19,7 +53,7 @@ int	key_strlen(char *var)
 
 	i = 0;
 	count = 0;
-	while (var[i] != '=' && var[i] != '\0')
+	while (is_special_char(var[i]) == 0 && var[i] != '\0')
 	{
 		i++;
 		count++;
