@@ -6,7 +6,7 @@
 #    By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/29 22:59:42 by kojwatan          #+#    #+#              #
-#    Updated: 2024/04/23 08:16:12 by kojwatan         ###   ########.fr        #
+#    Updated: 2024/04/23 16:41:32 by kojwatan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,11 +38,14 @@ SRCS =	srcs/main.c \
 		srcs/builtins/environ1.c \
 		srcs/builtins/environ2.c \
 		srcs/builtins/environ3.c \
-		srcs/builtins/42_cd.c \
+		srcs/builtins/env_split.c \
+		srcs/builtins/42_cd1.c \
+		srcs/builtins/42_cd2.c \
 		srcs/builtins/42_echo.c \
 		srcs/builtins/42_env.c \
 		srcs/builtins/42_exit.c \
-		srcs/builtins/42_export.c \
+		srcs/builtins/42_export1.c \
+		srcs/builtins/42_export2.c \
 		srcs/builtins/42_pwd.c \
 		srcs/builtins/42_unset.c \
 		srcs/check_builtins.c

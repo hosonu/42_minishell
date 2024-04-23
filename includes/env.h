@@ -19,9 +19,12 @@ char **env_int_str(t_env *env);
 int	is_special_char(char c);
 
 //environ3.c
+int	is_special_char(char c);
 int	key_strlen(char *var);
 int	value_strlen(char *var);
 int	varname_validate(char *var);
+
+//env_split.c
 char	**env_split(char *var);
 
 #endif

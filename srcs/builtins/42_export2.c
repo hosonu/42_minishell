@@ -6,11 +6,24 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 10:46:47 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/23 14:02:24 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:38:17 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+char	*get_key(char *var)
+{
+	char	*key;
+	int		count;
+
+	count = key_strlen(var);
+	key = x_malloc(count + 1);
+	if (key == NULL)
+		return (NULL);
+	key_cpy(key, var);
+	return (key);
+}
 
 static void	swap_nodes(t_env *prev, t_env *current, int *sorted)
 {

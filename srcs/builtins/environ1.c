@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 08:19:17 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/23 15:57:42 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:06:01 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ t_env	*new_env(char *var)
 	splited = env_split(var);
 	if (splited == NULL)
 		return (NULL);
-	//key_validate(split[0]);
 	new->key = splited[0];
 	new->value = splited[1];
 	new->next = NULL;
