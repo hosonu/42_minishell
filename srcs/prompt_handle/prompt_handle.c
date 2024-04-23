@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:49:36 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/23 10:07:58 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/23 10:17:46 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,11 @@ static char	*input_prompt(void)
 	char	*prompt;
 	char	buff[PATH_MAX];
 
-	getcwd(buff, PATH_MAX);
+	if (getcwd(buff, PATH_MAX) == NULL)
+	{
+		perror("getcwd");
+		return (NULL);
+	}
 	prompt = ft_strjoin(buff, ": ");
 	if (prompt == NULL)
 	{
@@ -65,10 +69,6 @@ static char	*input_prompt(void)
 		ft_putstr_fd("exit\n", STDOUT_FILENO);
 		exit(EXIT_SUCCESS);
 	}
-	if (input[0] != '\0')
-		add_history(input);
-	else if (input[0] == '\0')
-		return (NULL);
 	return (input);
 }
 
@@ -79,6 +79,11 @@ t_token	**prompt_handle(void)
 	char	*input;
 
 	input = input_prompt();
+	if (input[0] != '\0')
+		add_history(input);
+	/*else if (input[0] == '\0')
+		return (NULL);
+		*/
 	if (input == NULL)
 		return (NULL);
 	if (quotation_validate(input) == -1)
