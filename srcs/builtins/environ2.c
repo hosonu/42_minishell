@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 08:24:10 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/23 13:38:54 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/23 23:30:39 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*ft_getenv(t_env *env, char *key)
 	{
 		if (ft_strncmp(key, env->key, ft_strlen(key)) == 0)
 		{
-			if (ft_strncmp(key, env->key, ft_strlen(env->key)) == 0)
+			if (ft_strncmp(env->key, key, ft_strlen(env->key)) == 0)
 			{
 				value = ft_strdup(env->value);
 				if (value == NULL)
@@ -84,7 +84,7 @@ t_env	*getenv_node(t_env *env, char *key)
 	{
 		if (ft_strncmp(key, env->key, ft_strlen(key)) == 0)
 		{
-			if (ft_strncmp(key, env->key, ft_strlen(env->key)) == 0)
+			if (ft_strncmp(env->key, key, ft_strlen(env->key)) == 0)
 				return (env);
 		}
 		env = env->next;
