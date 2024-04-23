@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:13 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 01:05:33 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 01:52:37 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_token	*tokenize(char *input)
 		return (NULL);
 	while (splited_token[i] != NULL)
 	{
-		new = new_token(splited_token[i]);
+		new = new_token(splited_token[i++]);
 		if (top == NULL)
 			top = new;
 		else if (new == NULL)
@@ -72,7 +72,6 @@ t_token	*tokenize(char *input)
 		}
 		else
 			token_addlast(top, new);
-		i++;
 	}
 	free_split_all(splited_token, i);
 	return (top);
