@@ -13,8 +13,8 @@
 #ifndef MY_SPLIT_H
 # define MY_SPLIT_H
 
-#include "./minishell.h"
+# include "./minishell.h"
 
-char **minish_split(char const *s, char c);
+char	**minish_split(char const *s, char c);
 
 #endif

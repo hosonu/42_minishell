@@ -11,7 +11,8 @@
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wextra -g -fsanitize=address -Werror -Wall
+CFLAGS = -Wextra -Werror -Wall 
+# -g -fsanitize=address 
 
 SRCS =	srcs/main.c \
 		srcs/prompt_handle/tokenize.c \
@@ -55,7 +56,8 @@ SRCS =	srcs/main.c \
 		srcs/builtins/42_unset.c 
 
 OBJS = $(SRCS:.c=.o)
-READ_LINE_PREFIX = $(shell brew --prefix readline)
+READ_LINE_PREFIX = /usr/local/opt/readline
+# $(shell brew --prefix readline)
 NAME = minishell
 HEAD = ../includes/minishell.h
 LIBFT = ./libft

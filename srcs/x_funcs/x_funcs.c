@@ -35,16 +35,15 @@ void	*x_malloc(size_t size)
 	return (ret);
 }
 
-
 void	double_free(char **str)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (str[i] != NULL)
 	{
 		free(str[i]);
-        i++;
-    }
-    free(str);
+		i++;
+	}
+	free(str);
 }

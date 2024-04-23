@@ -41,18 +41,22 @@ void	execute_heredoc(int gfd[2], t_token *list, int exit_code, t_env *env)
 	}
 }
 
-void	fcntl_token(t_fdgs *fdgs, t_token *list)
+int	fcntl_token(t_fdgs *fdgs, t_token *list)
 {
 	if (list->type == TRUNCOUTFILE)
 	{
 		fdgs->gfd[1] = x_open(list->token, O_TRUNC | O_CREAT | O_RDWR, 0644);
+		return (1);
 	}
 	else if (list->type == APNDOUTFILE)
 	{
 		fdgs->gfd[1] = x_open(list->token, O_APPEND | O_CREAT | O_RDWR, 0644);
+		return (1);
 	}
 	else if (list->type == INFILE)
 	{
 		fdgs->gfd[0] = x_open(list->token, O_RDONLY, 0);
+		return (1);
 	}
+	return (0);
 }

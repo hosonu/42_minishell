@@ -6,20 +6,25 @@
 /*   By: hosonu <hoyuki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 21:54:49 by hosonu            #+#    #+#             */
-/*   Updated: 2024/04/23 16:57:02 by hosonu           ###   ########.fr       */
+/*   Updated: 2024/04/24 01:30:15 by hosonu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	err_msg_for_exit(char *str)
+void	skip_sign_and_space(char *str, int *sign)
 {
-	write(2, "bash: exit: ", 12);
-	write(2, str, ft_strlen(str));
-	write(2, ": numeric argument required\n", 28);
+	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			*sign *= -1;
+		str++;
+	}
 }
 
-int	ft_atoll_safe(const char *str)
+int	ft_atoll_safe(char *str)
 {
 	long long	result;
 	int			sign;
@@ -27,14 +32,7 @@ int	ft_atoll_safe(const char *str)
 
 	result = 0;
 	sign = 1;
-	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign *= -1;
-		str++;
-	}
+	skip_sign_and_space(str, &sign);
 	while (*str != '\0')
 	{
 		digit = *str - '0';
@@ -42,7 +40,7 @@ int	ft_atoll_safe(const char *str)
 					&& digit > LLONG_MAX % 10)))
 			return (1);
 		else if (sign == -1 && (-result < LLONG_MIN / 10
-				|| (-result == LLONG_MIN / 10 && -digit < LLONG_MIN % 10)))
+				|| (-result == LLONG_MIN / 10 && digit * -1 < LLONG_MIN % 10)))
 			return (1);
 		result = result * 10 + digit;
 		str++;

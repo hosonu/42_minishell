@@ -74,6 +74,7 @@ t_token	*tokenize(char *input)
 			token_addlast(top, new);
 		i++;
 	}
+	free_split_all(splited_token, i);
 	return (top);
 }
 
