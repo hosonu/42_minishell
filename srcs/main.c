@@ -6,13 +6,13 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:06 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 01:53:33 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 03:18:14 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int     g_sige;
+int		g_sige;
 
 void	signal_handler(int signum)
 {
@@ -51,5 +51,5 @@ int	main(void)
 			free_linear_token_list(list);
 		}
 	}
-	return 0;
+	return (0);
 }

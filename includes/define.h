@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 22:58:35 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/09 18:30:51 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 01:39:52 by hosonu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,45 +16,45 @@
 typedef struct s_token
 {
 	char			*token;
-	int8_t	type;
-	uint8_t	pipein;
-	uint8_t	pipeout;
-	struct s_token *next;
-	struct s_token *prev;
-}	t_token;
+	int8_t			type;
+	uint8_t			pipein;
+	uint8_t			pipeout;
+	struct s_token	*next;
+	struct s_token	*prev;
+}					t_token;
 
 typedef struct s_quotes
 {
-	char	*open;
-	char	*close;
-}	t_quotes;
+	char			*open;
+	char			*close;
+}					t_quotes;
 
-typedef struct	s_env
+typedef struct s_env
 {
-	char	*key;
-	char	*value;
+	char			*key;
+	char			*value;
 	struct s_env	*next;
-}	t_env;
+}					t_env;
 
 typedef struct s_fdgs
 {
-	int pp[2];
-	int gfd[2];
-	int original_stdin;
-	int original_stdout;
-}	t_fdgs;
+	int				pp[2];
+	int				gfd[2];
+	int				original_stdin;
+	int				original_stdout;
+}					t_fdgs;
 
 typedef struct s_status
 {
-	int exit_status;
-	int exit_code;
-	int is_file;
-}	t_status;
+	int				exit_status;
+	int				exit_code;
+	int				is_file;
+}					t_status;
 
 typedef struct s_ige
 {
-	int waiting_for_sige;
-}	t_ige;
+	int				waiting_for_sige;
+}					t_ige;
 
 # define METAOUT -1
 # define METAAPNDOUT -1
@@ -74,4 +74,4 @@ typedef struct s_ige
 # define HEREDOCCOMMAND 34
 # define REOUTHEREDOCCOMMAND 35
 
-# endif
+#endif

@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #ifndef TOKEN_TYPE_H
-#define TOKEN_TYPE_H
+# define TOKEN_TYPE_H
 
-#include "./minishell.h"
+# include "./minishell.h"
 
 void	token_type_revise(t_token **list);
 void	decide_type(t_token *top);

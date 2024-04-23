@@ -13,6 +13,6 @@
 #ifndef TOKEN_JOIN_H
 # define TOKEN_JOIN_H
 
-t_token	*token_join(t_token *top);
+t_token		*token_join(t_token *top);
 
 #endif

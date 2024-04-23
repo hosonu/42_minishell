@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+#ifndef TOKENIZE_H
+# define TOKENIZE_H
 
-#include "./minishell.h"
+# include "./minishell.h"
 
 t_token	*new_token(char *content);
 t_token	*tokenize(char *input);

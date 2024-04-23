@@ -6,12 +6,13 @@
 #    By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/29 22:59:42 by kojwatan          #+#    #+#              #
-#    Updated: 2024/04/24 01:36:05 by kojwatan         ###   ########.fr        #
+#    Updated: 2024/04/24 03:22:52 by kojwatan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wextra -Werror -Wall
+# -g -fsanitize=address 
 
 SRCS =	srcs/main.c \
 		srcs/prompt_handle/tokenize.c \
@@ -55,6 +56,7 @@ SRCS =	srcs/main.c \
 		srcs/builtins/42_unset.c 
 
 OBJS = $(SRCS:.c=.o)
+# READ_LINE_PREFIX = /usr/local/opt/readline
 READ_LINE_PREFIX = $(shell brew --prefix readline)
 NAME = minishell
 HEAD = ../includes/minishell.h

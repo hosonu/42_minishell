@@ -13,7 +13,7 @@
 #ifndef PROMPT_VALIDATE_H
 # define PROMPT_VALIDATE_H
 
-#include "./minishell.h"
+# include "./minishell.h"
 
 int	prompt_validate(char *prompt);
 int	syntax_validate(t_token *tokens);
