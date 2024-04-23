@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 08:33:07 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/23 16:38:50 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 02:27:30 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,6 @@ static int	export_util(char *str, t_env *env)
 	addlast_env(env, new);
 	return (0);
 }
-
-// static int	append_check(char *key)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (key[i] != '\0')
-// 		i++;
-// 	if (key[i - 1] == '+')
-// 		return (1);
-// 	else
-// 		return (0);
-// }
 
 static	void	set_value(t_env *node, char *var)
 {
@@ -94,7 +81,6 @@ int	ft_export(char *av[], t_env *env)
 {
 	int		i;
 	int		ret;
-	// char	*key;
 
 	i = 0;
 	ret = 0;
@@ -107,7 +93,6 @@ int	ft_export(char *av[], t_env *env)
 			i++;
 			continue ;
 		}
-		// key = get_key(av[i]);
 		if (ft_export_util(av[i], &ret, env) == 1)
 			return (1);
 		i++;
