@@ -1,56 +1,109 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   42_cd.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/19 01:32:17 by kojwatan          #+#    #+#             */
+/*   Updated: 2024/04/23 09:10:48 by kojwatan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
-char	*format_path(char *av, char buff[PATH_MAX])
+static int	cd_export(t_env *env, char *arg, char buff[PATH_MAX])
 {
-	char	*path;
-	int	i;
+	char	*av[2];
 
-	i = 0;
-	if (av == NULL)
-		ft_strlcpy(buff, "/", PATH_MAX);
-	else if (av[0] == '~')
+	arg = ft_strjoin(arg, buff);
+	if (arg == NULL)
 	{
-		path = getenv("HOME");
-		while (av[i] != '/' && av[i] != '\0')
-			i++;
-		ft_strlcpy(buff, path, PATH_MAX);
-		ft_strlcat(buff, &av[i], PATH_MAX);
+		perror("malloc");
+		return (1);
 	}
-	else
-		ft_strlcpy(buff, av, PATH_MAX);
-	return buff;
+	av[0] = arg;
+	av[1] = NULL;
+	ft_export(av, env);
+	free(arg);
+	return (0);
 }
 
 void	cd_change_env(t_env *env)
 {
 	t_env	*pwd;
-	t_env	*old;
 	char	pwd_buff[PATH_MAX];
 
 	if (getcwd(pwd_buff, PATH_MAX) == NULL)
 		perror("cd");
-	old = getenv_node(env, "OLDPWD");
 	pwd = getenv_node(env, "PWD");
-	free(old->value);
-	old->value = ft_strdup(pwd->value);
-	free(pwd->value);
-	pwd->value = ft_strdup(pwd_buff);
+	if (pwd == NULL)
+		cd_export(env, "PWD=", pwd_buff);
+	else
+	{
+		free(pwd->value);
+		pwd->value = ft_strdup(pwd_buff);
+		if (pwd->value == NULL)
+			perror("malloc");
+	}
+}
+
+static	int	ft_chdir(char *path, t_env *env)
+{
+	t_env	*home;
+	if (path != NULL)
+	{
+		if (chdir(path) == -1)
+		{
+			printf("No such file or directory\n");
+			return (-1);
+		}
+	}
+	else
+	{
+		home = getenv_node(env, "HOME");
+		if (home == NULL)
+		{
+			ft_putstr_fd("HOME not set\n", STDERR_FILENO);
+			return (-1);
+		}
+		else
+		{
+			if (chdir(home->value) == -1)
+			{
+				printf("No such file or directory\n");
+				return (-1);
+			}
+		}
+	}
+	return (0);
 }
 
 int	ft_cd(char *av[], t_env *env)
 {
-	t_env	*pwd;
 	t_env	*old;
-	char	format_buff[PATH_MAX];
-	int	i;
+	char	pwd_buff[PATH_MAX];
 
-	i = 0;
-	format_path(av[0], format_buff);
-	if (chdir(format_buff) == -1)
+	if (getcwd(pwd_buff, PATH_MAX) == NULL)
 	{
-		printf("No such file or directory\n");
+		perror("cd");
 		return (1);
 	}
+	old = getenv_node(env, "OLDPWD");
+	if (old == NULL)
+		cd_export(env, "OLDPWD=", pwd_buff);
+	else
+	{
+		free(old->value);
+		old->value = ft_strdup(pwd_buff);
+		if (old->value == NULL)
+		{
+			perror("malloc");
+			return (1);
+		}
+	}
+	if (ft_chdir(av[0], env) == -1)
+		return (1);
 	else
 		cd_change_env(env);
 	return (0);

@@ -6,22 +6,26 @@
 #    By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/29 22:59:42 by kojwatan          #+#    #+#              #
-#    Updated: 2024/04/16 15:54:19 by kojwatan         ###   ########.fr        #
+#    Updated: 2024/04/23 08:16:12 by kojwatan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wextra 
+CFLAGS = -Wextra -g -fsanitize=address
 # -Werror -Wall
-# -g -fsanitize=address
+
 SRCS =	srcs/main.c \
-		srcs/tokenize.c \
-		srcs/token_type.c \
-		srcs/sort_token.c \
-		srcs/token_split.c \
-		srcs/prompt_validate.c \
-		srcs/string_utils.c \
-		srcs/debug.c srcs/free.c \
+		srcs/prompt_handle/tokenize.c \
+		srcs/prompt_handle/token_type.c \
+		srcs/prompt_handle/sort_token.c \
+		srcs/prompt_handle/token_join.c \
+		srcs/prompt_handle/token_split1.c \
+		srcs/prompt_handle/token_split2.c \
+		srcs/prompt_handle/prompt_validate.c \
+		srcs/prompt_handle/metachar_validate.c \
+		srcs/prompt_handle/string_utils.c \
+		srcs/prompt_handle/prompt_handle.c \
+		srcs/prompt_handle/free.c \
 		srcs/dispatch_token_v2.c \
 		srcs/execve_token.c \
 		srcs/fcntl_token.c \
@@ -31,7 +35,9 @@ SRCS =	srcs/main.c \
 		srcs/x_funcs.c \
 		srcs/x_funcs_second.c \
 		srcs/error_msg.c \
-		srcs/environ_init.c \
+		srcs/builtins/environ1.c \
+		srcs/builtins/environ2.c \
+		srcs/builtins/environ3.c \
 		srcs/builtins/42_cd.c \
 		srcs/builtins/42_echo.c \
 		srcs/builtins/42_env.c \

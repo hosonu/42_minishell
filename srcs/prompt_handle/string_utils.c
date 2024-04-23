@@ -6,22 +6,20 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 00:14:54 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/04 22:38:00 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/18 23:39:51 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-int	is_quoted(char *str, char *pnt)
+static int	is_quoted_util(char *str, char *pnt)
 {
-	int	i;
+	int		i;
 	char	c;
 	uint8_t	quotefg;
 
 	i = 0;
 	quotefg = false;
-	if (pnt == NULL || str == NULL || *pnt == '\0')
-		return (-1);
 	while (str[i] != '\0')
 	{
 		if (is_quote(str[i]) > 0 && quotefg == false)
@@ -43,6 +41,13 @@ int	is_quoted(char *str, char *pnt)
 	return (1);
 }
 
+int	is_quoted(char *str, char *pnt)
+{
+	if (pnt == NULL || str == NULL || *pnt == '\0')
+		return (-1);
+	return (is_quoted_util(str, pnt));
+}
+
 int	is_metachar(char c)
 {
 	if (c == '|' || c == '>' || c == '<')
@@ -57,19 +62,13 @@ int	is_quote(char c)
 	else if (c == '\'')
 		return (2);
 	else
-		return 0;
+		return (0);
 }
 
-int	is_more_than_word(char *str)
+int	is_space(char c)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == ' ' && is_quoted(str, &str[i]) == -1)
-			return (1);
-		i++;
-	}
-	return (-1);
+	if (c == ' ' || c == '\t')
+		return (1);
+	else
+		return (-1);
 }

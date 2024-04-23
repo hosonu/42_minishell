@@ -4,31 +4,29 @@
 #include "./minishell.h"
 
 //42_echo.c
-int     ft_echo(int argc, char *argv[]);
-int     cnt_option_n(char **argv);
-bool    get_option_n(char *argv);
+int		ft_echo(char *argv[]);
+int		cnt_option_n(char **argv);
+bool	get_option_n(char *argv);
 
 //42cd.c
-int	    ft_cd(char *av[], t_env *env);
+int	ft_cd(char *av[], t_env *env);
 void	cd_change_env(t_env *env);
-char	*format_path(char *av, char buff[PATH_MAX]);
 
 //42pwd.c
-int     ft_pwd(char *av[], t_env *env);
+int     ft_pwd(void);
 
 //42export.c
-int	    ft_export(char *av[], t_env *env);
+int	ft_export(char *av[], t_env *env);
 void	export_display(t_env *env);
 
 //42unset.c
-int     ft_unset(char *av[], t_env *env);
-int	    unset_util(char *key, char *av[]);
+int	ft_unset(char *av[], t_env *env);
 
 //42env.c
-int	    ft_env(t_env *env);
+int	ft_env(t_env *env);
 
 //42exit.c
-int	    ft_exit(char *av[], int num);
+int	ft_exit(char *av[], int num);
 
 #endif
     

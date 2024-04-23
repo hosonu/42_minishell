@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 11:31:28 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/16 15:55:12 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/18 22:44:01 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@
 # include "./token_type.h"
 # include "./sort_token.h"
 # include "./prompt_validate.h"
+# include "./token_join.h"
 # include "./debug.h"
 # include "./free.h"
 # include "./string_utils.h"
 # include "env.h"
 # include "./ft_builtins.h"
 # include "./token_split.h"
+# include "./prompt_handle.h"
 # include "token_runner.h"
 # include "x_func.h"
 # include "error_msg.h"

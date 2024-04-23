@@ -1,52 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   42_unset.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/23 08:31:30 by kojwatan          #+#    #+#             */
+/*   Updated: 2024/04/23 08:32:11 by kojwatan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
-int	unset_util(char *key, char *av[])
+int	ft_unset(char *av[], t_env *env)
 {
-	int	i;
+	int		i;
+	t_env	*node;
 
 	i = 0;
 	while (av[i] != NULL)
 	{
-		if (ft_strncmp(key, av[i], ft_strlen(key)) == 0)
-		{
-			if (ft_strncmp(key, av[i], ft_strlen(av[i])) == 0)
-				return (1);
-		}
+		node = getenv_node(env, av[i]);
+		if (node != NULL)
+			delone_env(env, node);
 		i++;
 	}
-	return 0;
+	return (0);
 }
-
-int ft_unset(char *av[], t_env *env)
-{
-	int	i;
-	t_env	*tmp;
-	t_env	*head;
-
-	i = 0;
-	head = env;
-	while (env != NULL)
-	{
-		if (unset_util(env->key, av) == 1)
-		{
-			tmp = env;
-			env = env->next;
-			delone_env(&head, tmp);
-		}
-		else
-			env = env->next;
-	}
-}
-/*
-int	main(void)
-{
-	t_env	*env;
-	char	*av1[] = {"TEST=42", "TEST2=52", NULL};
-	char	*av2[] = {"TEST", "PS2", NULL};
-
-	env = environ_init();
-	ft_export(av1, env);
-	ft_env(env);
-	ft_unset(av2, env);
-	ft_env(env);
-}*/

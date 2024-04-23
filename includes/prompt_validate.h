@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 22:58:59 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/04 00:18:19 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/19 01:20:08 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 #include "./minishell.h"
 
 int	prompt_validate(char *prompt);
-int	redirect_validate(char *str);
+int	syntax_validate(t_token *tokens);
 int	quotation_validate(char *str);
+int	metachar_validate(t_token *node);
 
 #endif

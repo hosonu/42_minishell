@@ -102,7 +102,6 @@ void dispatch_token(t_token **list)
             status.exit_code = WTERMSIG(status.exit_status) + 128;
         }
     }
-    sige.ext_child = 0;
     sige.waiting_for_sige = 0;
     set_sigint_flag(0);
 }

@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   42_pwd.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/23 08:32:25 by kojwatan          #+#    #+#             */
+/*   Updated: 2024/04/23 08:44:13 by kojwatan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
-int ft_pwd(char *av[], t_env *env)
+int	ft_pwd(void)
 {
-	while (env != NULL)
+	char	buff[PATH_MAX + 1];
+
+	if (getcwd(buff, PATH_MAX) == NULL)
 	{
-		if (ft_strncmp("PWD", env->key, ft_strlen("PWD")) == 0)
-		{
-			if (ft_strncmp("PWD", env->key, ft_strlen(env->key)) == 0)
-				printf("%s\n", env->value);
-		}
-		env = env->next;
+		perror("getcwd");
+		return (1);
 	}
+	ft_printf("%s\n", buff);
+	return (0);
 }
