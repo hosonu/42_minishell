@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:49:36 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/19 01:17:32 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/23 10:07:58 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,22 @@ t_token	**linear_token_list(t_token *top)
 	return (list);
 }
 
-t_token	**prompt_handle(void)
+static char	*input_prompt(void)
 {
-	t_token	**list;
-	t_token	*tokens;
 	char	*input;
+	char	*pwd;
+	char	*prompt;
+	char	buff[PATH_MAX];
 
-	input = readline("minish>> ");
+	getcwd(buff, PATH_MAX);
+	prompt = ft_strjoin(buff, ": ");
+	if (prompt == NULL)
+	{
+		perror("malloc");
+		return (NULL);
+	}
+	input = readline(prompt);
+	free(prompt);
 	if (input == NULL)
 	{
 		ft_putstr_fd("exit\n", STDOUT_FILENO);
@@ -60,10 +69,22 @@ t_token	**prompt_handle(void)
 		add_history(input);
 	else if (input[0] == '\0')
 		return (NULL);
+	return (input);
+}
+
+t_token	**prompt_handle(void)
+{
+	t_token	**list;
+	t_token	*tokens;
+	char	*input;
+
+	input = input_prompt();
+	if (input == NULL)
+		return (NULL);
 	if (quotation_validate(input) == -1)
 	{
 		free(input);
-		//g_exit 248
+		//g_sige = 248
 		return (NULL);
 	}
 	tokens = tokenize(input);
