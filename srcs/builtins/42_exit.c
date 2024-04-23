@@ -6,7 +6,7 @@
 /*   By: hosonu <hoyuki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 21:54:49 by hosonu            #+#    #+#             */
-/*   Updated: 2024/04/23 02:28:46 by hosonu           ###   ########.fr       */
+/*   Updated: 2024/04/23 16:57:02 by hosonu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,7 @@ void	ft_exit(char *av[], int status)
 	else if (av[1] != NULL && check_digits(av[1]) != 1)
 	{
 		err_msg_for_exit(av[1]);
-		if (ft_isdigit(av[1][0]) == 1)
-			exit_status = ft_atoi(av[1]);
-		else
-			exit_status = 1;
+		exit_status = 255;
 	}
 	else
 		exit_status = status;
