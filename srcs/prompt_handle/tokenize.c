@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:13 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/18 20:13:04 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/23 09:29:23 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_token	*tokenize(char *input)
 
 	i = 0;
 	top = NULL;
-	splited_token = token_split(input, ' ');
+	splited_token = token_split(input);
 	if (splited_token == NULL)
 		return (NULL);
 	while (splited_token[i] != NULL)
