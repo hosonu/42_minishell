@@ -32,6 +32,7 @@ SRCS =	srcs/main.c \
 		srcs/token_runner/execve_token.c \
 		srcs/token_runner/fcntl_token.c \
 		srcs/token_runner/heredoc_init.c \
+		srcs/token_runner/minish_split.c \
 		srcs/token_runner/manage_fd.c \
 		srcs/token_runner/expand_variable.c \
 		srcs/token_runner/handle_token.c \

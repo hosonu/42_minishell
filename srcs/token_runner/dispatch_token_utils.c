@@ -12,9 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-int	get_sigint_flag(void);
-int	set_sigint_flag(int i);
-
 void	pre_manage_fd_parent(t_token *list, t_fdgs *fdgs)
 {
 	fdgs->original_stdin = x_dup(STDIN_FILENO);
@@ -45,7 +42,7 @@ void	dispatch_token_help(t_token **list, t_fdgs *fdgs, t_status *status,
 	int		pid;
 	char	**tokens_splited;
 
-	tokens_splited = ft_split((*list)->token, ' ');
+	tokens_splited = minish_split((*list)->token, ' ');
 	if (tokens_splited == NULL)
 		return ;
 	handle_token(tokens_splited, status->exit_code, env);
