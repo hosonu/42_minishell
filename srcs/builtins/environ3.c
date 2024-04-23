@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 08:25:45 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/23 08:25:49 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:45:53 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ static char	**env_split_alloc(char **split, char *var)
 	if (split[0] == NULL)
 		return (NULL);
 	count = value_strlen(var);
-	if (count == 0)
+	if (ft_strchr(var, '=') == NULL)
+		split[1] = NULL;
+	else if (count == 0)
 		split[1] = ft_strdup("");
 	else
 	{
@@ -70,7 +72,7 @@ static char	**env_split_alloc(char **split, char *var)
 static void	env_split_cpy(char **split, char *var)
 {
 	key_cpy(split[0], var);
-	if (split[1][0] != '\0')
+	if (split[1] != NULL && split[1][0] != '\0')
 		value_cpy(split[1], var);
 }
 

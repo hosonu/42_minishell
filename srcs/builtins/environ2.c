@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 08:24:10 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/23 08:50:28 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:38:54 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ char	**env_int_str(t_env *env)
 	char	*tmp;
 
 	line = NULL;
+	env = env->next;
 	while (env != NULL)
 	{
 		line = ft_strjoin(line, env->key);

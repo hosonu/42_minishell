@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 08:19:17 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/23 09:17:20 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:47:38 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ t_env	*new_env(char *var)
 	t_env	*new;
 	char	**splited;
 
-	if (ft_strchr(var, '=') == NULL)
-		return (NULL);
 	new = x_malloc(sizeof(t_env));
 	if (new == NULL)
 		return (NULL);
