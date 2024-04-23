@@ -43,7 +43,6 @@ int	x_execve(const char *filename, char *const argv[], char *const envp[])
 			exit(EXIT_FAILURE);
 		}
 		error_msg_for_cmd(argv[0]);
-		exit(127);
 	}
 	return (result);
 }

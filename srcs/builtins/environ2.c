@@ -115,5 +115,6 @@ char	**env_int_str(t_env *env)
 		env = env->next;
 	}
 	str = ft_split(line, '\n');
+	free(line);
 	return (str);
 }

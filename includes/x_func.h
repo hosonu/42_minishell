@@ -19,6 +19,7 @@
 
 pid_t	x_fork(void);
 void	*x_malloc(size_t size);
+void	double_free(char **str);
 
 // x_func_second.c
 

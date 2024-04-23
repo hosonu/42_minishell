@@ -66,7 +66,13 @@ void	execve_token(char **tokens_splited, t_env *env)
 		else
 		{
 			command = path_lookup(tokens_splited[i], environ);
-			x_execve(command, tokens_splited, environ);
+			if(x_execve(command, tokens_splited, environ) == -1)
+			{
+				double_free(environ);
+				double_free(tokens_splited);
+				free(command);
+				exit (127);
+			}
 		}
 		i++;
 	}
