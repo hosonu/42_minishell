@@ -16,10 +16,12 @@ t_env   *environ_init(void);
 char    *ft_getenv(t_env *env, char *key);
 t_env   *getenv_node(t_env *env, char *key);
 char **env_int_str(t_env *env);
+int	is_special_char(char c);
 
 //environ3.c
 int	key_strlen(char *var);
 int	value_strlen(char *var);
+int	varname_validate(char *var);
 char	**env_split(char *var);
 
 #endif
