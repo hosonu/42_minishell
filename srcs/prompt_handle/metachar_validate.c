@@ -29,6 +29,7 @@ static int	metachar_validate_util(t_token node)
 {
 	int	ret;
 
+	ret = 0;
 	if (node.type == METAAPNDOUT)
 		ret = completly_match(node.token, ">>");
 	else if (node.type == METAHEREDOC)

@@ -57,7 +57,7 @@ int ft_echo(char *argv[])
             cnt_opt = cnt_option_n(argv);
         while(argv[1 + cnt_opt] != NULL)
         {
-            write(1, argv[1 + cnt_opt], strlen(argv[1 + cnt_opt]));//fix ft_putstr
+            write(1, argv[1 + cnt_opt], ft_strlen(argv[1 + cnt_opt]));//fix ft_putstr
             if(argv[1 + cnt_opt + 1] != NULL)
                 write(1, " ", 1);
             cnt_opt++;

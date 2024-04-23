@@ -58,7 +58,7 @@ int	check_builtins_childs(char **tokens_splited, t_env *env)
 
 	is_builtins = -1;
 	if (ft_strncmp("echo", tokens_splited[0], 4) == 0)
-		is_builtins = ft_echo(check_argc(tokens_splited), tokens_splited);
+		is_builtins = ft_echo(tokens_splited);
 	else if (ft_strncmp("pwd", tokens_splited[0], 3) == 0)
 		is_builtins = ft_pwd();
 	else if (ft_strncmp("env", tokens_splited[0], 3) == 0)
