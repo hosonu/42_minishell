@@ -4,7 +4,7 @@
 #include "./minishell.h"
 
 //42_echo.c
-int		ft_echo(char *argv[]);
+int ft_echo(int argc, char *argv[]);
 int		cnt_option_n(char **argv);
 bool	get_option_n(char *argv);
 
@@ -28,7 +28,7 @@ int	ft_unset(char *av[], t_env *env);
 int	ft_env(t_env *env);
 
 //42exit.c
-int	ft_exit(char *av[], int num);
+void	ft_exit(char *av[], int status);
 
 #endif
     
