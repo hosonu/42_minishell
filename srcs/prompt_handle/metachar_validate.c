@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 01:29:30 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/19 01:30:05 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 01:24:22 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,26 @@ static int	completly_match(char *s1, char *s2)
 	return (1);
 }
 
+static int	metaout_check(char *token)
+{
+	if (completly_match(token, ">") == 1)
+		return (1);
+	if (completly_match(token, ">>") == 1)
+		return (1);
+	return (-1);
+}
+
 static int	metachar_validate_util(t_token node)
 {
 	int	ret;
 
 	ret = 0;
-	if (node.type == METAAPNDOUT)
-		ret = completly_match(node.token, ">>");
+	if (node.type == METAOUT)
+		ret = metaout_check(node.token);
 	else if (node.type == METAHEREDOC)
 		ret = completly_match(node.token, "<<");
 	else if (node.type == METAIN)
 		ret = completly_match(node.token, "<");
-	else if (node.type == METAOUT)
-		ret = completly_match(node.token, ">");
 	else if (node.type == METAPIPE)
 		ret = completly_match(node.token, "|");
 	return (ret);

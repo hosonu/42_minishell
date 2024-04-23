@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:49:36 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/23 23:06:57 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 01:29:13 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ t_token	**prompt_handle(void)
 	if (quotation_validate(input) == -1)
 	{
 		free(input);
-		//g_sige = 248
 		return (NULL);
 	}
 	tokens = tokenize(input);

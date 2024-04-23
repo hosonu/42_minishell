@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 21:21:07 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/23 08:52:12 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 01:04:54 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../includes/minishell.h"
@@ -58,4 +58,5 @@ void	free_split_all(char **strs, int i)
 		i--;
 	}
 	free(strs[i]);
+	free(strs);
 }

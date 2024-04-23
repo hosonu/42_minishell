@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 23:31:26 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/23 08:30:39 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 01:06:11 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	free_linear_token_list(t_token **list)
 		free(list[i]);
 		i++;
 	}
+	free(list);
 }
 
 void	free_chain_token_list(t_token *top)
