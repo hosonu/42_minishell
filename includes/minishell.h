@@ -25,7 +25,7 @@
 # include "./free.h"
 # include "./string_utils.h"
 # include "env.h"
-# include "heredoc_init.h"
+# include "./heredoc_init.h"
 # include "./ft_builtins.h"
 # include "./token_split.h"
 # include "./my_split.h"
@@ -39,7 +39,5 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <errno.h>
-void	signal_handler(int signum);
-
 
 #endif
