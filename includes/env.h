@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024-04-23 16:54:50 by user              #+#    #+#             */
-/*   Updated: 2024-04-23 16:54:50 by user             ###   ########.fr       */
+/*   Updated: 2024/04/24 23:19:12 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		is_special_char(char c);
 int		is_special_char(char c);
 int		key_strlen(char *var);
 int		value_strlen(char *var);
-int		varname_validate(char *var);
+int		varname_validate(char *var, char *cmd);
 
 //env_split.c
 char	**env_split(char *var);
