@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 08:31:30 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 23:28:14 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/25 00:06:52 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_unset(char *av[], t_env *env)
 	t_env	*node;
 
 	i = 0;
-	ret = 1;
+	ret = 0;
 	while (av[i] != NULL)
 	{
 		if (unset_util(av[i]) == -1 || varname_validate(av[i], "unset") == -1)
