@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:08:49 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/23 16:18:44 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 16:30:48 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	set_oldpwd(char pwd_buff[PATH_MAX], t_env *env)
 
 	old = getenv_node(env, "OLDPWD");
 	if (old == NULL)
-		cd_export(env, "OLDPWD=", pwd_buff);
+		;
 	else
 	{
 		free(old->value);
