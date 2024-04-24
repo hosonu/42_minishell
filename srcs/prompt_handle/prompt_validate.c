@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:23 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 23:07:46 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/25 01:01:39 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,31 @@ int	quotation_validate(char *prompt)
 	return (1);
 }
 
+static void	manage_flag(uint8_t *metafg, uint8_t *ppfg, int type)
+{
+	*metafg = true;
+	if (type == METAPIPE)
+		*ppfg = true;
+	else
+		*ppfg = false;
+}
+
 static int	syntax_validate_util(t_token *token)
 {
 	uint8_t	metafg;
+	uint8_t	ppfg;
 
 	metafg = false;
+	ppfg = false;
 	if (token->type == METAPIPE)
 		return (-1);
 	while (token != NULL)
 	{
 		if (token->type < 0)
 		{
-			if (metafg == true)
+			if (metafg == true && ppfg == false)
 				return (-1);
-			metafg = true;
+			manage_flag(&metafg, &ppfg, token->type);
 		}
 		else
 			metafg = false;
