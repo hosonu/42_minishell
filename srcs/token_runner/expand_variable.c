@@ -6,7 +6,7 @@
 /*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:43:52 by hoyuki            #+#    #+#             */
-/*   Updated: 2024/04/24 18:22:38 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 18:25:16 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ char	*process_expansion(int *i, char *input, int exit_code, t_env *env)
 	free(input);
 	input = tmp;
 	*i += ft_strlen(expanded_input) - 1;
+	free(expanded_input);
 	return (input);
 }
 
