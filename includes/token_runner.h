@@ -55,7 +55,7 @@ char	*change_input(char *expanded_in, char *original_in, int index);
 char	*check_and_expand(int index, char *input, t_env *env);
 
 // handle_token.c
-void	handle_token(char **splited_token, int exit_code, t_env *env);
+char 	**handle_token(char **splited_token, int exit_code, t_env *env);
 char	*remove_quote(char *token);
 char	*remove_specific_quote(char *token, int *i, int *quote_status);
 

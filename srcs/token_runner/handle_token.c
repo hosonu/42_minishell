@@ -51,16 +51,44 @@ char	*remove_quote(char *token)
 	return (token);
 }
 
-void	handle_token(char **splited_token, int exit_code, t_env *env)
+char	**remove_empty_strings(char **arr, int count)
 {
-	int	i;
+	int		i;
+	char	**new_arr;
+	char	**p;
 
 	i = 0;
+	new_arr = malloc(sizeof(char *) * (count + 1));
+	p = new_arr;
+	while (arr[i] != NULL)
+	{
+		if (arr[i][0] != '\0')
+		{
+			*p = strdup(arr[i]);
+			p++;
+		}
+		i++;
+	}
+	*p = NULL;
+	double_free(arr);
+	return (new_arr);
+}
+
+char	**handle_token(char **splited_token, int exit_code, t_env *env)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
 	while (splited_token[i] != NULL)
 	{
 		splited_token[i] = expand_variable(splited_token[i], 0, exit_code,
 				env);
 		splited_token[i] = remove_quote(splited_token[i]);
+		if (splited_token[i][0] != '\0')
+			count++;
 		i++;
 	}
+	return (remove_empty_strings(splited_token, count));
 }
