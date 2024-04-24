@@ -6,7 +6,7 @@
 /*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:43:43 by hoyuki            #+#    #+#             */
-/*   Updated: 2024/04/24 02:36:11 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/25 02:16:28 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	execve_token(char **tokens_splited, t_env *env)
 			if (execve(tokens_splited[0], tokens_splited, environ) == -1)
 				error_and_exit(tokens_splited[0], 126, 1);
 		}
+		else if (errno == EACCES)
+			error_and_exit(tokens_splited[0], 126, 0);
 		else
 			error_and_exit(tokens_splited[0], 127, 0);
 	}
