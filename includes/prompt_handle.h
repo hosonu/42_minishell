@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024-04-23 16:45:48 by user              #+#    #+#             */
-/*   Updated: 2024-04-23 16:45:48 by user             ###   ########.fr       */
+/*   Updated: 2024/04/24 20:50:05 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "./minishell.h"
 
-t_token	**prompt_handle(void);
+t_token	**prompt_handle(t_env *env);
 t_token	**token_list(t_token *tokens);
 
 #endif

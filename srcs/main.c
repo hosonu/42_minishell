@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:06 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 03:18:14 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 20:48:38 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,19 @@ void	set_signal_handler(void)
 int	main(void)
 {
 	t_token	**list;
+	t_env	*env;
 
+	env = environ_init();
 	while (1)
 	{
 		set_signal_handler();
-		list = prompt_handle();
+		list = prompt_handle(env);
 		if (list != NULL)
 		{
-			dispatch_token(list);
+			dispatch_token(list, env);
 			free_linear_token_list(list);
 		}
 	}
+	free_env(env);
 	return (0);
 }

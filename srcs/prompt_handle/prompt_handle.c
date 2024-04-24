@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:49:36 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 03:18:50 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 20:48:27 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_token	**linear_token_list(t_token *top)
 	return (list);
 }
 
-static char	*input_prompt(void)
+static char	*input_prompt(t_env *env)
 {
 	char	*input;
 	char	*prompt;
@@ -66,18 +66,19 @@ static char	*input_prompt(void)
 	if (input == NULL)
 	{
 		ft_putstr_fd("exit\n", STDOUT_FILENO);
+		free_env(env);
 		exit(EXIT_SUCCESS);
 	}
 	return (input);
 }
 
-t_token	**prompt_handle(void)
+t_token	**prompt_handle(t_env *env)
 {
 	t_token	**list;
 	t_token	*tokens;
 	char	*input;
 
-	input = input_prompt();
+	input = input_prompt(env);
 	if (input[0] != '\0')
 		add_history(input);
 	else if (input[0] == '\0')

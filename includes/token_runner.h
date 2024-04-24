@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024-04-20 11:10:59 by user              #+#    #+#             */
-/*   Updated: 2024-04-20 11:10:59 by user             ###   ########.fr       */
+/*   Updated: 2024/04/24 20:50:18 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "./minishell.h"
 
 // dispatch_token.c
-void	dispatch_token(t_token **list);
+void	dispatch_token(t_token **list, t_env *env);
 void	token_main_engine(t_token **list, t_fdgs *fdgs, t_status *status,
 			t_env *env);
 
