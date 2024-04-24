@@ -6,7 +6,7 @@
 /*   By: kojwatan < kojwatan@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 18:06:55 by kojwatan          #+#    #+#             */
-/*   Updated: 2023/11/21 17:54:17 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/25 03:51:14 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,6 @@ int	print_u(unsigned int nbr)
 	ft_putnbr_u(nbr);
 	if (nbr == 0)
 		return (1);
-	// if (nbr < 0)
-	// {
-	// 	nbr *= -1;
-	// 	digit++;
-	// }
-	// while (nbr > 0)
 	{
 		nbr /= 10;
 		digit++;

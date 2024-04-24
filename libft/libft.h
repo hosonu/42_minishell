@@ -6,7 +6,7 @@
 /*   By: kojwatan < kojwatan@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 17:46:25 by kojwatan          #+#    #+#             */
-/*   Updated: 2023/12/21 11:35:10 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/25 03:50:55 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,9 @@ int			digit_deci_to_hexa(size_t nbr);
 
 //gnl
 char		*get_next_line(int fd);
-// char		*ft_strjoin_gnl(char const *s1, char const *s2);
-// char		*linecpy(char *str);
-// char		*save_to_buff(char *src);
-char	*left_str(char *str);
-char	*get_line(char *str);
-char	*gnl_strchr(char *s, int c);
-char	*gnl_strjoin(char *s1, char *s2, size_t j);
-
+char		*left_str(char *str);
+char		*get_line(char *str);
+char		*gnl_strchr(char *s, int c);
+char		*gnl_strjoin(char *s1, char *s2, size_t j);
 
 #endif
