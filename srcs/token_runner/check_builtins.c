@@ -6,40 +6,43 @@
 /*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:41:45 by hoyuki            #+#    #+#             */
-/*   Updated: 2024/04/19 14:41:45 by hoyuki           ###   ########.fr       */
+/*   Updated: 2024/04/25 03:47:02 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	check_builtins_parents(char **tokens_splited, t_env *env, t_status *status)
+static int	exec_builtins(char **tokens_splited, t_env *env, t_status *status)
 {
-	int	is_builtins;
-
-	is_builtins = -1;
-	if (tokens_splited[0] == NULL)
-		return (is_builtins);
 	if (x_sstrncmp("cd", tokens_splited[0], 2) == 0)
 	{
 		status->exit_code = ft_cd(tokens_splited + 1, env);
-		is_builtins = 0;
+		return (0);
 	}
 	else if (x_sstrncmp("export", tokens_splited[0], 6) == 0)
 	{
 		status->exit_code = ft_export(tokens_splited + 1, env);
-		is_builtins = 0;
+		return (0);
 	}
 	else if (x_sstrncmp("unset", tokens_splited[0], 5) == 0)
 	{
 		status->exit_code = ft_unset(tokens_splited + 1, env);
-		is_builtins = 0;
+		return (0);
 	}
 	else if (x_sstrncmp("exit", tokens_splited[0], 4) == 0)
 	{
 		ft_exit(tokens_splited, status->exit_code, 1, env);
 		status->exit_code = 1;
-		is_builtins = 0;
+		return (0);
 	}
+	return (-1);
+}
+
+int	check_builtins_parents(char **tokens_splited, t_env *env, t_status *status)
+{
+	int	is_builtins;
+
+	is_builtins = exec_builtins(tokens_splited, env, status);
 	return (is_builtins);
 }
 
