@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_split1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:54:11 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 00:51:58 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 04:17:15 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
