@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:49:36 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 20:48:27 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 21:14:36 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static char	*input_prompt(t_env *env)
 	return (input);
 }
 
-t_token	**prompt_handle(t_env *env)
+t_token	**prompt_handle(t_env *env, t_status *status)
 {
 	t_token	**list;
 	t_token	*tokens;
@@ -97,16 +97,16 @@ t_token	**prompt_handle(t_env *env)
 	free(input);
 	if (tokens == NULL)
 		return (NULL);
-	list = token_list(tokens);
+	list = token_list(tokens, status);
 	return (list);
 }
 
-t_token	**token_list(t_token *tokens)
+t_token	**token_list(t_token *tokens, t_status *status)
 {
 	t_token	**list;
 
 	decide_type(tokens);
-	if (syntax_validate(tokens) == -1 || metachar_validate(tokens) == -1)
+	if (syntax_validate(tokens, status) == -1 || metachar_validate(tokens, status) == -1)
 	{
 		free_chain_token_list(tokens);
 		return (NULL);

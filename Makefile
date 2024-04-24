@@ -6,13 +6,12 @@
 #    By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/29 22:59:42 by kojwatan          #+#    #+#              #
-#    Updated: 2024/04/24 20:28:47 by kojwatan         ###   ########.fr        #
+#    Updated: 2024/04/24 21:18:24 by kojwatan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wextra -Werror -Wall 
-# -g -fsanitize=address 
+CFLAGS = -Wextra -Werror -Wall -g -fsanitize=address 
 
 SRCS =	srcs/main.c \
 		srcs/prompt_handle/tokenize.c \

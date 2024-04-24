@@ -6,7 +6,7 @@
 /*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:50:56 by hoyuki            #+#    #+#             */
-/*   Updated: 2024/04/24 20:51:51 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 21:17:18 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,20 @@ void	token_main_engine(t_token **list, t_fdgs *fdgs, t_status *status,
 	}
 }
 
-void	dispatch_token(t_token **list, t_env *env)
+void	dispatch_token(t_token **list, t_env *env, t_status *status)
 {
 	int				i;
 	t_fdgs			fdgs;
-	static t_status	status;
 
 	i = 0;
 	if (g_sige == SIGINT)
-		status.exit_code = 1;
+		status->exit_code = 1;
 	while (list[i] != NULL)
 	{
-		token_main_engine(&list[i], &fdgs, &status, env);
+		token_main_engine(&list[i], &fdgs, status, env);
 		i++;
 	}
-	wait_childs(&status);
+	wait_childs(status);
 	g_sige = 0;
 	set_sigint_flag(0);
 }

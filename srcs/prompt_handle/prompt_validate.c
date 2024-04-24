@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:23 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 16:40:18 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 21:10:35 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	quotation_validate(char *prompt)
 {
 	if (quotation_validate_util(prompt) == -1)
 	{
-		ft_putstr_fd("Quotation Error: Not closed\n", STDERR_FILENO);
+		ft_putstr_fd("minish: Quotation not closed\n", STDERR_FILENO);
 		return (-1);
 	}
 	return (1);
@@ -71,11 +71,12 @@ static int	syntax_validate_util(t_token *token)
 	return (1);
 }
 
-int	syntax_validate(t_token *token)
+int	syntax_validate(t_token *token, t_status *status)
 {
 	if (syntax_validate_util(token) == -1)
 	{
-		ft_putstr_fd("Syntax Error\n", STDERR_FILENO);
+		status->exit_code = 258;
+		ft_putstr_fd("minish: syntax error\n", STDERR_FILENO);
 		return (-1);
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 01:29:30 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 01:24:22 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 21:08:34 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	metachar_validate_util(t_token node)
 	return (ret);
 }
 
-int	metachar_validate(t_token *node)
+int	metachar_validate(t_token *node, t_status *status)
 {
 	int	ret;
 
@@ -64,6 +64,9 @@ int	metachar_validate(t_token *node)
 		node = node->next;
 	}
 	if (ret == -1)
-		ft_putstr_fd("Uncorrect metacharacter\n", STDOUT_FILENO);
+	{
+		status->exit_code = 258;
+		ft_putstr_fd("minish: syntax error\n", STDOUT_FILENO);
+	}
 	return (ret);
 }
