@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 08:33:07 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 02:27:30 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 17:03:21 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	export_util(char *str, t_env *env)
 	assignop = ft_strchr(str, '=');
 	if (assignop == str)
 	{
-		ft_putstr_fd("export: not valid identifier\n", STDERR_FILENO);
+		ft_putstr_fd("export: not a valid identifier\n", STDERR_FILENO);
 		return (1);
 	}
 	new = new_env(str);
