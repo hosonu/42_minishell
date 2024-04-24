@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:06 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 21:28:48 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 21:34:09 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	set_signal_handler(void)
 
 int	main(void)
 {
-	t_token	**list;
-	t_env	*env;
+	t_token		**list;
+	t_env		*env;
 	t_status	status;
 
 	status.is_file = 0;
