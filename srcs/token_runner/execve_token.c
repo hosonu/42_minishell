@@ -20,10 +20,10 @@ char	*join_path(char *command, char *path)
 	path = ft_strjoin(path, "/");
 	free(tmp);
 	if (path == NULL)
-		error_and_exit("malloc", 1);
+		error_and_exit("malloc", 1, 0);
 	path = ft_strjoin(path, command);
 	if (path == NULL)
-		error_and_exit("malloc", 1);
+		error_and_exit("malloc", 1, 0);
 	return (path);
 }
 
@@ -61,14 +61,19 @@ void	execve_token(char **tokens_splited, t_env *env)
 	char	*command;
 
 	if (check_builtins_childs(tokens_splited, env) == 0)
-		exit(0);
+		exit(127);
 	environ = env_int_str(env);
+	if (tokens_splited[0] == NULL)
+		exit(1);
 	if (tokens_splited[0][0] == '.' || tokens_splited[0][0] == '/')
 	{
 		if (access(tokens_splited[0], X_OK) == 0)
-			x_execve(tokens_splited[0], tokens_splited, environ);
+		{
+			if (execve(tokens_splited[0], tokens_splited, environ) == -1)
+				error_and_exit(tokens_splited[0], 126, 1);
+		}
 		else
-			error_and_exit(tokens_splited[0], 126);
+			error_and_exit(tokens_splited[0], 127, 0);
 	}
 	command = path_lookup(tokens_splited[0], environ);
 	if (x_execve(command, tokens_splited, environ) == -1)

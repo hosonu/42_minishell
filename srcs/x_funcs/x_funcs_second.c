@@ -39,7 +39,9 @@ int	x_execve(const char *filename, char *const argv[], char *const envp[])
 		path_check = getenv_char(envp, "PATH");
 		if (path_check == NULL)
 		{
-			printf("bash: %s: No such file or directory\n", argv[0]);
+			write(2, "minish: ", 8);
+			write(2, argv[0], ft_strlen(argv[0]));
+			write(2, ": Permission denied\n", 20);
 			exit(EXIT_FAILURE);
 		}
 		error_msg_for_cmd(argv[0]);

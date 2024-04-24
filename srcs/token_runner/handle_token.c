@@ -35,6 +35,8 @@ char	*remove_quote(char *token)
 	i = 0;
 	quoted = 0;
 	dblquoted = 0;
+	if (token == NULL)
+		return (NULL);
 	while (token[i] != '\0')
 	{
 		quote_type = is_quote(token[i]);
