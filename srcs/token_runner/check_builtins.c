@@ -35,10 +35,7 @@ int	check_builtins_parents(char **tokens_splited, t_env *env, t_status *status)
 		is_builtins = 0;
 	}
 	else if (x_sstrncmp("exit", tokens_splited[0], 4) == 0)
-	{
 		ft_exit(tokens_splited, status->exit_code, 1, env);
-		is_builtins = 0;
-	}
 	return (is_builtins);
 }
 
@@ -58,14 +55,13 @@ int	check_builtins_childs(char **tokens_splited, t_env *env)
 	}
 	else if (x_sstrncmp("env", tokens_splited[0], 3) == 0)
 		is_builtins = ft_env(env);
-	else if (x_sstrncmp("cd", tokens_splited[0], 2) == 0)
-		is_builtins = 0;
 	else if (x_sstrncmp("export", tokens_splited[0], 6) == 0)
 	{
 		ft_export(tokens_splited + 1, env);
 		is_builtins = 0;
 	}
-	else if (x_sstrncmp("unset", tokens_splited[0], 5) == 0)
+	else if (x_sstrncmp("unset", tokens_splited[0], 5) == 0
+		|| x_sstrncmp("cd", tokens_splited[0], 2) == 0)
 		is_builtins = 0;
 	else if (x_sstrncmp("exit", tokens_splited[0], 4) == 0)
 		ft_exit(tokens_splited, 0, 0, env);
