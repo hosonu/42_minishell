@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 08:25:45 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/23 16:40:45 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 17:00:07 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	varname_validate(char *var)
 	i = 0;
 	if ('0' <= var[0] && var[0] <= '9')
 	{
-		ft_printf("%c is not a valid identifier\n", var[i]);
+		ft_putstr_fd("export: not a valid identifier\n", STDERR_FILENO);
 		return (-1);
 	}
 	while (var[i] != '=' && var[i] != '\0')
@@ -37,7 +37,7 @@ int	varname_validate(char *var)
 				return (1);
 			else
 			{
-				ft_printf("%c is not a valid identifier\n", var[i]);
+				ft_putstr_fd("export: not a valid identifier\n", STDERR_FILENO);
 				return (-1);
 			}
 		}
