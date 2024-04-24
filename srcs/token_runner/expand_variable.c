@@ -6,7 +6,7 @@
 /*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:43:52 by hoyuki            #+#    #+#             */
-/*   Updated: 2024/04/19 14:43:52 by hoyuki           ###   ########.fr       */
+/*   Updated: 2024/04/24 18:22:38 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char	*change_input(char *expanded_in, char *original_in, int index)
 	char	*after_symbol;
 	char	*before_symbol;
 	char	*change_in;
+	char	*tmp;
 
 	before_symbol = ft_substr(original_in, 0, index);
 	while (ft_isalnum(original_in[index + 1]) != 0)
@@ -41,7 +42,9 @@ char	*change_input(char *expanded_in, char *original_in, int index)
 	after_symbol = ft_substr(original_in, index + 1, ft_strlen(original_in)
 			- index + 1);
 	change_in = ft_strjoin(before_symbol, expanded_in);
+	tmp = change_in;
 	change_in = ft_strjoin(change_in, after_symbol);
+	free(tmp);
 	free(before_symbol);
 	free(after_symbol);
 	return (change_in);
