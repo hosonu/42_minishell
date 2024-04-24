@@ -15,6 +15,7 @@
 
 void	error_msg_for_cmd(const char *filename);
 void	err_msg_for_exit(char *str);
-void	error_and_exit(const char *filename, int exit_code);
+void	error_and_exit(const char *filename, int exit_code, bool is_tilda);
+// void	error_and_exit(const char *filename, int exit_code);
 
 #endif

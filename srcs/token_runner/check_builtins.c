@@ -12,41 +12,31 @@
 
 #include "../../includes/minishell.h"
 
-int	check_argc(char **str)
-{
-	int	cnt;
-
-	cnt = 0;
-	while (str[cnt] != NULL)
-	{
-		cnt++;
-	}
-	return (cnt);
-}
-
-int	check_builtins_parents(char **tokens_splited, t_env *env, int exit_code)
+int	check_builtins_parents(char **tokens_splited, t_env *env, t_status *status)
 {
 	int	is_builtins;
 
 	is_builtins = -1;
-	if (ft_strncmp("cd", tokens_splited[0], 2) == 0)
+	if (tokens_splited[0] == NULL)
+		return (is_builtins);
+	if (x_sstrncmp("cd", tokens_splited[0], 2) == 0)
 	{
-		ft_cd(tokens_splited + 1, env);
+		status->exit_code = ft_cd(tokens_splited + 1, env);
 		is_builtins = 0;
 	}
-	else if (ft_strncmp("export", tokens_splited[0], 5) == 0)
+	else if (x_sstrncmp("export", tokens_splited[0], 6) == 0)
 	{
-		ft_export(tokens_splited + 1, env);
+		status->exit_code = ft_export(tokens_splited + 1, env);
 		is_builtins = 0;
 	}
-	else if (ft_strncmp("unset", tokens_splited[0], 5) == 0)
+	else if (x_sstrncmp("unset", tokens_splited[0], 5) == 0)
 	{
-		ft_unset(tokens_splited + 1, env);
+		status->exit_code = ft_unset(tokens_splited + 1, env);
 		is_builtins = 0;
 	}
-	else if (ft_strncmp("exit", tokens_splited[0], 4) == 0)
+	else if (x_sstrncmp("exit", tokens_splited[0], 4) == 0)
 	{
-		ft_exit(tokens_splited, exit_code);
+		ft_exit(tokens_splited, status->exit_code);
 		is_builtins = 0;
 	}
 	return (is_builtins);
@@ -57,22 +47,27 @@ int	check_builtins_childs(char **tokens_splited, t_env *env)
 	int	is_builtins;
 
 	is_builtins = -1;
-	if (ft_strncmp("echo", tokens_splited[0], 4) == 0)
+	if (tokens_splited[0] == NULL)
+		return (is_builtins);
+	if (x_sstrncmp("echo", tokens_splited[0], 4) == 0)
 		is_builtins = ft_echo(tokens_splited);
-	else if (ft_strncmp("pwd", tokens_splited[0], 3) == 0)
+	else if (x_sstrncmp("pwd", tokens_splited[0], 3) == 0)
 	{
 		ft_pwd();
 		is_builtins = 0;
 	}
-	else if (ft_strncmp("env", tokens_splited[0], 3) == 0)
+	else if (x_sstrncmp("env", tokens_splited[0], 3) == 0)
 		is_builtins = ft_env(env);
-	else if (ft_strncmp("cd", tokens_splited[0], 2) == 0)
+	else if (x_sstrncmp("cd", tokens_splited[0], 2) == 0)
 		is_builtins = 0;
-	else if (ft_strncmp("export", tokens_splited[0], 5) == 0)
+	else if (x_sstrncmp("export", tokens_splited[0], 6) == 0)
+	{
+		ft_export(tokens_splited + 1, env);
 		is_builtins = 0;
-	else if (ft_strncmp("unset", tokens_splited[0], 5) == 0)
+	}
+	else if (x_sstrncmp("unset", tokens_splited[0], 5) == 0)
 		is_builtins = 0;
-	else if (ft_strncmp("exit", tokens_splited[0], 4) == 0)
-		is_builtins = 0;
+	else if (x_sstrncmp("exit", tokens_splited[0], 4) == 0)
+		ft_exit(tokens_splited, 0);
 	return (is_builtins);
 }

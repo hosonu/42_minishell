@@ -70,7 +70,7 @@ void	dispatch_token_help(t_token **list, t_fdgs *fdgs, t_status *status,
 	}
 	handle_token(tokens_splited, status->exit_code, env);
 	if ((*list)->pipeout != true && (*list)->pipein != true
-		&& check_builtins_parents(tokens_splited, env, status->exit_code) == 0)
+		&& check_builtins_parents(tokens_splited, env, status) == 0)
 	{
 		double_free(tokens_splited);
 		return ;
