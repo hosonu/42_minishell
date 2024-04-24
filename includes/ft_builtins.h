@@ -40,6 +40,6 @@ int		ft_unset(char *av[], t_env *env);
 int		ft_env(t_env *env);
 
 //42exit.c
-void	ft_exit(char *av[], int status);
+void	ft_exit(char *av[], int status, bool is_parent, t_env *env);
 
 #endif

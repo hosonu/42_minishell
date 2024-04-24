@@ -36,7 +36,7 @@ int	check_builtins_parents(char **tokens_splited, t_env *env, t_status *status)
 	}
 	else if (x_sstrncmp("exit", tokens_splited[0], 4) == 0)
 	{
-		ft_exit(tokens_splited, status->exit_code);
+		ft_exit(tokens_splited, status->exit_code, 1, env);
 		is_builtins = 0;
 	}
 	return (is_builtins);
@@ -68,6 +68,6 @@ int	check_builtins_childs(char **tokens_splited, t_env *env)
 	else if (x_sstrncmp("unset", tokens_splited[0], 5) == 0)
 		is_builtins = 0;
 	else if (x_sstrncmp("exit", tokens_splited[0], 4) == 0)
-		ft_exit(tokens_splited, 0);
+		ft_exit(tokens_splited, 0, 0, env);
 	return (is_builtins);
 }
