@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:49:36 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 21:14:36 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 21:33:15 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ t_token	**token_list(t_token *tokens, t_status *status)
 	t_token	**list;
 
 	decide_type(tokens);
-	if (syntax_validate(tokens, status) == -1 || metachar_validate(tokens, status) == -1)
+	if (syntax_validate(tokens, status) == -1
+		|| metachar_validate(tokens, status) == -1)
 	{
 		free_chain_token_list(tokens);
 		return (NULL);
