@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:23 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 21:10:35 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 23:07:46 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static int	syntax_validate_util(t_token *token)
 	uint8_t	metafg;
 
 	metafg = false;
+	if (token->type == METAPIPE)
+		return (-1);
 	while (token != NULL)
 	{
 		if (token->type < 0)
