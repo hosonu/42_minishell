@@ -58,7 +58,8 @@ int	ft_echo(char *argv[])
 		while (argv[1 + cnt_opt] != NULL)
 		{
 			write(1, argv[1 + cnt_opt], ft_strlen(argv[1 + cnt_opt]));
-			write(1, " ", 1);
+			if (argv[1 + cnt_opt + 1] != NULL)
+				write(1, " ", 1);
 			cnt_opt++;
 		}
 		if (is_noline == false)

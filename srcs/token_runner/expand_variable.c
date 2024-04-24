@@ -19,6 +19,16 @@ char	*check_and_expand(int index, char *input, t_env *env)
 	char	*expanded_input;
 
 	i = index;
+	if (ft_isalpha(input[i + 1]) == 0)
+	{
+		while (ft_isalnum(input[i + 1]) == 1)
+			i++;
+		if (i - index > 0)
+			trimmed_input = ft_substr(input, index + 2, i - index);
+		else
+			trimmed_input = ft_strdup("$");
+		return (trimmed_input);
+	}
 	while (ft_isalnum(input[i + 1]) != 0)
 		i++;
 	trimmed_input = ft_substr(input, index + 1, i - index);

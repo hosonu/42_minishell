@@ -41,7 +41,7 @@ static size_t	strlen_c(char const *s, char c)
 
 	len = 0;
 	quoted = 0;
-	while (s[len++] != '\0')
+	while (s[len] != '\0')
 	{
 		if (s[len] == '\'' && (quoted == 0 || quoted == 1))
 		{
@@ -59,6 +59,7 @@ static size_t	strlen_c(char const *s, char c)
 		}
 		else if (quoted == 0 && s[len] == c)
 			break ;
+		len++;
 	}
 	return (len);
 }
