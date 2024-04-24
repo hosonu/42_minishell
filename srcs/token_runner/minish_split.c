@@ -34,6 +34,24 @@ static size_t	count_word(const char *s, char c)
 	return (words);
 }
 
+void	check_quoted(int *quoted, char c)
+{
+	if (c == '\'' && (*quoted == 0 || *quoted == 1))
+	{
+		if (*quoted == 1)
+			*quoted = 0;
+		else
+			*quoted = 1;
+	}
+	else if (c == '"' && (*quoted == 0 || *quoted == 2))
+	{
+		if (*quoted == 2)
+			*quoted = 0;
+		else
+			*quoted = 2;
+	}
+}
+
 static size_t	strlen_c(char const *s, char c)
 {
 	size_t	len;
@@ -43,20 +61,8 @@ static size_t	strlen_c(char const *s, char c)
 	quoted = 0;
 	while (s[len] != '\0')
 	{
-		if (s[len] == '\'' && (quoted == 0 || quoted == 1))
-		{
-			if (quoted == 1)
-				quoted = 0;
-			else
-				quoted = 1;
-		}
-		else if (s[len] == '"' && (quoted == 0 || quoted == 2))
-		{
-			if (quoted == 2)
-				quoted = 0;
-			else
-				quoted = 2;
-		}
+		if (s[len] == '\'' || s[len] == '"')
+			check_quoted(&quoted, s[len]);
 		else if (quoted == 0 && s[len] == c)
 			break ;
 		len++;
