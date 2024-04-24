@@ -28,7 +28,8 @@ void	post_manage_fd_parent(t_fdgs *fdgs, char **tokens_splited)
 	double_free(tokens_splited);
 }
 
-void	mange_fd_child(t_token **list, t_fdgs *fdgs, t_status *status, t_env *env)
+void	mange_fd_child(t_token **list, t_fdgs *fdgs, t_status *status,
+	t_env *env)
 {
 	int	i;
 
@@ -69,7 +70,7 @@ void	dispatch_token_help(t_token **list, t_fdgs *fdgs, t_status *status,
 		double_free(tokens_splited);
 		return ;
 	}
-	handle_token(tokens_splited, status->exit_code, env);
+	tokens_splited = handle_token(tokens_splited, status->exit_code, env);
 	if ((*list)->pipeout != true && (*list)->pipein != true
 		&& check_builtins_parents(tokens_splited, env, status) == 0)
 	{
