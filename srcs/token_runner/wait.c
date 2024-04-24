@@ -6,7 +6,7 @@
 /*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 14:42:16 by hoyuki            #+#    #+#             */
-/*   Updated: 2024/04/24 03:20:09 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 22:05:01 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	wait_childs(t_status *status)
 {
+	int	fg;
+
+	fg = 0;
 	while (wait(&status->exit_status) > 0 || errno != ECHILD)
 	{
 		if (WIFEXITED(status->exit_status))
@@ -24,7 +27,11 @@ void	wait_childs(t_status *status)
 		{
 			if (WTERMSIG(status->exit_status) == SIGINT
 				|| WTERMSIG(status->exit_status) == SIGQUIT)
-				write(1, "\n", 1);
+			{
+				if (fg == 0)
+					write(1, "\n", 1);
+				fg = 1;
+			}
 			status->exit_code = WTERMSIG(status->exit_status) + 128;
 		}
 	}
