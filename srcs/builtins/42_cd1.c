@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:08:49 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 16:30:48 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 16:38:41 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ static int	ft_chdir_util(t_env *env)
 	home = getenv_node(env, "HOME");
 	if (home == NULL)
 	{
-		ft_putstr_fd("HOME not set\n", STDERR_FILENO);
+		ft_putstr_fd("cd: HOME not set\n", STDERR_FILENO);
 		return (-1);
 	}
 	else
 	{
 		if (chdir(home->value) == -1)
 		{
-			printf("No such file or directory\n");
+			ft_putstr_fd("cd: No such file or directory\n", STDERR_FILENO);
 			return (-1);
 		}
 	}
@@ -39,7 +39,7 @@ static	int	ft_chdir(char *path, t_env *env)
 	{
 		if (chdir(path) == -1)
 		{
-			printf("No such file or directory\n");
+			ft_putstr_fd("cd: No such file or directory\n", STDERR_FILENO);
 			return (-1);
 		}
 	}
@@ -76,7 +76,7 @@ int	ft_cd(char *av[], t_env *env)
 
 	if (getcwd(pwd_buff, PATH_MAX) == NULL)
 	{
-		perror("cd");
+		perror("getcwd");
 		return (1);
 	}
 	set_oldpwd(pwd_buff, env);
