@@ -28,7 +28,7 @@ void	post_manage_fd_parent(t_fdgs *fdgs, char **tokens_splited)
 	double_free(tokens_splited);
 }
 
-void	mange_fd_child(t_token **list, t_fdgs *fdgs, t_status *status)
+void	mange_fd_child(t_token **list, t_fdgs *fdgs, t_status *status, t_env *env)
 {
 	int	i;
 
@@ -38,7 +38,7 @@ void	mange_fd_child(t_token **list, t_fdgs *fdgs, t_status *status)
 		i *= status->is_file * 2;
 		while (list[i]->type < 30 && status->is_file != 0)
 		{
-			if (fcntl_token(fdgs, list[i]) == 1)
+			if (fcntl_token(fdgs, list[i], status->exit_code, env) == 1)
 				status->is_file--;
 			i++;
 		}
@@ -80,7 +80,7 @@ void	dispatch_token_help(t_token **list, t_fdgs *fdgs, t_status *status,
 	pid = x_fork();
 	if (pid == 0)
 	{
-		mange_fd_child(list, fdgs, status);
+		mange_fd_child(list, fdgs, status, env);
 		child_help(tokens_splited, env);
 	}
 	signal(SIGINT, SIG_IGN);

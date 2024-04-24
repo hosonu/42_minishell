@@ -41,8 +41,11 @@ void	execute_heredoc(int gfd[2], t_token *list, int exit_code, t_env *env)
 	}
 }
 
-int	fcntl_token(t_fdgs *fdgs, t_token *list)
+int	fcntl_token(t_fdgs *fdgs, t_token *list, int exit_code, t_env *env)
 {
+
+	list->token = expand_variable(list->token, 0, exit_code, env);
+	list->token = remove_quote(list->token);
 	if (list->type == TRUNCOUTFILE)
 	{
 		fdgs->gfd[1] = x_open(list->token, O_TRUNC | O_CREAT | O_RDWR, 0644);
