@@ -35,11 +35,12 @@ void	mange_fd_child(t_token **list, t_fdgs *fdgs, t_status *status)
 	i = -1;
 	if (status->is_file >= 1)
 	{
+		i *= status->is_file * 2;
 		while (list[i]->type < 30 && status->is_file != 0)
 		{
 			if (fcntl_token(fdgs, list[i]) == 1)
 				status->is_file--;
-			i--;
+			i++;
 		}
 	}
 	manage_gfdin(fdgs->gfd, (*list));
