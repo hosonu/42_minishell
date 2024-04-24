@@ -74,31 +74,29 @@ int	check_digits(char *str)
 		return (2);
 }
 
-void	ft_exit(char *av[], int status)
+void	ft_exit(char *av[], int status, bool is_parent, t_env *env)
 {
-	int	exit_status;
-
-	write(1, "exit\n", 5);
+	if (is_parent == true)
+		write(1, "exit\n", 5);
 	if (av[1] != NULL && check_digits(av[1]) == 1)
 	{
 		if (ft_atoll_safe(av[1]) == 1)
 		{
 			err_msg_for_exit(av[1]);
-			exit_status = 255;
+			status = 255;
 		}
 		else if (av[2] != NULL)
 		{
 			write(2, "bash: exit: too many arguments\n", 31);
 			return ;
 		}
-		exit_status = ft_atoi(av[1]);
+		status = ft_atoi(av[1]);
 	}
 	else if (av[1] != NULL && check_digits(av[1]) != 1)
 	{
 		err_msg_for_exit(av[1]);
-		exit_status = 255;
+		status = 255;
 	}
-	else
-		exit_status = status;
-	exit(exit_status);
+	free_env(env);
+	exit(status);
 }

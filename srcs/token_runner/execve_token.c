@@ -61,7 +61,7 @@ void	execve_token(char **tokens_splited, t_env *env)
 	char	*command;
 
 	if (check_builtins_childs(tokens_splited, env) == 0)
-		exit(127);
+		exit(0);
 	environ = env_int_str(env);
 	if (tokens_splited[0] == NULL)
 		exit(1);

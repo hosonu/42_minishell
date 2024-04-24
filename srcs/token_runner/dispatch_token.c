@@ -13,8 +13,6 @@
 #include "../../includes/minishell.h"
 
 extern int	g_sige;
-int	get_sigint_flag(void);
-int	set_sigint_flag(int i);
 
 void	token_main_engine(t_token **list, t_fdgs *fdgs, t_status *status,
 		t_env *env)
@@ -23,7 +21,9 @@ void	token_main_engine(t_token **list, t_fdgs *fdgs, t_status *status,
 	{
 		status->is_file += 1;
 		if ((*list)->type == HEREDOC)
+		{
 			execute_heredoc(fdgs->gfd, (*list), status->exit_code, env);
+		}
 	}
 	else if ((*list)->type >= 30)
 	{
@@ -43,7 +43,7 @@ void	dispatch_token(t_token **list)
 	if (env == NULL)
 		env = environ_init();
 	if (g_sige == SIGINT)
-		status.exit_code = 130;
+		status.exit_code = 1	;
 	while (list[i] != NULL)
 	{
 		token_main_engine(&list[i], &fdgs, &status, env);

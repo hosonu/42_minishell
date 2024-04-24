@@ -58,5 +58,7 @@ int	fcntl_token(t_fdgs *fdgs, t_token *list)
 		fdgs->gfd[0] = x_open(list->token, O_RDONLY, 0);
 		return (1);
 	}
+	else if (list->type == HEREDOC)
+		return (1);
 	return (0);
 }
