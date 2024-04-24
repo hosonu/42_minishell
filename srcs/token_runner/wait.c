@@ -34,5 +34,7 @@ void	wait_childs(t_status *status)
 			}
 			status->exit_code = WTERMSIG(status->exit_status) + 128;
 		}
+		if(status->exit_code == 141)
+			status->exit_code = 0;
 	}
 }
