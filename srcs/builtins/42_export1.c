@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 08:33:07 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 17:03:21 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 21:41:46 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int	ft_export(char *av[], t_env *env)
 	{
 		if (varname_validate(av[i]) == -1)
 		{
+			ret = 1;
 			i++;
 			continue ;
 		}
