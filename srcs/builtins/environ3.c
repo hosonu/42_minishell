@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 08:25:45 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 17:00:07 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/24 23:22:00 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 int	is_special_char(char c)
 {
-	if (ft_strchr("-+=;&()|^<>?*[]$`\'\"\\!{}\n\t ", c) != NULL)
+	if (ft_strchr("-+=;:&()|^<>?*[]$`\'\"\\!{}\n\t ", c) != NULL)
 		return (1);
 	return (0);
 }
 
-int	varname_validate(char *var)
+int	varname_validate(char *var, char *cmd)
 {
 	int	i;
 
 	i = 0;
 	if ('0' <= var[0] && var[0] <= '9')
 	{
-		ft_putstr_fd("export: not a valid identifier\n", STDERR_FILENO);
+		ft_putstr_fd(cmd, STDERR_FILENO);
+		ft_putstr_fd(": not a valid identifier\n", STDERR_FILENO);
 		return (-1);
 	}
 	while (var[i] != '=' && var[i] != '\0')
@@ -37,7 +38,8 @@ int	varname_validate(char *var)
 				return (1);
 			else
 			{
-				ft_putstr_fd("export: not a valid identifier\n", STDERR_FILENO);
+				ft_putstr_fd(cmd, STDERR_FILENO);
+				ft_putstr_fd(": not a valid identifier\n", STDERR_FILENO);
 				return (-1);
 			}
 		}
