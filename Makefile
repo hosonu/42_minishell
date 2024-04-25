@@ -6,12 +6,12 @@
 #    By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/29 22:59:42 by kojwatan          #+#    #+#              #
-#    Updated: 2024/04/25 20:00:34 by hoyuki           ###   ########.fr        #
+#    Updated: 2024/04/25 20:16:45 by hosonu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wextra -Werror -Wall
+CFLAGS = -Wextra -Werror -Wall -g -fsanitize=address
 
 SRCS =	srcs/main.c \
 		srcs/prompt_handle/tokenize.c \
