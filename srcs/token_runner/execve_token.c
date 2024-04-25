@@ -21,7 +21,9 @@ char	*join_path(char *command, char *path)
 	free(tmp);
 	if (path == NULL)
 		error_and_exit("malloc", 1, 0);
+	tmp = path;
 	path = ft_strjoin(path, command);
+	free(tmp);
 	if (path == NULL)
 		error_and_exit("malloc", 1, 0);
 	return (path);
@@ -63,6 +65,7 @@ void	execve_token(char **tokens_splited, t_env *env)
 	if (check_builtins_childs(tokens_splited, env) == 0)
 		exit (0);
 	environ = env_int_str(env);
+	free_env(env);
 	if (tokens_splited[0] == NULL)
 		exit(0);
 	if (tokens_splited[0][0] == '.' || tokens_splited[0][0] == '/')

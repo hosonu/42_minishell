@@ -11,8 +11,7 @@
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wextra -Werror -Wall 
-# -g -fsanitize=address 
+CFLAGS = -Wextra -Werror -Wall -g -fsanitize=address 
 
 SRCS =	srcs/main.c \
 		srcs/prompt_handle/tokenize.c \

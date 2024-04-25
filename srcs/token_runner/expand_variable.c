@@ -67,7 +67,11 @@ char	*process_expansion(int *i, char *input, int exit_code, t_env *env)
 
 	expanded_input = check_and_expand(*i, input, env);
 	if (input[*i + 1] == '?')
+	{
+		tmp = expanded_input;
 		expanded_input = ft_itoa(exit_code);
+		free(tmp);
+	}
 	tmp = change_input(expanded_input, input, *i);
 	free(input);
 	input = tmp;

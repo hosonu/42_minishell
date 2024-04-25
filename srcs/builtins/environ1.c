@@ -62,6 +62,7 @@ t_env	*new_env(char *var)
 	new->key = splited[0];
 	new->value = splited[1];
 	new->next = NULL;
+	free(splited);
 	return (new);
 }
 

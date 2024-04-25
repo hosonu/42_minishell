@@ -50,4 +50,5 @@ void	free_env(t_env *env)
 		env = env->next;
 		destroy_env(tmp);
 	}
+	free(env);
 }

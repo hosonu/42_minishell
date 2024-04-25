@@ -102,7 +102,9 @@ char	**env_int_str(t_env *env)
 	env = env->next;
 	while (env != NULL)
 	{
+		tmp = line;
 		line = ft_strjoin(line, env->key);
+		free(tmp);
 		tmp = line;
 		line = ft_strjoin(line, "=");
 		free(tmp);
@@ -115,5 +117,6 @@ char	**env_int_str(t_env *env)
 		env = env->next;
 	}
 	str = ft_split(line, '\n');
+	free(line);
 	return (str);
 }

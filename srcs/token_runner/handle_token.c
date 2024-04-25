@@ -22,6 +22,7 @@ char	*remove_specific_quote(char *token, int *i, int *quote_status)
 		return (NULL);
 	*i -= 1;
 	*quote_status += 1;
+	free(token);
 	return (new_token);
 }
 
@@ -58,7 +59,12 @@ char	**remove_empty_strings(char **arr, int count)
 	char	**p;
 
 	i = 0;
-	new_arr = malloc(sizeof(char *) * (count + 1));
+	new_arr = x_malloc(sizeof(char *) * (count + 1));
+	if (new_arr == NULL)
+	{
+		double_free(arr);
+		return (NULL);
+	}
 	p = new_arr;
 	while (arr[i] != NULL)
 	{
