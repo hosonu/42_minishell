@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 11:31:28 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/18 22:44:01 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:07:02 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <stdbool.h>
 # include "../libft/libft.h"
 # include "./define.h"
@@ -33,8 +36,6 @@
 # include "token_runner.h"
 # include "x_func.h"
 # include "error_msg.h"
-# include <readline/readline.h>
-# include <readline/history.h>
 # include <signal.h>
 # include <fcntl.h>
 # include <sys/wait.h>

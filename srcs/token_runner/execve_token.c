@@ -32,6 +32,7 @@ char	*join_path(char *command, char *path)
 char	*path_lookup(char *command, char **envi)
 {
 	int		i;
+	int		j;
 	char	**path;
 
 	i = 0;
@@ -41,14 +42,14 @@ char	*path_lookup(char *command, char **envi)
 		if (ft_strncmp(envi[i], "PATH=", 5) == 0)
 		{
 			path = ft_split(envi[i] + 5, ':');
-			i = 0;
-			while (path[i] != NULL)
+			j = 0;
+			while (path[j] != NULL)
 			{
-				path[i] = join_path(command, path[i]);
-				if (access(path[i], X_OK) == 0)
-					return (path[i]);
-				free(path[i]);
-				i++;
+				path[j] = join_path(command, path[j]);
+				if (access(path[j], X_OK) == 0)
+					return (path[j]);
+				free(path[j]);
+				j++;
 			}
 		}
 		i++;

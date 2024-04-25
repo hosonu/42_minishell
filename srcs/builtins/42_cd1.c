@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   42_cd1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:08:49 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 16:38:41 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/25 16:03:15 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,15 @@ static int	ft_chdir_util(t_env *env)
 	home = getenv_node(env, "HOME");
 	if (home == NULL)
 	{
-		ft_putstr_fd("cd: HOME not set\n", STDERR_FILENO);
+		ft_putstr_fd("minish: cd: HOME not set\n", STDERR_FILENO);
 		return (-1);
 	}
 	else
 	{
 		if (chdir(home->value) == -1)
 		{
-			ft_putstr_fd("cd: No such file or directory\n", STDERR_FILENO);
+			ft_putstr_fd("minish: cd: No such file or directory\n",
+				STDERR_FILENO);
 			return (-1);
 		}
 	}
@@ -39,7 +40,8 @@ static	int	ft_chdir(char *path, t_env *env)
 	{
 		if (chdir(path) == -1)
 		{
-			ft_putstr_fd("cd: No such file or directory\n", STDERR_FILENO);
+			ft_putstr_fd("minish: cd: No such file or directory\n",
+				STDERR_FILENO);
 			return (-1);
 		}
 	}

@@ -21,7 +21,8 @@ static int	unset_util(char *av)
 	{
 		if (is_special_char(av[i]) == 1)
 		{
-			ft_putstr_fd("unset: not a valid identifier\n", STDERR_FILENO);
+			ft_putstr_fd("minish: unset: not a valid identifier\n",
+				STDERR_FILENO);
 			return (-1);
 		}
 		i++;
@@ -39,7 +40,8 @@ int	ft_unset(char *av[], t_env *env)
 	ret = 0;
 	while (av[i] != NULL)
 	{
-		if (unset_util(av[i]) == -1 || varname_validate(av[i], "unset") == -1)
+		if (unset_util(av[i]) == -1 || varname_validate(av[i],
+				"minish: unset") == -1)
 			ret = 1;
 		else
 		{

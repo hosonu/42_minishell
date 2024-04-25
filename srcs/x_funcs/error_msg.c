@@ -32,7 +32,7 @@ void	error_and_exit(const char *filename, int exit_code, bool is_tilda)
 	if (is_tilda == true)
 	{
 		write(2, filename, ft_strlen(filename));
-		ft_putstr_fd(": Is a directory\n", 2);
+		ft_putstr_fd(": is a directory\n", 2);
 	}
 	else
 		perror(filename);

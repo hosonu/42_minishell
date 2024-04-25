@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_validate.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:23 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/25 01:01:39 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:23:57 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,12 @@ static int	quotation_validate_util(char *str)
 	return (1);
 }
 
-int	quotation_validate(char *prompt)
+int	quotation_validate(char *prompt, t_status *status)
 {
 	if (quotation_validate_util(prompt) == -1)
 	{
 		ft_putstr_fd("minish: Quotation not closed\n", STDERR_FILENO);
+		status->exit_code = 258;
 		return (-1);
 	}
 	return (1);

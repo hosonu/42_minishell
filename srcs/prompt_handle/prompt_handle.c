@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_handle.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:49:36 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 21:33:15 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:23:14 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_token	**prompt_handle(t_env *env, t_status *status)
 	}
 	if (input == NULL)
 		return (NULL);
-	if (quotation_validate(input) == -1)
+	if (quotation_validate(input, status) == -1)
 	{
 		free(input);
 		return (NULL);
