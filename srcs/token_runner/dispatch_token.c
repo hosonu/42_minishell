@@ -19,7 +19,8 @@ int	fcntl_engine(t_fdgs *fdgs, t_token **list, t_status *status, t_env *env)
 	int	i;
 
 	i = 0;
-	while (list[i]->type != HEREDOC && list[i]->type < 30 && status->is_file == 1)
+	while (list[i]->type != HEREDOC && list[i]->type < 30
+		&& status->is_file == 1)
 	{
 		if (fcntl_token(fdgs, list[i], status, env) == -1)
 			status->is_file = 0;

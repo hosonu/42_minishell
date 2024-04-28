@@ -77,7 +77,7 @@ int	check_digits(char *str)
 void	ft_exit(char *av[], int status, bool is_parent, t_env *env)
 {
 	if (is_parent == true)
-		write(1, "exit\n", 5);
+		write(2, "exit\n", 5);
 	if (av[1] != NULL && check_digits(av[1]) == 1)
 	{
 		if (ft_atoll_safe(av[1]) == 1)

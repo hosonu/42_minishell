@@ -29,32 +29,44 @@ char	*join_path(char *command, char *path)
 	return (path);
 }
 
+char	*find_executable(char *command, char **path)
+{
+	int		j;
+	char	*full_path;
+
+	j = 0;
+	while (path[j] != NULL)
+	{
+		full_path = join_path(command, path[j]);
+		if (access(full_path, X_OK) == 0)
+			return (full_path);
+		free(full_path);
+		j++;
+	}
+	return (NULL);
+}
+
 char	*path_lookup(char *command, char **envi)
 {
 	int		i;
-	int		j;
+	char	*result;
 	char	**path;
 
 	i = 0;
 	path = NULL;
+	if (envi == NULL || command == NULL)
+		return (NULL);
 	while (envi[i] != NULL)
 	{
 		if (ft_strncmp(envi[i], "PATH=", 5) == 0)
 		{
 			path = ft_split(envi[i] + 5, ':');
-			j = 0;
-			while (path[j] != NULL)
-			{
-				path[j] = join_path(command, path[j]);
-				if (access(path[j], X_OK) == 0)
-					return (path[j]);
-				free(path[j]);
-				j++;
-			}
+			result = find_executable(command, path);
+			free(path);
+			return (result);
 		}
 		i++;
 	}
-	free(path);
 	return (NULL);
 }
 

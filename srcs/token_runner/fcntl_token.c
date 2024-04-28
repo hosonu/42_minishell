@@ -12,29 +12,53 @@
 
 #include "../../includes/minishell.h"
 
+void	for_norminette(int fdin, char *input, bool is_error)
+{
+	x_close(fdin);
+	free(input);
+	if (is_error == 1)
+		rl_event_hook = 0;
+}
+
+int	judge_quoted(t_token *list)
+{
+	int	i;
+	int	is_quoted;
+
+	i = 0;
+	is_quoted = 0;
+	while (list->token[i] != '\0')
+	{
+		if (list->token[i] == '"' || list->token[i] == '\'')
+			is_quoted = 1;
+		i++;
+	}
+	list->token = remove_quote(list->token);
+	return (is_quoted);
+}
+
 void	execute_heredoc(int gfd[2], t_token *list, int exit_code, t_env *env)
 {
 	char	*input;
+	int		is_quoted;
 
 	heredoc_init(gfd);
+	is_quoted = judge_quoted(list);
 	while (gfd[0] != -1 && get_sigint_flag() == 0)
 	{
 		input = readline("> ");
 		if (input == NULL || get_sigint_flag() == 1)
 		{
-			x_close(gfd[0]);
-			free(input);
-			rl_event_hook = 0;
+			for_norminette(gfd[0], input, 1);
 			break ;
 		}
-		if (ft_strncmp(input, list->token, ft_strlen(list->token)) == 0
-			&& ft_strlen(input) == ft_strlen(list->token))
+		if (x_sstrncmp(input, list->token, ft_strlen(input)) == 0)
 		{
-			x_close(gfd[0]);
-			free(input);
+			for_norminette(gfd[0], input, 0);
 			break ;
 		}
-		input = expand_variable(input, 1, exit_code, env);
+		if (is_quoted == 1)
+			input = expand_variable(input, 1, exit_code, env);
 		write(gfd[0], input, ft_strlen(input));
 		write(gfd[0], "\n", 1);
 		free(input);

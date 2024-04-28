@@ -19,6 +19,8 @@ char	*getenv_char(char *const envp[], const char *name)
 
 	i = 0;
 	name_len = strlen(name);
+	if (envp == NULL)
+		return (NULL);
 	while (envp[i] != NULL)
 	{
 		if (strncmp(envp[i], name, name_len) == 0 && envp[i][name_len] == '=')

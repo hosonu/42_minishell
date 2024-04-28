@@ -18,10 +18,7 @@ pid_t	x_fork(void)
 
 	result = fork();
 	if (result == -1)
-	{
 		perror("fork");
-		exit(EXIT_FAILURE);
-	}
 	return (result);
 }
 
