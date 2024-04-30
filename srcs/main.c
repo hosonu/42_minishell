@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:06 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/05/01 01:56:45 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/05/01 02:13:01 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void	set_signal_handler(void)
 
 int	main(void)
 {
-	t_token		**list;
-	t_env		*env;
-	t_status	status;
-	struct termios oldt;
-	
+	t_token			**list;
+	t_env			*env;
+	t_status		status;
+	struct termios	oldt;
+
 	tcgetattr(STDIN_FILENO, &oldt);
 	status.is_file = 0;
 	status.exit_status = 0;
