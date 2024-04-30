@@ -69,12 +69,16 @@ char	*x_getcwd(void)
 	int		i;
 
 	buff = x_malloc(100);
+	if (buff == NULL)
+		return (NULL);
 	i = 1;
 	while (getcwd(buff, (100 * i) - 1) == NULL)
 	{
 		free(buff);
 		i++;
 		buff = x_malloc(100 * i);
+		if (buff == NULL)
+			return (NULL);
 	}
 	return (buff);
 }
