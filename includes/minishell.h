@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 11:31:28 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/18 22:44:01 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/05/01 01:57:01 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include <stdbool.h>
+# include <termios.h>
 # include "../libft/libft.h"
 # include "./define.h"
 # include "./tokenize.h"
