@@ -14,13 +14,10 @@
 
 int	ft_pwd(void)
 {
-	char	buff[PATH_MAX + 1];
+	char	*buff;
 
-	if (getcwd(buff, PATH_MAX) == NULL)
-	{
-		perror("getcwd");
-		return (1);
-	}
+	buff = x_getcwd();
 	ft_printf("%s\n", buff);
+	free(buff);
 	return (0);
 }

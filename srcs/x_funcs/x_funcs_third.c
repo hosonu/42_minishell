@@ -62,3 +62,19 @@ int	x_close(int fd)
 	}
 	return (result);
 }
+
+char	*x_getcwd(void)
+{
+	char	*buff;
+	int		i;
+
+	buff = x_malloc(100);
+	i = 1;
+	while (getcwd(buff, (100 * i) - 1) == NULL)
+	{
+		free(buff);
+		i++;
+		buff = x_malloc(100 * i);
+	}
+	return (buff);
+}

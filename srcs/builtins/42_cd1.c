@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   42_cd1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:08:49 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 16:38:41 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/30 19:26:23 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static	int	ft_chdir(char *path, t_env *env)
 	return (0);
 }
 
-static int	set_oldpwd(char pwd_buff[PATH_MAX], t_env *env)
+static int	set_oldpwd(char *pwd_buff, t_env *env)
 {
 	t_env	*old;
 
@@ -72,14 +72,11 @@ static int	set_oldpwd(char pwd_buff[PATH_MAX], t_env *env)
 
 int	ft_cd(char *av[], t_env *env)
 {
-	char	pwd_buff[PATH_MAX];
+	char	*pwd;
 
-	if (getcwd(pwd_buff, PATH_MAX) == NULL)
-	{
-		perror("getcwd");
-		return (1);
-	}
-	set_oldpwd(pwd_buff, env);
+	pwd = x_getcwd();
+	set_oldpwd(pwd, env);
+	free(pwd);
 	if (ft_chdir(av[0], env) == -1)
 		return (1);
 	else
