@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 23:00:06 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 21:34:09 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/05/01 01:56:45 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ int	main(void)
 	t_token		**list;
 	t_env		*env;
 	t_status	status;
-
+	struct termios oldt;
+	
+	tcgetattr(STDIN_FILENO, &oldt);
 	status.is_file = 0;
 	status.exit_status = 0;
 	status.exit_code = 0;
@@ -56,6 +58,7 @@ int	main(void)
 			dispatch_token(list, env, &status);
 			free_linear_token_list(list);
 		}
+		tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
 	}
 	free_env(env);
 	return (0);
