@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:54:11 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/30 18:22:18 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/05/01 00:21:56 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static char	**split_help(char **strs, char *s)
 	while (strs[i])
 	{
 		j = 0;
-		while (s[k] == ' ' && is_quoted(s, &s[k]))
+		while (is_space(s[k]) == 1 && is_quoted(s, &s[k]))
 			k++;
 		while (strs[i][j] != '\0')
 			strs[i][j++] = s[k++];
