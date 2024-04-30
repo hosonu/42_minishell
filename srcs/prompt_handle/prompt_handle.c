@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_handle.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:49:36 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 21:33:15 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/30 18:23:49 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

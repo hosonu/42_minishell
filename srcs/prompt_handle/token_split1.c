@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:54:11 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 04:17:15 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/04/30 18:22:18 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,17 @@ static char	**split_help(char **strs, char *s)
 char	**token_split(char *s)
 {
 	char	**strs;
+	int		count;
 
 	if (s == NULL)
 		return (NULL);
-	strs = x_malloc(sizeof(char *) * (count_words(s) + 1));
+	count = count_words(s);
+	if (count == 0)
+		return (NULL);
+	strs = x_malloc(sizeof(char *) * (count + 1));
 	if (strs == NULL)
 		return (NULL);
-	strs = split_alloc(strs, (char *)s, count_words(s));
+	strs = split_alloc(strs, (char *)s, count);
 	if (strs == NULL)
 		return (NULL);
 	return (split_help(strs, (char *)s));
