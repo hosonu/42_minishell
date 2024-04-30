@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-int	cd_export(t_env *env, char *arg, char buff[PATH_MAX])
+int	cd_export(t_env *env, char *arg, char *buff)
 {
 	char	*av[2];
 
