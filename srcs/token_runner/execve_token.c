@@ -81,7 +81,8 @@ void	execve_token(char **tokens_splited, t_env *env)
 	free_env(env);
 	if (tokens_splited[0] == NULL)
 		exit(0);
-	if (tokens_splited[0][0] == '.' || tokens_splited[0][0] == '/')
+	if (tokens_splited[0][0] == '.' || tokens_splited[0][0] == '/'
+		|| (tokens_splited[0][0] == '~' && tokens_splited[0][1] == '/'))
 	{
 		if (access(tokens_splited[0], X_OK) == 0)
 		{

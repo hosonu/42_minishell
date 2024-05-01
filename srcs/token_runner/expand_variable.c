@@ -83,12 +83,26 @@ char	*process_expansion(int *i, char *input, int exit_code, t_env *env)
 char	*expand_home_directory(char *input, t_env *env)
 {
 	char	*tmp;
+	char	*after_tilda;
 
 	tmp = ft_getenv(env, "HOME");
 	if (tmp == NULL)
 		tmp = ft_strdup(getenv("HOME"));
-	free(input);
-	input = tmp;
+	if (input[1] == '/')
+	{
+		after_tilda = ft_substr(input, 1, ft_strlen(input) - 1);
+		free(input);
+		input = ft_strjoin(tmp, after_tilda);
+		free(after_tilda);
+		free(tmp);
+	}
+	else if (input[1] == '\0')
+	{
+		free(input);
+		input = tmp;
+	}
+	else
+		free(tmp);
 	return (input);
 }
 
@@ -99,6 +113,8 @@ char	*expand_variable(char *input, int heredoc, int exit_code, t_env *env)
 
 	i = 0;
 	unexpand = 0;
+	if (input[0] == '~' && heredoc == 0)
+		input = expand_home_directory(input, env);
 	while (input[i] != '\0')
 	{
 		if (is_quote(input[i]) == 1 && heredoc == 0)
@@ -109,7 +125,5 @@ char	*expand_variable(char *input, int heredoc, int exit_code, t_env *env)
 			input = process_expansion(&i, input, exit_code, env);
 		i++;
 	}
-	if (i == 1 && input[0] == '~' && heredoc == 0)
-		input = expand_home_directory(input, env);
 	return (input);
 }
