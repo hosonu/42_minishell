@@ -43,7 +43,10 @@ void	cd_change_env(t_env *env)
 		free(pwd->value);
 		pwd->value = ft_strdup(pwd_buff);
 		if (pwd->value == NULL)
-			perror("malloc");
+		{
+			if (errno != ENOENT)
+				perror("cd");
+		}
 	}
 	free(pwd_buff);
 }

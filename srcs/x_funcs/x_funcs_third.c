@@ -75,6 +75,8 @@ char	*x_getcwd(void)
 	while (getcwd(buff, (100 * i) - 1) == NULL)
 	{
 		free(buff);
+		if (errno == ENOENT)
+			return (NULL);
 		i++;
 		buff = x_malloc(100 * i);
 		if (buff == NULL)
