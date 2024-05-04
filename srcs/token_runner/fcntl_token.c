@@ -52,7 +52,7 @@ void	execute_heredoc(int gfd[2], t_token *list, int exit_code, t_env *env)
 			for_norminette(gfd[0], input, 1);
 			break ;
 		}
-		if (x_sstrncmp(input, list->token, ft_strlen(list->token)) == 0)
+		if (perfectly_match(input, list->token) == 1)
 		{
 			for_norminette(gfd[0], input, 0);
 			break ;

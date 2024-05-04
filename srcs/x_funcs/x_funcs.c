@@ -62,3 +62,16 @@ int	x_sstrncmp(const char *s1, const char *s2, size_t len)
 		i++;
 	return (str1[i] - str2[i]);
 }
+
+int	perfectly_match(char *s1, char *s2)
+{
+	char	*ret;
+
+	ret = ft_strnstr(s1, s2, ft_strlen(s1));
+	if (ret == NULL)
+		return (-1);
+	ret = ft_strnstr(s2, s1, ft_strlen(s2));
+	if (ret == NULL)
+		return (-1);
+	return (1);
+}
