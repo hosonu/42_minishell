@@ -58,7 +58,10 @@ void	execute_heredoc(int gfd[2], t_token *list, int exit_code, t_env *env)
 			break ;
 		}
 		if (is_quoted == 1)
+		{
+			puts("oi");
 			input = expand_variable(input, 1, exit_code, env);
+		}
 		write(gfd[0], input, ft_strlen(input));
 		write(gfd[0], "\n", 1);
 		free(input);
