@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   token_split2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 21:21:07 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 01:04:54 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/04/30 18:22:01 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 static	int	skip_space(char *s, int i)
@@ -31,8 +32,8 @@ int	count_words(char *s)
 		return (0);
 	while (is_space(s[i]) == 1)
 		i++;
-	count = (is_metachar(s[i]) != 1);
-	while (s[i])
+	count = (is_metachar(s[i]) != 1 && s[i] != '\0');
+	while (s[i] != '\0')
 	{
 		i = skip_space(s, i);
 		if (s[i])

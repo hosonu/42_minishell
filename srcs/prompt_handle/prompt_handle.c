@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_handle.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:49:36 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/25 15:23:14 by hoyuki           ###   ########.fr       */
+/*   Updated: 2024/04/30 19:47:03 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,11 @@ static char	*input_prompt(t_env *env)
 {
 	char	*input;
 	char	*prompt;
-	char	buff[PATH_MAX];
+	char	*pwd;
 
-	if (getcwd(buff, PATH_MAX) == NULL)
-	{
-		perror("getcwd");
-		return (NULL);
-	}
-	prompt = ft_strjoin(buff, ": ");
+	pwd = x_getcwd();
+	prompt = ft_strjoin(pwd, ": ");
+	free(pwd);
 	if (prompt == NULL)
 	{
 		perror("malloc");
@@ -79,6 +76,8 @@ t_token	**prompt_handle(t_env *env, t_status *status)
 	char	*input;
 
 	input = input_prompt(env);
+	if (input == NULL)
+		return (NULL);
 	if (input[0] != '\0')
 		add_history(input);
 	else if (input[0] == '\0')
@@ -86,9 +85,7 @@ t_token	**prompt_handle(t_env *env, t_status *status)
 		free(input);
 		return (NULL);
 	}
-	if (input == NULL)
-		return (NULL);
-	if (quotation_validate(input, status) == -1)
+	if (quotation_validate(input) == -1)
 	{
 		free(input);
 		return (NULL);
