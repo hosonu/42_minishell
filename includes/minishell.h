@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 11:31:28 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/25 15:07:02 by hoyuki           ###   ########.fr       */
+/*   Updated: 2024/05/01 01:57:01 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
+# include <termios.h>
 # include "../libft/libft.h"
 # include "./define.h"
 # include "./tokenize.h"

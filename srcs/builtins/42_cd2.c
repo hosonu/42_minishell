@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-int	cd_export(t_env *env, char *arg, char buff[PATH_MAX])
+int	cd_export(t_env *env, char *arg, char *buff)
 {
 	char	*av[2];
 
@@ -32,10 +32,9 @@ int	cd_export(t_env *env, char *arg, char buff[PATH_MAX])
 void	cd_change_env(t_env *env)
 {
 	t_env	*pwd;
-	char	pwd_buff[PATH_MAX];
+	char	*pwd_buff;
 
-	if (getcwd(pwd_buff, PATH_MAX) == NULL)
-		perror("cd");
+	pwd_buff = x_getcwd();
 	pwd = getenv_node(env, "PWD");
 	if (pwd == NULL)
 		cd_export(env, "PWD=", pwd_buff);
@@ -44,6 +43,10 @@ void	cd_change_env(t_env *env)
 		free(pwd->value);
 		pwd->value = ft_strdup(pwd_buff);
 		if (pwd->value == NULL)
-			perror("malloc");
+		{
+			if (errno != ENOENT)
+				perror("cd");
+		}
 	}
+	free(pwd_buff);
 }

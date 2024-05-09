@@ -36,5 +36,6 @@ int		x_dup(int oldfd);
 int		x_dup2(int oldfd, int newfd);
 int		x_pipe(int pipefd[2]);
 int		x_close(int fd);
+char	*x_getcwd(void);
 
 #endif
