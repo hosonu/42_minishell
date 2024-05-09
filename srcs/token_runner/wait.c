@@ -36,5 +36,7 @@ void	wait_childs(t_status *status)
 		}
 		if (status->exit_code == 141)
 			status->exit_code = 0;
+		if (errno == EAGAIN)
+			status->exit_code = 1;
 	}
 }

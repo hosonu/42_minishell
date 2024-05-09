@@ -19,8 +19,8 @@ int	x_dup(int oldfd)
 	newfd = dup(oldfd);
 	if (newfd == -1)
 	{
+		ft_putstr_fd("minish: ", STDERR_FILENO);
 		perror("dup");
-		exit(EXIT_FAILURE);
 	}
 	return (newfd);
 }
@@ -34,6 +34,7 @@ int	x_dup2(int oldfd, int newfd)
 	result = dup2(oldfd, newfd);
 	if (result == -1)
 	{
+		ft_putstr_fd("minish: ", STDERR_FILENO);
 		perror("dup2");
 	}
 	return (result);
@@ -46,6 +47,7 @@ int	x_pipe(int pipefd[2])
 	result = pipe(pipefd);
 	if (result == -1)
 	{
+		ft_putstr_fd("minish: ", STDERR_FILENO);
 		perror("pipe");
 		exit(EXIT_FAILURE);
 	}
@@ -59,6 +61,7 @@ int	x_close(int fd)
 	result = close(fd);
 	if (result == -1)
 	{
+		ft_putstr_fd("minish: ", STDERR_FILENO);
 		perror("close");
 	}
 	return (result);

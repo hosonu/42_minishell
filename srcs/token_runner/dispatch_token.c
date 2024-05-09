@@ -50,7 +50,8 @@ void	dispatch_token(t_token **list, t_env *env, t_status *status)
 			execute_heredoc(fdgs.gfd, list[i], status->exit_code, env);
 		else if (list[i] != NULL && list[i]->type >= 30)
 		{
-			dispatch_token_help(&list[i], &fdgs, status, env);
+			if (dispatch_token_help(&list[i], &fdgs, status, env) == -1)
+				break ;
 			status->is_file = 1;
 		}
 		else if (list[i]->type == METAPIPE)

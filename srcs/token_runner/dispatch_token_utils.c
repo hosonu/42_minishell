@@ -44,7 +44,7 @@ void	child_help(char **tokens_splited, t_env *env)
 	execve_token(tokens_splited, env);
 }
 
-void	dispatch_token_help(t_token **list, t_fdgs *fdgs, t_status *status,
+int	dispatch_token_help(t_token **list, t_fdgs *fdgs, t_status *status,
 		t_env *env)
 {
 	int		pid;
@@ -52,19 +52,13 @@ void	dispatch_token_help(t_token **list, t_fdgs *fdgs, t_status *status,
 
 	tokens_splited = minish_split((*list)->token, ' ');
 	if (tokens_splited == NULL)
-	{
-		double_free(tokens_splited);
-		return ;
-	}
+		return (double_free(tokens_splited));
 	tokens_splited = handle_token(tokens_splited, status->exit_code, env);
 	if ((*list)->pipeout != true && (*list)->pipein != true
 		&& check_builtins_parents(tokens_splited, env, status) == 0)
-	{
-		double_free(tokens_splited);
-		return ;
-	}
+		return (double_free(tokens_splited));
 	pre_manage_fd_parent((*list), fdgs);
-	pid = x_fork();
+	pid = x_fork(status);
 	if (pid == 0)
 	{
 		mange_fd_child(list, fdgs);
@@ -72,4 +66,7 @@ void	dispatch_token_help(t_token **list, t_fdgs *fdgs, t_status *status,
 	}
 	signal(SIGINT, SIG_IGN);
 	post_manage_fd_parent(fdgs, tokens_splited);
+	if (pid == -1)
+		return (-1);
+	return (0);
 }

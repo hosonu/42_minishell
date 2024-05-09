@@ -17,11 +17,11 @@
 
 // x_func.c
 
-pid_t	x_fork(void);
+pid_t	x_fork(t_status *status);
 void	*x_malloc(size_t size);
 int		x_sstrncmp(const char *s1, const char *s2, size_t len);
 int		perfectly_match(char *s1, char *s2);
-void	double_free(char **str);
+int		double_free(char **str);
 
 // x_func_second.c
 

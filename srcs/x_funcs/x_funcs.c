@@ -12,13 +12,17 @@
 
 #include "../../includes/minishell.h"
 
-pid_t	x_fork(void)
+pid_t	x_fork(t_status *status)
 {
 	pid_t	result;
 
 	result = fork();
 	if (result == -1)
+	{
+		ft_putstr_fd("minish: ", STDERR_FILENO);
 		perror("fork");
+		status->exit_code = 1;
+	}
 	return (result);
 }
 
@@ -28,11 +32,14 @@ void	*x_malloc(size_t size)
 
 	ret = malloc(size);
 	if (ret == NULL)
+	{
+		ft_putstr_fd("minish: ", STDERR_FILENO);
 		perror("malloc");
+	}
 	return (ret);
 }
 
-void	double_free(char **str)
+int	double_free(char **str)
 {
 	int		i;
 
@@ -43,6 +50,7 @@ void	double_free(char **str)
 		i++;
 	}
 	free(str);
+	return (1);
 }
 
 int	x_sstrncmp(const char *s1, const char *s2, size_t len)

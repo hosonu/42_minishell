@@ -6,7 +6,7 @@
 /*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:08:49 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/05/09 15:18:14 by hoyuki           ###   ########.fr       */
+/*   Updated: 2024/05/09 16:47:13 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ static int	ft_chdir_util(t_env *env)
 	{
 		if (chdir(home->value) == -1)
 		{
-			if (errno != ENOENT)
-				perror("cd");
+			perror("cd");
 			return (-1);
 		}
 	}
@@ -40,8 +39,7 @@ static	int	ft_chdir(char *path, t_env *env)
 	{
 		if (chdir(path) == -1)
 		{
-			if (errno != ENOENT)
-				perror("cd");
+			perror("cd");
 			return (-1);
 		}
 	}
@@ -74,7 +72,8 @@ int	ft_cd(char *av[], t_env *env)
 	char	*pwd;
 
 	pwd = x_getcwd();
-	if (errno == ENOENT)
+	if (errno == ENOENT && (perfectly_match(av[0], ".") == 1
+		|| perfectly_match(av[0], "..") == 1))
 	{
 		ft_putstr_fd("cd: error retrieving current directory", STDERR_FILENO);
 		ft_putstr_fd(": getcwd: cannot access parent directories:", 2);
