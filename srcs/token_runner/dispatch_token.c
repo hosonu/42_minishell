@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 14:50:56 by hoyuki            #+#    #+#             */
-/*   Updated: 2024/04/24 21:17:18 by kojwatan         ###   ########.fr       */
+/*   Created: 2024/04/25 18:55:05 by hoyuki            #+#    #+#             */
+/*   Updated: 2024/04/25 18:55:05 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,46 @@
 
 extern int	g_sige;
 
-void	token_main_engine(t_token **list, t_fdgs *fdgs, t_status *status,
-		t_env *env)
+int	fcntl_engine(t_fdgs *fdgs, t_token **list, t_status *status, t_env *env)
 {
-	if ((*list)->type > 0 && (*list)->type < 30)
+	int	i;
+
+	i = 0;
+	while (list[i]->type < 30 && status->is_file == 1)
 	{
-		status->is_file += 1;
-		if ((*list)->type == HEREDOC)
+		if (fcntl_token(fdgs, list[i], status, env) == -1)
+			status->is_file = 0;
+		i++;
+		if (list[i] == NULL)
 		{
-			execute_heredoc(fdgs->gfd, (*list), status->exit_code, env);
+			i--;
+			break ;
 		}
 	}
-	else if ((*list)->type >= 30)
-	{
-		dispatch_token_help(list, fdgs, status, env);
-		status->is_file = 0;
-	}
+	return (i);
 }
 
 void	dispatch_token(t_token **list, t_env *env, t_status *status)
 {
-	int				i;
-	t_fdgs			fdgs;
+	int		i;
+	t_fdgs	fdgs;
 
 	i = 0;
+	status->is_file = 1;
 	if (g_sige == SIGINT)
 		status->exit_code = 1;
 	while (list[i] != NULL)
 	{
-		token_main_engine(&list[i], &fdgs, status, env);
+		i += fcntl_engine(&fdgs, &list[i], status, env);
+		if (list[i] != NULL && list[i]->type == HEREDOC)
+			execute_heredoc(fdgs.gfd, list[i], status->exit_code, env);
+		else if (list[i] != NULL && list[i]->type >= 30)
+		{
+			dispatch_token_help(&list[i], &fdgs, status, env);
+			status->is_file = 1;
+		}
+		else if (list[i]->type == METAPIPE)
+			status->is_file = 1;
 		i++;
 	}
 	wait_childs(status);

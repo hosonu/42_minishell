@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   42_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hosonu <hoyuki@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 21:54:49 by hosonu            #+#    #+#             */
-/*   Updated: 2024/04/24 01:30:15 by hosonu           ###   ########.fr       */
+/*   Updated: 2024/04/25 15:14:19 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	ft_exit(char *av[], int status, bool is_parent, t_env *env)
 		}
 		else if (av[2] != NULL)
 		{
-			write(2, "bash: exit: too many arguments\n", 31);
+			write(2, "minish: exit: too many arguments\n", 33);
 			return ;
 		}
 		status = ft_atoi(av[1]);

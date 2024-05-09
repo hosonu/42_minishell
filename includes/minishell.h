@@ -13,6 +13,9 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <stdbool.h>
 # include <termios.h>
 # include "../libft/libft.h"
@@ -34,8 +37,6 @@
 # include "token_runner.h"
 # include "x_func.h"
 # include "error_msg.h"
-# include <readline/readline.h>
-# include <readline/history.h>
 # include <signal.h>
 # include <fcntl.h>
 # include <sys/wait.h>

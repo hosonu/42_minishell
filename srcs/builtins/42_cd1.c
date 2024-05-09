@@ -19,7 +19,7 @@ static int	ft_chdir_util(t_env *env)
 	home = getenv_node(env, "HOME");
 	if (home == NULL)
 	{
-		ft_putstr_fd("cd: HOME not set\n", STDERR_FILENO);
+		ft_putstr_fd("minish: cd: HOME not set\n", STDERR_FILENO);
 		return (-1);
 	}
 	else

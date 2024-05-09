@@ -29,11 +29,12 @@ int	x_dup2(int oldfd, int newfd)
 {
 	int	result;
 
+	if (oldfd == -1)
+		exit(EXIT_FAILURE);
 	result = dup2(oldfd, newfd);
 	if (result == -1)
 	{
 		perror("dup2");
-		exit(EXIT_FAILURE);
 	}
 	return (result);
 }

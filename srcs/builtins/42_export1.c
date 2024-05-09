@@ -20,7 +20,7 @@ static int	export_util(char *str, t_env *env)
 	assignop = ft_strchr(str, '=');
 	if (assignop == str)
 	{
-		ft_putstr_fd("export: not a valid identifier\n", STDERR_FILENO);
+		ft_putstr_fd("minish: export: not a valid identifier\n", STDERR_FILENO);
 		return (1);
 	}
 	new = new_env(str);
@@ -88,7 +88,7 @@ int	ft_export(char *av[], t_env *env)
 		export_display(env);
 	while (av[i] != NULL)
 	{
-		if (varname_validate(av[i], "export") == -1)
+		if (varname_validate(av[i], "minish: export") == -1)
 		{
 			ret = 1;
 			i++;

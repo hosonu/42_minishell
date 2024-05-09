@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/29 22:59:42 by kojwatan          #+#    #+#              #
 #    Updated: 2024/04/30 19:11:57 by kojwatan         ###   ########.fr        #
@@ -12,7 +12,6 @@
 
 CC = cc
 CFLAGS = -Wextra -Werror -Wall
-#-g -fsanitize=address 
 
 SRCS =	srcs/main.c \
 		srcs/prompt_handle/tokenize.c \
@@ -56,7 +55,6 @@ SRCS =	srcs/main.c \
 		srcs/builtins/42_unset.c 
 
 OBJS = $(SRCS:.c=.o)
-# READ_LINE_PREFIX = /usr/local/opt/readline
 READ_LINE_PREFIX = $(shell brew --prefix readline)
 NAME = minishell
 HEAD = ../includes/minishell.h
@@ -66,7 +64,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) -C $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) -I $(HEAD) -L$(READ_LINE_PREFIX)/lib -lreadline -I$(READ_LINE_PREFIX)/include -L$(LIBFT) -lft -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -I $(HEAD) -L$(READ_LINE_PREFIX)/lib -lreadline -lhistory -I$(READ_LINE_PREFIX)/include -L$(LIBFT) -lft -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I $(HEAD) -I$(READ_LINE_PREFIX)/include -c $< -o $@

@@ -83,7 +83,6 @@ int	x_open(const char *pathname, int flags, mode_t mode)
 	{
 		write(2, "minish: ", 8);
 		perror(pathname);
-		exit(EXIT_FAILURE);
 	}
 	return (result);
 }
