@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   42_cd1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
+/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:08:49 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/05/01 13:07:36 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/05/09 15:18:14 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,11 @@ int	ft_cd(char *av[], t_env *env)
 
 	pwd = x_getcwd();
 	if (errno == ENOENT)
-		ft_putstr_fd("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n", STDERR_FILENO);
+	{
+		ft_putstr_fd("cd: error retrieving current directory", STDERR_FILENO);
+		ft_putstr_fd(": getcwd: cannot access parent directories:", 2);
+		ft_putstr_fd(" No such file or directory\n", STDERR_FILENO);
+	}
 	set_oldpwd(pwd, env);
 	free(pwd);
 	if (ft_chdir(av[0], env) == -1)
