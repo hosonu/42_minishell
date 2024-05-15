@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 22:58:35 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/04/24 01:39:52 by hosonu           ###   ########.fr       */
+/*   Updated: 2024/05/15 18:55:29 by hoyuki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_status
 	int				exit_status;
 	int				exit_code;
 	int				is_file;
+	int				cnt_file;
 }					t_status;
 
 typedef struct s_ige

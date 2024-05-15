@@ -24,7 +24,7 @@ void	token_main_engine(t_token **list, t_fdgs *fdgs, t_status *status,
 int		dispatch_token_help(t_token **list, t_fdgs *fdgs, t_status *status,
 			t_env *env);
 void	pre_manage_fd_parent(t_token *list, t_fdgs *fdgs);
-void	post_manage_fd_parent(t_fdgs *fdgs, char **tokens_splited);
+void	post_manage_fd_parent(t_fdgs *fdgs, char **tokens_splited, t_token **list, t_status *status);
 void	mange_fd_child(t_token **list, t_fdgs *fdgs);
 void	child_help(char **tokens_splited, t_env *env);
 
@@ -37,8 +37,8 @@ char	*path_lookup(char *command, char **envi);
 char	*join_path(char *command, char *path);
 
 // manage_fd.c
-void	manage_gfdin(int gfd[2], t_token *list);
-void	manage_gfdout(int gfd[2], t_token *list);
+void	manage_gfdin(int gfd[2], t_token *list, bool gene);
+void	manage_gfdout(int gfd[2], t_token *list, bool gene);
 void	manage_pipein(int pp[2], t_token *list);
 void	manage_pipeout(int pp[2], t_token *list);
 

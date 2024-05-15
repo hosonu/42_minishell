@@ -69,6 +69,7 @@ int	fcntl_token(t_fdgs *fdgs, t_token *list, t_status *status, t_env *env)
 {
 	fdgs->gfd[0] = 3;
 	fdgs->gfd[1] = 3;
+	status->cnt_file++;
 	list->token = expand_variable(list->token, 0, status->exit_code, env);
 	list->token = remove_quote(list->token);
 	if (list->type == TRUNCOUTFILE)

@@ -12,12 +12,14 @@
 
 #include "../../includes/minishell.h"
 
-void	manage_gfdin(int gfd[2], t_token *list)
+void	manage_gfdin(int gfd[2], t_token *list, bool gene)
 {
 	if (list->type == REINCOMMAND || list->type == REINOUTCOMMAND)
 	{
-		x_dup2(gfd[0], STDIN_FILENO);
-		x_close(gfd[0]);
+		if (gene == 0)
+			x_dup2(gfd[0], STDIN_FILENO);
+		else if (gene == 1 && gfd[0] != -1)
+			x_close(gfd[0]);
 	}
 	else if (list->type == HEREDOCCOMMAND || list->type == REOUTHEREDOCCOMMAND)
 	{
@@ -27,13 +29,15 @@ void	manage_gfdin(int gfd[2], t_token *list)
 	}
 }
 
-void	manage_gfdout(int gfd[2], t_token *list)
+void	manage_gfdout(int gfd[2], t_token *list, bool gene)
 {
 	if (list->type == REOUTCOMMAND || list->type == REINOUTCOMMAND
 		|| list->type == REOUTHEREDOCCOMMAND)
 	{
-		x_dup2(gfd[1], STDOUT_FILENO);
-		x_close(gfd[1]);
+		if (gene == 0)
+			x_dup2(gfd[1], STDOUT_FILENO);
+		else if (gene == 1 && gfd[1] != -1)
+			x_close(gfd[1]);
 	}
 }
 
