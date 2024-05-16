@@ -14,22 +14,22 @@
 
 static int	exec_builtins(char **tokens_splited, t_env *env, t_status *status)
 {
-	if (x_sstrncmp("cd", tokens_splited[0], 2) == 0)
+	if (perfectly_match("cd", tokens_splited[0]) == 0)
 	{
 		status->exit_code = ft_cd(tokens_splited + 1, env);
 		return (0);
 	}
-	else if (x_sstrncmp("export", tokens_splited[0], 6) == 0)
+	else if (perfectly_match("export", tokens_splited[0]) == 0)
 	{
 		status->exit_code = ft_export(tokens_splited + 1, env);
 		return (0);
 	}
-	else if (x_sstrncmp("unset", tokens_splited[0], 5) == 0)
+	else if (perfectly_match("unset", tokens_splited[0]) == 0)
 	{
 		status->exit_code = ft_unset(tokens_splited + 1, env);
 		return (0);
 	}
-	else if (x_sstrncmp("exit", tokens_splited[0], 4) == 0)
+	else if (perfectly_match("exit", tokens_splited[0]) == 0)
 	{
 		ft_exit(tokens_splited, status->exit_code, 1, env);
 		status->exit_code = 1;
@@ -50,24 +50,24 @@ static int	exec_builtins_chld(char **tokens_splited, t_env *env)
 {
 	if (tokens_splited[0] == NULL)
 		return (-1);
-	if (x_sstrncmp("echo", tokens_splited[0], 4) == 0)
+	if (perfectly_match("echo", tokens_splited[0]) == 0)
 		return (ft_echo(tokens_splited));
-	else if (x_sstrncmp("pwd", tokens_splited[0], 3) == 0)
+	else if (perfectly_match("pwd", tokens_splited[0]) == 0)
 	{
 		ft_pwd();
 		return (0);
 	}
-	else if (x_sstrncmp("env", tokens_splited[0], 3) == 0)
+	else if (perfectly_match("env", tokens_splited[0]) == 0)
 		return (ft_env(env));
-	else if (x_sstrncmp("export", tokens_splited[0], 6) == 0)
+	else if (perfectly_match("export", tokens_splited[0]) == 0)
 	{
 		ft_export(tokens_splited + 1, env);
 		return (0);
 	}
-	else if (x_sstrncmp("unset", tokens_splited[0], 5) == 0
-		|| x_sstrncmp("cd", tokens_splited[0], 2) == 0)
+	else if (perfectly_match("unset", tokens_splited[0]) == 0
+		|| perfectly_match("cd", tokens_splited[0]) == 0)
 		return (0);
-	else if (x_sstrncmp("exit", tokens_splited[0], 4) == 0)
+	else if (perfectly_match("exit", tokens_splited[0]) == 0)
 	{
 		ft_exit(tokens_splited, 0, 0, env);
 		exit(1);

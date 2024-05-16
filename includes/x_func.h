@@ -19,9 +19,9 @@
 
 pid_t	x_fork(t_status *status);
 void	*x_malloc(size_t size);
-int		x_sstrncmp(const char *s1, const char *s2, size_t len);
-int		perfectly_match(char *s1, char *s2);
 int		double_free(char **str);
+int		perfectly_match(char *s1, char *s2);
+int		just_close_pipe(int pp[2]);
 
 // x_func_second.c
 
