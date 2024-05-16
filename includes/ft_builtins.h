@@ -23,7 +23,7 @@ bool	get_option_n(char *argv);
 //42cd.c
 int		ft_cd(char *av[], t_env *env);
 void	cd_change_env(t_env *env);
-int		cd_export(t_env *env, char *arg, char buff[PATH_MAX]);
+int		cd_export(t_env *env, char *arg, char *buff);
 
 //42pwd.c
 int		ft_pwd(void);

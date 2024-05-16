@@ -24,7 +24,7 @@ void	token_main_engine(t_token **list, t_fdgs *fdgs, t_status *status,
 int		dispatch_token_help(t_token **list, t_fdgs *fdgs, t_status *status,
 			t_env *env);
 void	pre_manage_fd_parent(t_token *list, t_fdgs *fdgs);
-void	post_manage_fd_parent(t_fdgs *fdgs, char **tokens_splited, t_token **list, t_status *status);
+void	post_manage_fd_parent(t_fdgs *fdgs, char **tokens_splited, t_token **list);
 void	mange_fd_child(t_token **list, t_fdgs *fdgs);
 void	child_help(char **tokens_splited, t_env *env);
 

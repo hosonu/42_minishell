@@ -67,9 +67,10 @@ void	execute_heredoc(int gfd[2], t_token *list, int exit_code, t_env *env)
 
 int	fcntl_token(t_fdgs *fdgs, t_token *list, t_status *status, t_env *env)
 {
-	fdgs->gfd[0] = 3;
-	fdgs->gfd[1] = 3;
-	status->cnt_file++;
+	if(fdgs->gfd[0] != -2 && list->type == INFILE)
+		x_close(fdgs->gfd[0]);
+	if(fdgs->gfd[1] != -2 && (list->type  == TRUNCOUTFILE || list->type == APNDOUTFILE))
+		x_close(fdgs->gfd[1]);
 	list->token = expand_variable(list->token, 0, status->exit_code, env);
 	list->token = remove_quote(list->token);
 	if (list->type == TRUNCOUTFILE)

@@ -19,18 +19,17 @@ void	pre_manage_fd_parent(t_token *list, t_fdgs *fdgs)
 	manage_pipein(fdgs->pp, list);
 }
 
-void	post_manage_fd_parent(t_fdgs *fdgs, char **tokens_splited, t_token **list, t_status *status)
+void	post_manage_fd_parent(t_fdgs *fdgs, char **tokens_splited, t_token **list)
 {
 	dup2(fdgs->original_stdin, STDIN_FILENO);
 	dup2(fdgs->original_stdout, STDOUT_FILENO);
 	x_close(fdgs->original_stdin);
 	x_close(fdgs->original_stdout);
-	while(status->cnt_file > 0)
-	{
+	// while(status->cnt_file > 0)
+	// {
 		manage_gfdin(fdgs->gfd, (*list), 1);
 		manage_gfdout(fdgs->gfd, (*list), 1);
-		status->cnt_file--;
-	}
+	// }
 	double_free(tokens_splited);
 }
 
@@ -71,7 +70,7 @@ int	dispatch_token_help(t_token **list, t_fdgs *fdgs, t_status *status,
 		child_help(tokens_splited, env);
 	}
 	signal(SIGINT, SIG_IGN);
-	post_manage_fd_parent(fdgs, tokens_splited, list, status);
+	post_manage_fd_parent(fdgs, tokens_splited, list);
 	if (pid == -1)
 		return (-1);
 	return (0);
