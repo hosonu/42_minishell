@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_handle.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hoyuki <hoyuki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:49:36 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/05/09 14:59:53 by hoyuki           ###   ########.fr       */
+/*   Updated: 2024/05/15 17:57:14 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_token	**linear_token_list(t_token *top)
 	return (list);
 }
 
-static char	*input_prompt(t_env *env)
+static char	*input_prompt(t_env *env, t_status *status)
 {
 	char	*input;
 	char	*prompt;
@@ -64,7 +64,7 @@ static char	*input_prompt(t_env *env)
 	{
 		ft_putstr_fd("exit\n", STDOUT_FILENO);
 		free_env(env);
-		exit(EXIT_SUCCESS);
+		exit(status->exit_code);
 	}
 	return (input);
 }
@@ -75,7 +75,7 @@ t_token	**prompt_handle(t_env *env, t_status *status)
 	t_token	*tokens;
 	char	*input;
 
-	input = input_prompt(env);
+	input = input_prompt(env, status);
 	if (input == NULL)
 		return (NULL);
 	if (input[0] != '\0')
