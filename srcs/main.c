@@ -56,7 +56,7 @@ int	main(void)
 		if (list != NULL)
 		{
 			dispatch_token(list, env, &status);
-			if(access("/tmp/sh-thd-tekitou", F_OK) == 0)
+			if (access("/tmp/sh-thd-tekitou", F_OK) == 0)
 				x_unlink("/tmp/sh-thd-tekitou");
 			free_linear_token_list(list);
 		}

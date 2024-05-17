@@ -73,7 +73,7 @@ int	ft_cd(char *av[], t_env *env)
 
 	pwd = x_getcwd();
 	if (errno == ENOENT && (perfectly_match(av[0], ".") == 1
-		|| perfectly_match(av[0], "..") == 1))
+			|| perfectly_match(av[0], "..") == 1))
 	{
 		ft_putstr_fd("cd: error retrieving current directory", STDERR_FILENO);
 		ft_putstr_fd(": getcwd: cannot access parent directories:", 2);
