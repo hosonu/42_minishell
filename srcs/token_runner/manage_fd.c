@@ -23,7 +23,8 @@ void	manage_gfdin(int gfd[2], t_token *list, bool gene)
 	}
 	else if (list->type == HEREDOCCOMMAND || list->type == REOUTHEREDOCCOMMAND)
 	{
-		gfd[0] = x_open("/tmp/sh-thd-tekitou", O_RDONLY, 0);
+		if (gfd[0] == -2)
+			gfd[0] = x_open("/tmp/sh-thd-tekitou", O_RDONLY, 0);
 		if (gene == 0)
 			x_dup2(gfd[0], STDIN_FILENO);
 		else if (gene == 1 && gfd[0] != -1)
