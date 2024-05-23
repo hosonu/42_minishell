@@ -57,6 +57,8 @@ int	perfectly_match(char *s1, char *s2)
 {
 	char	*ret;
 
+	if (s1 == NULL || s2 == NULL)
+		return (-1);
 	ret = ft_strnstr(s1, s2, ft_strlen(s1));
 	if (ret == NULL)
 		return (-1);

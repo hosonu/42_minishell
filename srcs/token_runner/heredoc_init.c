@@ -48,6 +48,8 @@ int	heredoc_hook(void)
 
 void	heredoc_init(int gfd[2])
 {
+	if (gfd[0] != -2)
+		x_close(gfd[0]);
 	signal(SIGINT, signal_handler_heredoc);
 	rl_event_hook = heredoc_hook;
 	rl_catch_signals = 0;
