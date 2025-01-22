@@ -1,4 +1,17 @@
+# Object files
 *.o
-.DS_store
-minishell
-.*.swp
+
+# Libraries
+*.lib
+*.a
+
+# Executables
+*.exe
+*.out
+
+# Debug files
+*.dSYM/
+
+# Other
+.DS_Store
+.vscode
